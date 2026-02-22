@@ -155,6 +155,30 @@
             "asset_id": "49075814720",
             "reserve_price": 230,
             "description": "Check Stall"
+        },
+        {
+            "name": "Dual Brut Colony MVPless",
+            "asset_id": "48925295625",
+            "reserve_price": 71,
+            "description": "MVPless + Check Stall"
+        },
+        {
+            "name": "Mp9 Slide MVPless",
+            "asset_id": "48925295612",
+            "reserve_price": 71,
+            "description": "MVPless + Check Stall"
+        },
+        {
+            "name": "Negev Bulkhead MVPless",
+            "asset_id": "48925295634",
+            "reserve_price": 215,
+            "description": "MVPless + Check Stall"
+        },
+        {
+            "name": "M4a1s Black lotus 5X glitter (Poop)",
+            "asset_id": "49644539389",
+            "reserve_price": 230,
+            "description": "5X Clean + Check Stall"
         }
 
     ]

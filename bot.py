@@ -23,6 +23,21 @@ pgrep -f bot.py
 # Stop the bot
 pkill -f bot.py
 """
+"""
+CSFloat Auto-Auction Bot
+========================
+Automatically re-lists your CS2 skins as 24h auctions on CSFloat.
+
+Instead of polling on a fixed interval, the bot reads expires_at from
+each active listing and sleeps until exactly that time + 5 mins.
+This means it always wakes up at the right moment regardless of daily drift.
+
+Setup:
+  1. pip install requests python-dotenv
+  2. Fill in .env  (API key, Steam ID, Discord webhook)
+  3. Fill in config.json  (your items)
+  4. python bot.py
+"""
 
 import requests
 import json
@@ -240,30 +255,13 @@ class AuctionBot:
         except Exception:
             return None
 
-    def _next_wake_time(self) -> float:
-        """Wake up at the earliest auction expiry + RELIST_DELAY."""
-        now = time.time()
-        if self.expires_at:
-            earliest = min(v for k, v in self.expires_at.items() if k != "__retry")
-            return max(earliest + RELIST_DELAY, now + 10)
-        return now + 60
-
     def run(self):
-        log.info("Running — press Ctrl+C to stop.")
-        while True:
-            try:
-                self.tick()
-                wake_at   = self._next_wake_time()
-                sleep_for = wake_at - time.time()
-                wake_str  = datetime.fromtimestamp(wake_at).strftime("%Y-%m-%d %H:%M:%S")
-                log.info(f"Next check at {wake_str} ({int(sleep_for / 60)} mins from now)")
-                time.sleep(max(sleep_for, 0))
-            except KeyboardInterrupt:
-                log.info("Bot stopped.")
-                break
-            except Exception as e:
-                log.exception(f"Unexpected error: {e}")
-                time.sleep(60)
+        log.info("Running.")
+        try:
+            self.tick()
+        except Exception as e:
+            log.exception(f"Unexpected error: {e}")
+        log.info("Done — exiting.")
 
     def tick(self):
         now     = time.time()
@@ -321,7 +319,10 @@ class AuctionBot:
                     if i < len(self.watched) - 1:
                         time.sleep(10)
 
-        send_discord(self.discord_webhook, updates)
+        # Only ping Discord if something actually happened (relist or failure)
+        notable = [u for u in updates if u["status"] in ("relisted", "failed")]
+        if notable:
+            send_discord(self.discord_webhook, notable)
 
     def _do_relist(self, asset_id: str) -> dict:
         item_cfg = self.watched[asset_id]
