@@ -241,18 +241,11 @@ class AuctionBot:
             return None
 
     def _next_wake_time(self) -> float:
-        """
-        Calculate when to wake up next.
-        - If we have active listings with known expiry times, wake up at the
-          earliest expiry + RELIST_DELAY so we catch it right after it ends.
-        - If nothing is listed yet, check again in 60 seconds.
-        """
+        """Wake up at the earliest auction expiry + RELIST_DELAY."""
         now = time.time()
         if self.expires_at:
-            earliest_expiry = min(self.expires_at.values())
-            wake_at = earliest_expiry + RELIST_DELAY
-            # If expiry already passed, wake immediately
-            return max(wake_at, now + 10)
+            earliest = min(v for k, v in self.expires_at.items() if k != "__retry")
+            return max(earliest + RELIST_DELAY, now + 10)
         return now + 60
 
     def run(self):
@@ -260,14 +253,11 @@ class AuctionBot:
         while True:
             try:
                 self.tick()
-
-                # Sleep until the right moment instead of a fixed interval
                 wake_at   = self._next_wake_time()
                 sleep_for = wake_at - time.time()
                 wake_str  = datetime.fromtimestamp(wake_at).strftime("%Y-%m-%d %H:%M:%S")
                 log.info(f"Next check at {wake_str} ({int(sleep_for / 60)} mins from now)")
                 time.sleep(max(sleep_for, 0))
-
             except KeyboardInterrupt:
                 log.info("Bot stopped.")
                 break
