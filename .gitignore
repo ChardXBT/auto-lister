@@ -2,3 +2,9 @@
 auction_bot.log
 __pycache__/
 *.pyc
+.idea/vcs.xml
+.idea/auto-lister.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/modules.xml

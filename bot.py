@@ -7,11 +7,21 @@ Instead of polling on a fixed interval, the bot reads expires_at from
 each active listing and sleeps until exactly that time + 5 mins.
 This means it always wakes up at the right moment regardless of daily drift.
 
-Setup:
-  1. pip install requests python-dotenv
-  2. Fill in .env  (API key, Steam ID, Discord webhook)
-  3. Fill in config.json  (your items)
-  4. python bot.py
+# SSH in
+ssh root@147.182.158.184
+
+# Check logs
+cat auction_bot.log
+
+# Restart the bot
+pkill -f bot.py
+nohup ./run.sh &
+
+# Check bot is running
+pgrep -f bot.py
+
+# Stop the bot
+pkill -f bot.py
 """
 
 import requests
