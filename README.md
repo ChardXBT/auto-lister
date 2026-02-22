@@ -1,3 +1,5 @@
+Key Functions: 
+
 The bot (bot.py):
 
 Reads your items from config.json and credentials from .env
@@ -9,8 +11,8 @@ Then exits
 
 The cloud server (Digital Ocean Droplet):
 
-A $6/month Ubuntu VM running 24/7 in Toronto
-Your bot files live in /root/csfloat-bot
+$6/month Ubuntu VM running 24/7 in Toronto
+Bot files live in /root/csfloat-bot
 The bot runs via nohup ./run.sh & which keeps it alive in the background
 run.sh pulls the latest code from GitHub before every run so it's always up to date
 
