@@ -38,6 +38,22 @@ Setup:
   3. Fill in config.json  (your items)
   4. python bot.py
 """
+"""
+CSFloat Auto-Auction Bot
+========================
+Automatically re-lists your CS2 skins as 24h auctions on CSFloat.
+
+Instead of polling on a fixed interval, the bot reads expires_at from
+each active listing and sleeps until exactly that time + 5 mins.
+This means it always wakes up at the right moment regardless of daily drift.
+
+Setup:
+  1. pip install requests python-dotenv
+  2. Fill in .env  (API key, Steam ID, Discord webhook)
+  3. Fill in config.json  (your items)
+  4. python bot.py
+"""
+
 import requests
 import json
 import time
@@ -191,6 +207,10 @@ class CSFloatClient:
                 body = r.json()
                 if body.get("code") == 4:
                     return {"__already_listed": True}
+            if r.status_code == 403:
+                body = r.json()
+                if body.get("code") == 17:
+                    return {"__not_in_inventory": True}
             r.raise_for_status()
             return r.json()
         except requests.HTTPError as e:
@@ -354,6 +374,17 @@ class AuctionBot:
 
         self._save_state()
 
+    def _remove_from_config(self, asset_id: str):
+        try:
+            with open(CONFIG_FILE) as f:
+                cfg = json.load(f)
+            cfg["items"] = [i for i in cfg["items"] if i["asset_id"] != asset_id]
+            with open(CONFIG_FILE, "w") as f:
+                json.dump(cfg, f, indent=4)
+            log.info(f"Removed asset {asset_id} from config.json")
+        except Exception as e:
+            log.warning(f"Could not remove asset {asset_id} from config: {e}")
+
     def _do_relist(self, asset_id: str) -> dict:
         item_cfg = self.watched[asset_id]
         name     = self._item_name(asset_id)
@@ -364,6 +395,15 @@ class AuctionBot:
             reserve_price = item_cfg["reserve_price"],
             description   = item_cfg["description"],
         )
+
+        if result and result.get("__not_in_inventory"):
+            log.warning(f"[{name}] Item not in inventory — sold! Removing from config.")
+            self._remove_from_config(asset_id)
+            self.sold.add(asset_id)
+            return {
+                "name": name, "asset_id": asset_id,
+                "status": "failed", "detail": "Item sold — removed from config",
+            }
 
         if result and result.get("__already_listed"):
             log.info(f"[{name}] Already listed — marking as active.")

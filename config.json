@@ -1,12 +1,6 @@
 {
     "items": [
         {
-            "name": "UMP With Krakow Gold HEN1",
-            "asset_id": "49552721527",
-            "reserve_price": 70,
-            "description": "Check Stall"
-        },
-        {
             "name": "UMP Indigo with Katowice 2015 Golds (Envy + Navi)",
             "asset_id": "49687303183",
             "reserve_price": 325,
@@ -133,12 +127,6 @@
             "description": "Check Stall"
         },
         {
-            "name": "Mag7 Sand Dune HR + Kd Gold kato 2015",
-            "asset_id": "49477579245",
-            "reserve_price": 490,
-            "description": "Check Stall"
-        },
-        {
             "name": "Mag7 Sand dune Copen + navi foil col 2014",
             "asset_id": "49434204321",
             "reserve_price": 480,
@@ -191,7 +179,36 @@
             "asset_id": "49701276514",
             "reserve_price": 100,
             "description": "MVPless + Check Stall"
+        },
+        {
+            "name": "Mag7 sand dune dig foil col 2014 0.251",
+            "asset_id": "49706433378",
+            "reserve_price": 1000,
+            "description": "Dig FOIL col 2014 + Check Stall"
+        },
+        {
+            "name": "Sawed off sand sprey Steiwe london 0.360",
+            "asset_id": "49698935251",
+            "reserve_price": 110,
+            "description": "Check Stall"
+        },
+        {
+            "name": "P250 Grassland 0.67731",
+            "asset_id": "49691570126",
+            "reserve_price": 150,
+            "description": "MLG + Check Stall"
+        },
+        {
+            "name": "Mag7 storm Zywoo 0.140",
+            "asset_id": "49411060296",
+            "reserve_price": 260,
+            "description": "ZYWOO + Check Stall"
+        },
+        {
+            "name": "Nova Pred MTS foil col 2014 0.3286",
+            "asset_id": "49541021640",
+            "reserve_price": 1100,
+            "description": "MVPless + Check Stall"
         }
-
     ]
 }
