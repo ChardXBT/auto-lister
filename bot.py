@@ -38,7 +38,6 @@ Setup:
   3. Fill in config.json  (your items)
   4. python bot.py
 """
-
 import requests
 import json
 import time
@@ -244,6 +243,31 @@ class AuctionBot:
         # asset_id -> unix timestamp of expiry (so we know when to wake up)
         self.expires_at: dict[str, float] = {}
 
+        # asset_id -> consecutive failure count (persisted to file)
+        self.state_file = Path("bot_state.json")
+        self.failures: dict[str, int] = {}
+        self.sold: set = set()
+        self._load_state()
+
+    def _load_state(self):
+        if self.state_file.exists():
+            try:
+                data = json.loads(self.state_file.read_text())
+                self.failures = data.get("failures", {})
+                self.sold     = set(data.get("sold", []))
+                log.info(f"Loaded state: {len(self.sold)} sold, {len(self.failures)} tracked failures.")
+            except Exception as e:
+                log.warning(f"Could not load state file: {e}")
+
+    def _save_state(self):
+        try:
+            self.state_file.write_text(json.dumps({
+                "failures": self.failures,
+                "sold":     list(self.sold),
+            }, indent=2))
+        except Exception as e:
+            log.warning(f"Could not save state file: {e}")
+
     def _item_name(self, asset_id: str) -> str:
         return self.watched[asset_id].get("name", asset_id)
 
@@ -282,6 +306,10 @@ class AuctionBot:
 
         for i, (asset_id, item_cfg) in enumerate(self.watched.items()):
             name = self._item_name(asset_id)
+
+            # Skip items marked as sold
+            if asset_id in self.sold:
+                continue
 
             if asset_id in live_asset_ids:
                 # Active — save expiry time so we know when to wake up
@@ -324,6 +352,8 @@ class AuctionBot:
         if notable:
             send_discord(self.discord_webhook, notable)
 
+        self._save_state()
+
     def _do_relist(self, asset_id: str) -> dict:
         item_cfg = self.watched[asset_id]
         name     = self._item_name(asset_id)
@@ -338,11 +368,13 @@ class AuctionBot:
         if result and result.get("__already_listed"):
             log.info(f"[{name}] Already listed — marking as active.")
             self.active[asset_id] = "unknown"
+            self.failures.pop(asset_id, None)
             return {
                 "name": name, "asset_id": asset_id,
                 "status": "active", "detail": "Already listed (picked up by bot)",
             }
         elif result:
+            self.failures.pop(asset_id, None)
             new_id      = result.get("id", "?")
             expires_str = result.get("auction_details", {}).get("expires_at", "")
             expiry_ts   = self._parse_expiry(expires_str)
@@ -355,10 +387,19 @@ class AuctionBot:
                 "status": "relisted", "detail": f"New listing ID: `{new_id}`",
             }
         else:
-            log.error(f"[{name}] Listing failed — retrying in 60s.")
+            self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
+            fail_count = self.failures[asset_id]
+            if fail_count >= 5:
+                self.sold.add(asset_id)
+                log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
+                return {
+                    "name": name, "asset_id": asset_id,
+                    "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
+                }
+            log.error(f"[{name}] Listing failed ({fail_count}/5) — retrying next run.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": "Failed to list — retrying shortly",
+                "status": "failed", "detail": f"Failed to list ({fail_count}/5) — retrying next run",
             }
 
 
