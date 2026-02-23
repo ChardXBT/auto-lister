@@ -179,6 +179,18 @@
             "asset_id": "49644539389",
             "reserve_price": 2050,
             "description": "5X Clean + Check Stall"
+        },
+        {
+            "name": "Mag7 Storm MVPless 0.28",
+            "asset_id": "49699382893",
+            "reserve_price": 100,
+            "description": "MVPless + Check Stall"
+        },
+        {
+            "name": "Mag7 Rust Coat MVPless 0.39",
+            "asset_id": "49701276514",
+            "reserve_price": 100,
+            "description": "MVPless + Check Stall"
         }
 
     ]
