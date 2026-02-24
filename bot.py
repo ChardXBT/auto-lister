@@ -359,13 +359,13 @@ class AuctionBot:
                     result = self._do_relist(asset_id)
                     updates.append(result)
                     if i < len(self.watched) - 1:
-                        time.sleep(10)
+                        time.sleep(45)
                 else:
                     log.info(f"[{name}] Not listed — listing now...")
                     result = self._do_relist(asset_id)
                     updates.append(result)
                     if i < len(self.watched) - 1:
-                        time.sleep(10)
+                        time.sleep(45)
 
         # Only ping Discord if something actually happened (relist or failure)
         notable = [u for u in updates if u["status"] in ("relisted", "failed")]

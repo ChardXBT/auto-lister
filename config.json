@@ -221,6 +221,12 @@
             "asset_id": "49716224061",
             "reserve_price": 760,
             "description": "Seang gold best POS"
+        },
+        {
+            "name": "PP-Bizon | Facility Sketch 0.097846",
+            "asset_id": "49550573326",
+            "reserve_price": 1605,
+            "description": "DICK MW Good Pos"
         }
     ]
 }
