@@ -37,12 +37,6 @@
             "description": "Good Pos + Check Stall"
         },
         {
-            "name": "AUG Colony + Titan Gold",
-            "asset_id": "49638752775",
-            "reserve_price": 500,
-            "description": "1/1 + Check Stall"
-        },
-        {
             "name": "Nova Walnut + Kato Gold 2015 (Nip and TSM)",
             "asset_id": "49638752714",
             "reserve_price": 210,
@@ -137,12 +131,6 @@
             "asset_id": "49075814720",
             "reserve_price": 230,
             "description": "Check Stall"
-        },
-        {
-            "name": "Dual Brut Colony MVPless",
-            "asset_id": "48925295625",
-            "reserve_price": 71,
-            "description": "MVPless + Check Stall"
         },
         {
             "name": "Mp9 Slide MVPless",
