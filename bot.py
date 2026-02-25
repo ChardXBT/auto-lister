@@ -17,6 +17,7 @@ grep "Running" auction_bot.log | tail -5
 // Checks last run time
 git fetch origin && git reset --hard origin/main // manually pull 
 cat bot_state.json // check bot state
+Spy on bot: tail -f /root/csfloat-bot/auction_bot.log
 
 """
 """
