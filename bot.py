@@ -7,21 +7,17 @@ Instead of polling on a fixed interval, the bot reads expires_at from
 each active listing and sleeps until exactly that time + 5 mins.
 This means it always wakes up at the right moment regardless of daily drift.
 
-# SSH in
+
 ssh root@147.182.158.184
+cd /root/csfloat-bot // Go to project directory 
+cat auction_bot.log // Check Log
+./run.sh runs the script
+crontab -l
+grep "Running" auction_bot.log | tail -5 
+// Checks last run time
+git fetch origin && git reset --hard origin/main // manually pull 
+cat bot_state.json // check bot state
 
-# Check logs
-cat auction_bot.log
-
-# Restart the bot
-pkill -f bot.py
-nohup ./run.sh &
-
-# Check bot is running
-pgrep -f bot.py
-
-# Stop the bot
-pkill -f bot.py
 """
 """
 CSFloat Auto-Auction Bot
