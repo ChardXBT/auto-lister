@@ -4,7 +4,7 @@
             "name": "UMP Indigo with Katowice 2015 Golds (Envy + Navi)",
             "asset_id": "49687303183",
             "reserve_price": 325,
-            "description": "Check Stall"
+            "description": "Kato GOLD 2015 + Check Stall"
         },
         {
             "name": "Sawed-Off Sage Sprey with D1vice Gold Krakow",
@@ -21,7 +21,7 @@
         {
             "name": "Ump Facility Dark Fn + Dick Gold 2019",
             "asset_id": "49638752761",
-            "reserve_price": 2200,
+            "reserve_price": 1900,
             "description": "FN DICK + Check Stall"
         },
         {
@@ -40,19 +40,13 @@
             "name": "Nova Walnut + Kato Gold 2015 (Nip and TSM)",
             "asset_id": "49638752714",
             "reserve_price": 210,
-            "description": "Check Stall"
+            "description": "KATO GOLD 2015 Check Stall"
         },
         {
             "name": "UMP Indigo with Katowice 2015 Golds (Envy + Navi)",
             "asset_id": "49586634280",
             "reserve_price": 320,
-            "description": "Check Stall"
-        },
-        {
-            "name": "Mag7 Sanddune W Niko gold boston 2018",
-            "asset_id": "49581513328",
-            "reserve_price": 280,
-            "description": "Check Stall"
+            "description": "KATO 2015 GOLD Check Stall"
         },
         {
             "name": "Mag 7 sand dune 2014 col (Nip Vs Fnatic)",
@@ -70,73 +64,61 @@
             "name": "G3SG1 Safari Mesh + Kato golds 2015 (V.P + Keyd)",
             "asset_id": "49571751788",
             "reserve_price": 265,
-            "description": "Check Stall"
+            "description": "KATO GOLD 2015 Check Stall"
         },
         {
             "name": "Nova Walnut + C9 Kato gold + vp",
             "asset_id": "49567200752",
             "reserve_price": 430,
-            "description": "Check Stall"
+            "description": "C9 GOLD 2015 Check Stall"
         },
         {
             "name": "Ma7 Sandune Fnatic + nip Kato gold 2015",
             "asset_id": "49550575574",
             "reserve_price": 162,
-            "description": "Check Stall"
+            "description": "KATO GOLD 2015 Check Stall"
         },
         {
             "name": "Sawed off Irrad + c9 + nip foil ",
             "asset_id": "49256955456",
             "reserve_price": 390,
-            "description": "Check Stall"
+            "description": "FOIL 2014 + Check Stall"
         },
         {
             "name": "G3Sg1 Safari mesh Titan Col gold 2015",
             "asset_id": "49041280175",
             "reserve_price": 362,
-            "description": "Check Stall"
+            "description": "TITAN GOLD Check Stall"
         },
         {
             "name": "Mag7 Storm VP + Keyd",
             "asset_id": "49541021785",
             "reserve_price": 280,
-            "description": "Check Stall"
+            "description": "CLEAN STICKERS Check Stall"
         },
         {
             "name": "P90 Storm Titan cluj gold",
             "asset_id": "49486116241",
             "reserve_price": 245,
-            "description": "Check Stall"
-        },
-        {
-            "name": "Mp9 sand dashed Kato nip + fnatic gold 2015",
-            "asset_id": "49468040818",
-            "reserve_price": 160,
-            "description": "Check Stall"
+            "description": "TITAN GOLD Check Stall"
         },
         {
             "name": "Mag7 Sand dune Copen + navi foil col 2014",
             "asset_id": "49434204321",
             "reserve_price": 480,
-            "description": "Check Stall"
+            "description": "2014 FOILS Check Stall"
         },
         {
             "name": "Mag7 Sand dune nip + fnatic kato 2015 gold (scrapped)",
             "asset_id": "49238456081",
             "reserve_price": 140,
-            "description": "Check Stall"
+            "description": "CLEAN STICKERS Check Stall"
         },
         {
             "name": "G3sG1 Desert Storm + Navi + Envy gold kato 2015",
             "asset_id": "49075814720",
             "reserve_price": 230,
-            "description": "Check Stall"
-        },
-        {
-            "name": "Mp9 Slide MVPless",
-            "asset_id": "48925295612",
-            "reserve_price": 71,
-            "description": "MVPless + Check Stall"
+            "description": "KATOWICE 2015 GOLD Check Stall"
         },
         {
             "name": "Negev Bulkhead MVPless",
@@ -227,6 +209,54 @@
             "asset_id": "49550573326",
             "reserve_price": 1605,
             "description": "DICK MW Good Pos"
+        },
+        {
+            "name": "Ump Scroched 0.42395",
+            "asset_id": "49736181801",
+            "reserve_price": 1800,
+            "description": "Cheapest S1mple GOLD $4600"
+        },
+        {
+            "name": "P90 Scroched 0.283007 Niko gold london",
+            "asset_id": "49731919230",
+            "reserve_price": 130,
+            "description": "Niko Gold + Check Stall"
+        },
+        {
+            "name": "Scar20 Safari Mesh KennyS Gold London",
+            "asset_id": "49731919223",
+            "reserve_price": 330,
+            "description": "KennyS Gold + Check Stall"
+        },
+        {
+            "name": "Mag7 Sanddune Twists Gold Boston",
+            "asset_id": "49731920615",
+            "reserve_price": 170,
+            "description": "Twist Gold + Check Stall"
+        },
+        {
+            "name": "Mag7 Sand dune DHgold VP Vs NIP full",
+            "asset_id": "49733031790",
+            "reserve_price": 760,
+            "description": "Full Set DH2014 GOLD"
+        },
+        {
+            "name": "G3SG1 Desert Storm Kato gold 2015 fnatic Vs nip full",
+            "asset_id": "49731919212",
+            "reserve_price": 150,
+            "description": "Full set gold + Check Stall"
+        },
+        {
+            "name": "Negev Nuclear Waste DH gold LDLC vs Fnatic full",
+            "asset_id": "49909358066",
+            "reserve_price": 1100,
+            "description": "Rare stickers + Check Stall"
+        },
+        {
+            "name": "Sawed off irradiation alert all star full",
+            "asset_id": "49740800284",
+            "reserve_price": 1230,
+            "description": "All Star full set"
         }
     ]
 }
