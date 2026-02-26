@@ -19,6 +19,14 @@ git fetch origin && git reset --hard origin/main // manually pull
 cat bot_state.json // check bot state
 Spy on bot: tail -f /root/csfloat-bot/auction_bot.log
 
+Place new bids with empty parameters;
+{
+            "name": "",
+            "asset_id": "",
+            "reserve_price": ,
+            "description": ""
+        }
+
 """
 """
 CSFloat Auto-Auction Bot
