@@ -43,12 +43,6 @@
             "description": "KATO 2015 GOLD Check Stall"
         },
         {
-            "name": "Mag 7 sand dune 2014 col (Nip Vs Fnatic)",
-            "asset_id": "49586630860",
-            "reserve_price": 320,
-            "description": "Col 2014 + Check Stall"
-        },
-        {
             "name": "G3SG1 s1mple MLG col gold",
             "asset_id": "49535577869",
             "reserve_price": 270,
@@ -258,6 +252,5 @@
             "reserve_price": 2080,
             "description": "Clean 5X Glitter on M4"
         }
-
     ]
 }
