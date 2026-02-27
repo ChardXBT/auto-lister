@@ -245,6 +245,18 @@
             "asset_id": "49763069030",
             "reserve_price": 2080,
             "description": "Clean 5X Glitter on M4"
+        },
+        {
+            "name": "Mag7 Sanddune col full set 0.36168",
+            "asset_id": "49788730390",
+            "reserve_price": 320,
+            "description": "Full foil col 2014 set"
+        },
+        {
+            "name": "M249 Contrast spray simple gold atlanta",
+            "asset_id": "49781821255",
+            "reserve_price": 200,
+            "description": "S1mple gold cheapest"
         }
     ]
 }
