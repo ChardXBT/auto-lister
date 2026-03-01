@@ -227,6 +227,24 @@
             "asset_id": "49805648240",
             "reserve_price": 1800,
             "description": "Best Pos sig on Detour"
+        },
+        {
+            "name": "Glock Ground Water kato skull gold 0.14089",
+            "asset_id": "49835887868",
+            "reserve_price": 6200,
+            "description": "Super rare Glock Kato gold"
+        },
+        {
+            "name": "G3SG1 Keyd Vs Counterlogic gold kato 2015 full set 0.22114",
+            "asset_id": "49835584887",
+            "reserve_price": 280,
+            "description": "Full set Kato 2015 gold cheap"
+        },
+        {
+            "name": "Mp7 Gunsmoke 3dMax kato 2015 gold full set 0.37306",
+            "asset_id": "49832120269",
+            "reserve_price": 1100,
+            "description": "Full set kato 2015 gold rare"
         }
     ]
 }
