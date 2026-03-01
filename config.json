@@ -19,12 +19,6 @@
             "description": "Titan gold + Check Stall"
         },
         {
-            "name": "PP-Bizon Irradiated Alert HellRaiser Kato gold 2015",
-            "asset_id": "49660414337",
-            "reserve_price": 445,
-            "description": "Good Pos + Check Stall"
-        },
-        {
             "name": "UMP Indigo with Katowice 2015 Golds (Envy + Navi)",
             "asset_id": "49586634280",
             "reserve_price": 320,
@@ -222,7 +216,7 @@
             "reserve_price": 230,
             "description": "Full Kato 2015 Gold"
         },
-      {
+        {
             "name": "Deg Urban DDPAT pgl gold 0.23186",
             "asset_id": "49806844950",
             "reserve_price": 1050,
