@@ -209,6 +209,18 @@
             "asset_id": "49832120269",
             "reserve_price": 1200,
             "description": "Full set kato 2015 gold rare"
+        },
+        {
+            "name": "UMP-45 | Scorched Full set Keyd vs Vp gold kato 2015 0.1911681",
+            "asset_id": "49859405562",
+            "reserve_price": 300,
+            "description": "Full set Kato Gold 2015"
+        },
+        {
+            "name": "SSG Blue Spruce kato foil 2014 0.387166798",
+            "asset_id": "49847451266",
+            "reserve_price": 5600,
+            "description": "Full SET Kato foil 2014 SSG"
         }
     ]
 }
