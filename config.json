@@ -7,12 +7,6 @@
             "description": "Dig GOLD DH2014 + Check Stall"
         },
         {
-            "name": "PP-Bizon Urban Dahsed with Titan Cluj",
-            "asset_id": "49660394506",
-            "reserve_price": 240,
-            "description": "Titan gold + Check Stall"
-        },
-        {
             "name": "UMP Indigo with Katowice 2015 Golds (Envy + Navi)",
             "asset_id": "49586634280",
             "reserve_price": 320,
@@ -103,12 +97,6 @@
             "description": "Dig FOIL col 2014 + Check Stall"
         },
         {
-            "name": "P250 Grassland 0.67731",
-            "asset_id": "49691570126",
-            "reserve_price": 150,
-            "description": "MLG + Check Stall"
-        },
-        {
             "name": "Mag7 storm Zywoo 0.140",
             "asset_id": "49411060296",
             "reserve_price": 260,
@@ -167,12 +155,6 @@
             "asset_id": "49731919212",
             "reserve_price": 150,
             "description": "Full set gold + Check Stall"
-        },
-        {
-            "name": "P250 Facility draft DICK 0.0879",
-            "asset_id": "49731920903",
-            "reserve_price": 2010,
-            "description": "BIG DICK best POS"
         },
         {
             "name": "Mag7 Sand dune Scream boston gold 0.38537",
