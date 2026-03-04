@@ -31,22 +31,10 @@
             "description": "C9 GOLD 2015 Check Stall"
         },
         {
-            "name": "Sawed off Irrad + c9 + nip foil ",
-            "asset_id": "49256955456",
-            "reserve_price": 390,
-            "description": "FOIL 2014 + Check Stall"
-        },
-        {
             "name": "G3Sg1 Safari mesh Titan Col gold 2015",
             "asset_id": "49041280175",
             "reserve_price": 362,
             "description": "TITAN GOLD Check Stall"
-        },
-        {
-            "name": "Mag7 Storm VP + Keyd",
-            "asset_id": "49541021785",
-            "reserve_price": 280,
-            "description": "CLEAN STICKERS Check Stall"
         },
         {
             "name": "P90 Storm Titan cluj gold",
@@ -101,12 +89,6 @@
             "asset_id": "49411060296",
             "reserve_price": 260,
             "description": "ZYWOO + Check Stall"
-        },
-        {
-            "name": "Nova Pred MTS foil col 2014 0.3286",
-            "asset_id": "49541021640",
-            "reserve_price": 1100,
-            "description": "1/613 whole world + Check Stall"
         },
         {
             "name": "M248 Contrast Sprey W MLG gold",
