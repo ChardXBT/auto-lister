@@ -203,6 +203,30 @@
             "asset_id": "49791670281",
             "reserve_price": 2250,
             "description": "5X glitter clean craft+ lowfloat"
+        },
+        {
+            "name": "P90  storm 0.62640",
+            "asset_id": "49896053141",
+            "reserve_price": 350,
+            "description": "Full set foil col 2014"
+        },
+        {
+            "name": "Tec9 Ground water 2014 kato foil",
+            "asset_id": "49890439927",
+            "reserve_price": 4900,
+            "description": "Best POS, Kato 2014"
+        },
+        {
+            "name": "Sacr-20 Storm 0.37952",
+            "asset_id": "49883670602",
+            "reserve_price": 320,
+            "description": "Full Col 2014 Set"
+        },
+        {
+            "name": "SSG 08 Detour Atanta 0.172781",
+            "asset_id": "49883670340",
+            "reserve_price": 1720,
+            "description": "Rare detour Atlanta 2017"
         }
     ]
 }
