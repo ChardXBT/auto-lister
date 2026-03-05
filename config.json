@@ -85,12 +85,6 @@
             "description": "Dig FOIL col 2014 + Check Stall"
         },
         {
-            "name": "Mag7 storm Zywoo 0.140",
-            "asset_id": "49411060296",
-            "reserve_price": 260,
-            "description": "ZYWOO + Check Stall"
-        },
-        {
             "name": "M248 Contrast Sprey W MLG gold",
             "asset_id": "49709611879",
             "reserve_price": 70,
