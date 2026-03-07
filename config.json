@@ -209,6 +209,24 @@
             "asset_id": "49907972314",
             "reserve_price": 600,
             "description": "Col foil 2014 full set"
+        },
+        {
+            "name": "Tec9 Ground water 2014 kato foil",
+            "asset_id": "49890439927",
+            "reserve_price": 4799,
+            "description": "Best POS, Kato 2014"
+        },
+        {
+            "name": "Sawd 0.1198",
+            "asset_id": "49965031324",
+            "reserve_price": 310,
+            "description": "Full Kato 2015 set! MW"
+        },
+        {
+            "name": "Sawd 0.1862",
+            "asset_id": "49982084320",
+            "reserve_price": 280,
+            "description": "Full Kato 2015 set!"
         }
     ]
 }
