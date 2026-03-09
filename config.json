@@ -19,12 +19,6 @@
             "description": "KATO GOLD 2015 Check Stall"
         },
         {
-            "name": "Nova Walnut + C9 Kato gold + vp",
-            "asset_id": "49567200752",
-            "reserve_price": 430,
-            "description": "C9 GOLD 2015 Check Stall"
-        },
-        {
             "name": "G3Sg1 Safari mesh Titan Col gold 2015",
             "asset_id": "49041280175",
             "reserve_price": 362,
@@ -71,12 +65,6 @@
             "asset_id": "49706433378",
             "reserve_price": 1000,
             "description": "Dig FOIL col 2014 + Check Stall"
-        },
-        {
-            "name": "M248 Contrast Sprey W MLG gold",
-            "asset_id": "49709611879",
-            "reserve_price": 70,
-            "description": "MLG + Check Stall"
         },
         {
             "name": "Dual Berettas | Colony heart gold boston 0.3894",
