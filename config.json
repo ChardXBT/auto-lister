@@ -149,6 +149,12 @@
             "asset_id": "49965031324",
             "reserve_price": 280,
             "description": "Full Kato 2015 set!"
+        },
+        {
+            "name": "Dick Ump 0.110899",
+            "asset_id": "50060149487",
+            "reserve_price": 1800,
+            "description": "Dick BEST POS"
         }
     ]
 }
