@@ -149,6 +149,36 @@
             "asset_id": "50060149487",
             "reserve_price": 1800,
             "description": "Dick BEST POS"
+        },
+        {
+            "name": "G3SG1 | Desert Storm 0.35366",
+            "asset_id": "50086426719",
+            "reserve_price": 360,
+            "description": "C9 Foil Col 2014"
+        },
+        {
+            "name": "SCAR-20 | Sand Mesh 0.375822365284",
+            "asset_id": "50102269937",
+            "reserve_price": 220,
+            "description": "Full Set Kato 2015 Gold"
+        },
+        {
+            "name": "MAG-7 | Irradiated Alert 0.470357507467",
+            "asset_id": "50106428684",
+            "reserve_price": 1450,
+            "description": "Full All Stars Set! Rare"
+        },
+        {
+            "name": "AUG | Radiation Hazard 0.197986274958",
+            "asset_id": "50108586933",
+            "reserve_price": 1000,
+            "description": "Team LDLC Gold DH2014"
+        },
+        {
+            "name": "MAG-7 | Sand Dune .160451918840",
+            "asset_id": "50110075035",
+            "reserve_price": 310,
+            "description": "Nip Col 2014 Rare"
         }
     ]
 }
