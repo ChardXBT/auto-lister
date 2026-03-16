@@ -22,3 +22,7 @@ Bot lists your items as 24h auctions on CSFloat
 24h later the auction expires
 Bot detects the listing is gone, waits 5 mins, relists it
 Repeats forever
+
+
+Bugs: 
+If float fucks something up and the bot runs but cannot list etc it will place the orders in the config as sold or failed which fucks it up. If an item is in config but not listing check the bot state file
