@@ -58,7 +58,6 @@ Setup:
   3. Fill in config.json  (your items)
   4. python bot.py
 """
-
 import requests
 import json
 import time
@@ -142,7 +141,6 @@ def send_discord(webhook_url: str, updates: list[dict]):
 
     icon_map = {"active": "🟢", "relisted": "🔄", "waiting": "⏳", "failed": "❌"}
 
-    # Build all fields, chunked into groups of 25 (Discord limit per embed)
     all_fields = []
     for u in updates:
         icon = icon_map.get(u["status"], "❔")
@@ -166,7 +164,6 @@ def send_discord(webhook_url: str, updates: list[dict]):
             embed["footer"] = {"text": "CSFloat Auto-Lister"}
         embeds.append(embed)
 
-    # Discord allows max 10 embeds per message
     payload = {"embeds": embeds[:10]}
 
     try:
@@ -257,18 +254,17 @@ class AuctionBot:
         self.steam_id        = config["steam_id"]
         self.discord_webhook = config.get("discord_webhook")
 
-        # asset_id -> item config
-        self.watched: dict[str, dict] = {
-            item["asset_id"]: item for item in config["items"]
-        }
+        self.watched: dict[str, dict] = {}
+        for item in config["items"]:
+            aid = item["asset_id"]
+            if aid in self.watched:
+                log.warning(f"Duplicate asset_id {aid} for '{item['name']}' — skipping duplicate!")
+            else:
+                self.watched[aid] = item
 
-        # asset_id -> listing_id
         self.active: dict[str, str] = {}
-
-        # asset_id -> unix timestamp of expiry (so we know when to wake up)
         self.expires_at: dict[str, float] = {}
 
-        # asset_id -> consecutive failure count (persisted to file)
         self.state_file = Path("bot_state.json")
         self.failures: dict[str, int] = {}
         self.sold: set = set()
@@ -297,7 +293,6 @@ class AuctionBot:
         return self.watched[asset_id].get("name", asset_id)
 
     def _parse_expiry(self, expires_str: str) -> float | None:
-        """Parse CSFloat's expires_at string into a unix timestamp."""
         try:
             dt = datetime.fromisoformat(expires_str.replace("Z", "+00:00"))
             return dt.timestamp()
@@ -316,15 +311,12 @@ class AuctionBot:
         now     = time.time()
         updates = []
 
-        # Fetch live auctions
         live = self.client.get_my_active_auctions(self.steam_id)
         if live is None:
             log.warning("Could not fetch listings — rate limited or network issue. Skipping relist to avoid false positives, will retry in 10 mins.")
-            # Schedule a retry soon but do NOT relist anything
             self.expires_at["__retry"] = time.time() + 600
             return
 
-        # Clear retry sentinel if present
         self.expires_at.pop("__retry", None)
 
         live_asset_ids = {l["item"]["asset_id"] for l in live}
@@ -332,12 +324,10 @@ class AuctionBot:
         for i, (asset_id, item_cfg) in enumerate(self.watched.items()):
             name = self._item_name(asset_id)
 
-            # Skip items marked as sold
             if asset_id in self.sold:
                 continue
 
             if asset_id in live_asset_ids:
-                # Active — save expiry time so we know when to wake up
                 matched     = next(l for l in live if l["item"]["asset_id"] == asset_id)
                 listing_id  = matched["id"]
                 expires_str = matched.get("auction_details", {}).get("expires_at", "")
@@ -356,8 +346,6 @@ class AuctionBot:
                 })
 
             else:
-                # Only relist if we previously confirmed it was active
-                # If we never saw it listed, it might be a fetch issue not a real expiry
                 if asset_id in self.active:
                     self.expires_at.pop(asset_id, None)
                     log.info(f"[{name}] Auction ended — relisting now...")
@@ -372,7 +360,6 @@ class AuctionBot:
                     if i < len(self.watched) - 1:
                         time.sleep(45)
 
-        # Only ping Discord if something actually happened (relist or failure)
         notable = [u for u in updates if u["status"] in ("relisted", "failed")]
         if notable:
             send_discord(self.discord_webhook, notable)
@@ -402,12 +389,20 @@ class AuctionBot:
         )
 
         if result and result.get("__not_in_inventory"):
-            log.warning(f"[{name}] Item not in inventory — sold! Removing from config.")
-            self._remove_from_config(asset_id)
-            self.sold.add(asset_id)
+            self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
+            not_in_inv_count = self.failures[asset_id]
+            if not_in_inv_count >= 3:
+                log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
+                self._remove_from_config(asset_id)
+                self.sold.add(asset_id)
+                return {
+                    "name": name, "asset_id": asset_id,
+                    "status": "failed", "detail": f"Item sold — confirmed {not_in_inv_count}x not in inventory",
+                }
+            log.warning(f"[{name}] Not in inventory ({not_in_inv_count}/3) — will confirm before marking sold.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": "Item sold — removed from config",
+                "status": "failed", "detail": f"Not in inventory ({not_in_inv_count}/3) — confirming before removing",
             }
 
         if result and result.get("__already_listed"):
@@ -434,17 +429,17 @@ class AuctionBot:
         else:
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             fail_count = self.failures[asset_id]
-            if fail_count >= 5:
+            if fail_count >= 8:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
                 return {
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
                 }
-            log.error(f"[{name}] Listing failed ({fail_count}/5) — retrying next run.")
+            log.error(f"[{name}] Listing failed ({fail_count}/8) — retrying next run.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Failed to list ({fail_count}/5) — retrying next run",
+                "status": "failed", "detail": f"Failed to list ({fail_count}/8) — retrying next run",
             }
 
 
