@@ -155,6 +155,12 @@
             "asset_id": "50110075035",
             "reserve_price": 310,
             "description": "Nip Col 2014 Rare"
+        },
+        {
+            "name": "0.245832264423 Black Lotus",
+            "asset_id": "50126930935",
+            "reserve_price": 2200,
+            "description": "5X lotus craft clean"
         }
     ]
 }
