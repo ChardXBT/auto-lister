@@ -161,6 +161,25 @@
             "asset_id": "50126930935",
             "reserve_price": 2200,
             "description": "5X lotus craft clean"
+        },
+        {
+            "name": "0.233876451850 All stars s1mple",
+            "asset_id": "50152132412",
+            "reserve_price": 1800,
+            "description": "S1mple All stars full set"
+        },
+        {
+            "name": "0.156625077128 Aug CL vs Nip gold kato 2015",
+            "asset_id": "50163522837",
+            "reserve_price": 400,
+            "description": "Full set kato 2015 GOLD"
+        },
+        {
+            "name": "0.216271787882 All star",
+            "asset_id": "50167062277",
+            "reserve_price": 1400,
+            "description": "All star full set!"
         }
+
     ]
 }
