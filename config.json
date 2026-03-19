@@ -155,6 +155,36 @@
             "asset_id": "50172797215",
             "reserve_price": 2150,
             "description": "Beauty Lotus on lotus craft"
+        },
+        {
+            "name": "AK redline MW Navi foil DH and Lum holo MLG",
+            "asset_id": "50166434158",
+            "reserve_price": 23500,
+            "description": "Beauty Ak and Craft"
+        },
+        {
+            "name": "Galil AR | Hunting Blind 0.235358729959",
+            "asset_id": "50210866304",
+            "reserve_price": 800,
+            "description": "Ropz Gold Good pos"
+        },
+        {
+            "name": "G3SG1 | Safari Mesh 0.169273003936",
+            "asset_id": "50248954099",
+            "reserve_price": 310,
+            "description": "Kato 2015 GOLD"
+        },
+        {
+            "name": "S1mple gold Col 2016 PP Urban Dashed",
+            "asset_id": "50253182939",
+            "reserve_price": 420,
+            "description": "S1mple Gold"
+        },
+        {
+            "name": "0.189000099897 Device Mag 7 Sanddune",
+            "asset_id": "50218964240",
+            "reserve_price": 250,
+            "description": "Device Gold Krakow"
         }
     ]
 }
