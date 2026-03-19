@@ -155,6 +155,36 @@
             "asset_id": "50167062277",
             "reserve_price": 1400,
             "description": "All star full set!"
+        },
+        {
+            "name": "189000099897 D1vice Mag 7 sand dune",
+            "asset_id": "50218964240",
+            "reserve_price": 280,
+            "description": "D1vice Gold Krakow"
+        },
+        {
+            "name": "Ropz Gold london .235358729959",
+            "asset_id": "50210866304",
+            "reserve_price": 450,
+            "description": "Ropz Good pos GOLD"
+        },
+        {
+            "name": "0.051871523261 Zywoo Gold",
+            "asset_id": "50182100802",
+            "reserve_price": 320,
+            "description": "ZYWOO GOAT GOLD FN"
+        },
+        {
+            "name": "S1mple All star gold FULL SET 0.193629339337",
+            "asset_id": "50182099117",
+            "reserve_price": 1820,
+            "description": "S1mple ALL STAR FULL SET"
+        },
+        {
+            "name": "0.312045067549 M4a1s Lotus",
+            "asset_id": "50172797215",
+            "reserve_price": 2150,
+            "description": "Beauty Lotus on lotus craft"
         }
     ]
 }
