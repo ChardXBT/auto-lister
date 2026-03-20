@@ -391,7 +391,7 @@ class AuctionBot:
         if result and result.get("__not_in_inventory"):
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             not_in_inv_count = self.failures[asset_id]
-            if not_in_inv_count >= 3:
+            if not_in_inv_count >= 100:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
                 self.sold.add(asset_id)
@@ -399,10 +399,10 @@ class AuctionBot:
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Item sold — confirmed {not_in_inv_count}x not in inventory",
                 }
-            log.warning(f"[{name}] Not in inventory ({not_in_inv_count}/3) — will confirm before marking sold.")
+            log.warning(f"[{name}] Not in inventory ({not_in_inv_count}/100) — will confirm before marking sold.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Not in inventory ({not_in_inv_count}/3) — confirming before removing",
+                "status": "failed", "detail": f"Not in inventory ({not_in_inv_count}/100) — confirming before removing",
             }
 
         if result and result.get("__already_listed"):
@@ -429,17 +429,17 @@ class AuctionBot:
         else:
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             fail_count = self.failures[asset_id]
-            if fail_count >= 8:
+            if fail_count >= 100:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
                 return {
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
                 }
-            log.error(f"[{name}] Listing failed ({fail_count}/8) — retrying next run.")
+            log.error(f"[{name}] Listing failed ({fail_count}/100) — retrying next run.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Failed to list ({fail_count}/8) — retrying next run",
+                "status": "failed", "detail": f"Failed to list ({fail_count}/100) — retrying next run",
             }
 
 
