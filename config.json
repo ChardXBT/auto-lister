@@ -185,6 +185,18 @@
             "asset_id": "50218964240",
             "reserve_price": 250,
             "description": "Device Gold Krakow"
+        },
+        {
+            "name": "0.325167000294 Nip vs TSM Gold katowice 2015",
+            "asset_id": "50341707552",
+            "reserve_price": 190,
+            "description": "Kato 2015 gold"
+        },
+        {
+            "name": "0.374110639095 Penta Vs Fnatic TSM Gold katowice 2015",
+            "asset_id": "50328173948",
+            "reserve_price": 240,
+            "description": "Full set Kato 2015 GOLD"
         }
     ]
 }
