@@ -191,6 +191,24 @@
             "asset_id": "50369206615",
             "reserve_price": 200,
             "description": "S1mple Gold kato"
+        },
+        {
+            "name": "0.381813973188 Nik0 All star full set",
+            "asset_id": "50372625690",
+            "reserve_price": 1450,
+            "description": "Niko ALL STAR FULL SET"
+        },
+        {
+            "name": "0.149126797915 S1mple Gold MLG 2016",
+            "asset_id": "50379032179",
+            "reserve_price": 455,
+            "description": "S1mple Gold MLG 2016"
+        },
+        {
+            "name": "0.199726432562 all star",
+            "asset_id": "50379034145",
+            "reserve_price": 480,
+            "description": "Kato 2015 GOLD full set"
         }
     ]
 }
