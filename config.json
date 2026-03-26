@@ -25,12 +25,6 @@
             "description": "KATOWICE 2015 GOLD Check Stall"
         },
         {
-            "name": "Mag7 sand dune dig foil col 2014 0.251",
-            "asset_id": "49706433378",
-            "reserve_price": 1000,
-            "description": "Dig FOIL col 2014 + Check Stall"
-        },
-        {
             "name": "Dual Berettas | Colony heart gold boston 0.3894",
             "asset_id": "49716224061",
             "reserve_price": 760,
@@ -97,12 +91,6 @@
             "description": "Full All Stars Set! Rare"
         },
         {
-            "name": "AUG | Radiation Hazard 0.197986274958",
-            "asset_id": "50108586933",
-            "reserve_price": 1000,
-            "description": "Team LDLC Gold DH2014"
-        },
-        {
             "name": "MAG-7 | Sand Dune .160451918840",
             "asset_id": "50110075035",
             "reserve_price": 310,
@@ -119,12 +107,6 @@
             "asset_id": "50167062277",
             "reserve_price": 1400,
             "description": "All star full set!"
-        },
-        {
-            "name": "0.051871523261 Zywoo Gold",
-            "asset_id": "50182100802",
-            "reserve_price": 320,
-            "description": "ZYWOO GOAT GOLD FN"
         },
         {
             "name": "S1mple All star gold FULL SET 0.193629339337",
