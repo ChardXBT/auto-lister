@@ -257,6 +257,36 @@
             "asset_id": "50534877482",
             "reserve_price": 1450,
             "description": "All Star Holo FULL SET"
+        },
+        {
+            "name": "Bowie Lore Knife 0.99",
+            "asset_id": "50212660632",
+            "reserve_price": 11100,
+            "description": "0.99 Hight float"
+        },
+        {
+            "name": "Ak Inhertance 5x MVP ",
+            "asset_id": "50355173202",
+            "reserve_price": 6400,
+            "description": "1/1 Clean New Craft"
+        },
+        {
+            "name": "Tec9 Sand Storm Purple mag 3X envy kato 2015",
+            "asset_id": "50499268430",
+            "reserve_price": 1050,
+            "description": "Clean 3X Kato 2015"
+        },
+        {
+            "name": "P90 Facility Negative Faceit Gold",
+            "asset_id": "50401569978",
+            "reserve_price": 610,
+            "description": "London 2018 Low float clean"
+        },
+        {
+            "name": "Ak47 Slate 4X mouz holo paris",
+            "asset_id": "49080404154",
+            "reserve_price": 720,
+            "description": "4X mouz holo CLEAN"
         }
     ]
 }
