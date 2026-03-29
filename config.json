@@ -233,6 +233,30 @@
             "asset_id": "50503777622",
             "reserve_price": 299,
             "description": "S1mple Gold"
+        },
+        {
+            "name": "0.594146192074 MP9 Storm Niko gold",
+            "asset_id": "50524496611",
+            "reserve_price": 180,
+            "description": "Niko GOLD"
+        },
+        {
+            "name": "MP9 Storm Zywoo Gold 0.191648617387",
+            "asset_id": "50527778397",
+            "reserve_price": 310,
+            "description": "ZYWOO GOLD"
+        },
+        {
+            "name": "All Star but with sig scrapped 0.196569114923",
+            "asset_id": "50528703604",
+            "reserve_price": 1250,
+            "description": "All Stars HOLO"
+        },
+        {
+            "name": "MAG 7 All star holo 0.353214085102",
+            "asset_id": "50534877482",
+            "reserve_price": 1450,
+            "description": "All Star Holo FULL SET"
         }
     ]
 }
