@@ -303,8 +303,14 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 4000,
+            "reserve_price": 2600,
             "description": "S1mple All STAR BEST POS FullSET"
+        },
+        {
+            "name": "P90 NIKO gold boston 0.190600961447",
+            "asset_id": "50566848686",
+            "reserve_price": 290,
+            "description": "NIKO GOLD"
         }
     ]
 }
