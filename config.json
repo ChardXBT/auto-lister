@@ -257,6 +257,66 @@
             "asset_id": "50566848686",
             "reserve_price": 290,
             "description": "NIKO GOLD"
+        },
+        {
+            "name": "Nova | Walnut 0.281690418720 Col 2014 full set",
+            "asset_id": "50553166073",
+            "reserve_price": 340,
+            "description": "Col 2014 Foil Full set"
+        },
+        {
+            "name": "Nova | Walnut KennyS gold 0.709007978439",
+            "asset_id": "50588426718",
+            "reserve_price": 375,
+            "description": "KennyS GOLD"
+        },
+        {
+            "name": "Niko Gold Nova | Walnut 0.754248619080",
+            "asset_id": "50590717076",
+            "reserve_price": 290,
+            "description": "Niko Gold"
+        },
+        {
+            "name": "Kato Gold 2015 Full set G3SG1 | Desert Storm 0.403959959745",
+            "asset_id": "50593210692",
+            "reserve_price": 230,
+            "description": "Kato Gold 2015 Full set"
+        },
+        {
+            "name": "Kato Gold 2015 Full set SCAR-20 | Sand Mesh 0.718152225018",
+            "asset_id": "50593211684",
+            "reserve_price": 230,
+            "description": "Kato Gold 2015 Full set"
+        },
+        {
+            "name": "Kato Gold 2015 Full set MAG-7 | Sand Dune 0.576293587685",
+            "asset_id": "50593212644",
+            "reserve_price": 240,
+            "description": "Kato Gold 2015 Full set"
+        },
+        {
+            "name": "Device gold krakow PP-Bizon | Irradiated Alert 0.279988229275",
+            "asset_id": "50611742762",
+            "reserve_price": 230,
+            "description": "Device Gold Krakow 2017"
+        },
+        {
+            "name": "MLG gold MP7 | Gunsmoke 0.318869739771",
+            "asset_id": "50609144115",
+            "reserve_price": 490,
+            "description": "MLG GOLD cheapest on Gunsmoke"
+        },
+        {
+            "name": "SSG MW bluespruce ESL wolf GOLD 2014 0.135453134775",
+            "asset_id": "50622087978",
+            "reserve_price": 6998,
+            "description": "KATO WOLF MW SSG"
+        },
+        {
+            "name": "ESC gold dh 2014 PP-Bizon | Chemical Green 0.823722779751",
+            "asset_id": "50634121018",
+            "reserve_price": 1600,
+            "description": "RARE DH2014 GOLD FULL SET"
         }
     ]
 }
