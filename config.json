@@ -305,6 +305,19 @@
             "asset_id": "50634121018",
             "reserve_price": 1600,
             "description": "RARE DH2014 GOLD FULL SET"
+        },
+        {
+            "name": "Ump indigo kato gold 0.360086888075",
+            "asset_id": "50670657226",
+            "reserve_price": 320,
+            "description": "Kato 2015 gold FULL SET"
+        },
+        {
+            "name": "Ump indigo kato gold 0.152052029967",
+            "asset_id": "50669584608",
+            "reserve_price": 420,
+            "description": "Kato 2015 gold SET + good float"
         }
+
     ]
 }
