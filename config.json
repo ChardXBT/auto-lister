@@ -279,7 +279,7 @@
         {
             "name": "SSG MW bluespruce ESL wolf GOLD 2014 0.135453134775",
             "asset_id": "50622087978",
-            "reserve_price": 6998,
+            "reserve_price": 6898,
             "description": "KATO WOLF MW SSG"
         },
         {
@@ -299,6 +299,24 @@
             "asset_id": "50669584608",
             "reserve_price": 420,
             "description": "Kato 2015 gold SET + good float"
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.260002315044",
+            "asset_id": "50690835207",
+            "reserve_price": 310,
+            "description": "Col 2014 Foil"
+        },
+        {
+            "name": "Ump indigo kato gold 0.161094859242",
+            "asset_id": "50690835511",
+            "reserve_price": 340,
+            "description": "Kato 2015 gold FULL SET"
+        },
+        {
+            "name": "S1mple Gold Kato 2019 P90 Scroched 0.182983770967",
+            "asset_id": "50702963751",
+            "reserve_price": 180,
+            "description": "S1mple GOLD"
         }
     ]
 }

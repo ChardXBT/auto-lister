@@ -85,7 +85,7 @@ log = logging.getLogger("csfloat_bot")
 # ── Constants ──────────────────────────────────────────────────────────────────
 BASE_URL     = "https://csfloat.com/api/v1"
 CONFIG_FILE  = "config.json"
-RELIST_DELAY = 300  # 5 mins after expiry before re-listing
+RELIST_DELAY = 150
 
 
 # ── Config ─────────────────────────────────────────────────────────────────────
@@ -391,7 +391,7 @@ class AuctionBot:
         if result and result.get("__not_in_inventory"):
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             not_in_inv_count = self.failures[asset_id]
-            if not_in_inv_count >= 100:
+            if not_in_inv_count >= 5:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
                 self.sold.add(asset_id)
@@ -429,7 +429,7 @@ class AuctionBot:
         else:
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             fail_count = self.failures[asset_id]
-            if fail_count >= 100:
+            if fail_count >= 10:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
                 return {
