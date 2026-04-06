@@ -85,7 +85,7 @@ log = logging.getLogger("csfloat_bot")
 # ── Constants ──────────────────────────────────────────────────────────────────
 BASE_URL     = "https://csfloat.com/api/v1"
 CONFIG_FILE  = "config.json"
-RELIST_DELAY = 150
+RELIST_DELAY = 120
 
 
 # ── Config ─────────────────────────────────────────────────────────────────────
@@ -399,10 +399,10 @@ class AuctionBot:
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Item sold — confirmed {not_in_inv_count}x not in inventory",
                 }
-            log.warning(f"[{name}] Not in inventory ({not_in_inv_count}/100) — will confirm before marking sold.")
+            log.warning(f"[{name}] Not in inventory ({not_in_inv_count}/10) — will confirm before marking sold.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Not in inventory ({not_in_inv_count}/100) — confirming before removing",
+                "status": "failed", "detail": f"Not in inventory ({not_in_inv_count}/10) — confirming before removing",
             }
 
         if result and result.get("__already_listed"):
@@ -436,10 +436,10 @@ class AuctionBot:
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
                 }
-            log.error(f"[{name}] Listing failed ({fail_count}/100) — retrying next run.")
+            log.error(f"[{name}] Listing failed ({fail_count}/10) — retrying next run.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Failed to list ({fail_count}/100) — retrying next run",
+                "status": "failed", "detail": f"Failed to list ({fail_count}/10) — retrying next run",
             }
 
 
