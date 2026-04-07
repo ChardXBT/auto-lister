@@ -191,6 +191,18 @@
             "asset_id": "50702963751",
             "reserve_price": 180,
             "description": "S1mple GOLD"
+        },
+        {
+            "name": "0.402479261160 Nova walnut kato2015",
+            "asset_id": "50729390374",
+            "reserve_price": 210,
+            "description": "Kato 2015 GOLD"
+        },
+        {
+            "name": "0.0.384038507938 Nova walnut kato2015",
+            "asset_id": "50729391950",
+            "reserve_price": 240,
+            "description": "Kato 2015 GOLD"
         }
     ]
 }
