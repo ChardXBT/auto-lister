@@ -112,13 +112,13 @@
             "name": "P90 NIKO gold boston 0.190600961447",
             "asset_id": "50566848686",
             "reserve_price": 290,
-            "description": "NIKO GOLD"
+            "description": "NIKO GOLD Cheapest"
         },
         {
             "name": "Niko Gold Nova | Walnut 0.754248619080",
             "asset_id": "50590717076",
             "reserve_price": 290,
-            "description": "Niko Gold"
+            "description": "Niko Gold Cheapest"
         },
         {
             "name": "Kato Gold 2015 Full set G3SG1 | Desert Storm 0.403959959745",
@@ -197,6 +197,36 @@
             "asset_id": "50729391950",
             "reserve_price": 240,
             "description": "Kato 2015 GOLD"
+        },
+        {
+            "name": "Nova Walnut: 0.384038507938",
+            "asset_id": "50729391950",
+            "reserve_price": 240,
+            "description": "Kato 2015 GOLD FULL SET"
+        },
+        {
+            "name": "Nova Walnut 0.402479261160",
+            "asset_id": "50729390374",
+            "reserve_price": 210,
+            "description": "Kato 2015 GOLD"
+        },
+        {
+            "name": "G3SG1 | Safari Mesh 0.268572598696",
+            "asset_id": "50745322265",
+            "reserve_price": 380,
+            "description": "S1mple GOLD Cheapest"
+        },
+        {
+            "name": "G3SG1 | Safari Mesh 0.291830509901",
+            "asset_id": "50747074740",
+            "reserve_price": 350,
+            "description": "KennyS GOLD CHEAPEST"
+        },
+        {
+            "name": "MAG-7 | Irradiated Alert 0.723311305046",
+            "asset_id": "50747189128",
+            "reserve_price": 310,
+            "description": "NIKO GOLD"
         }
     ]
 }
