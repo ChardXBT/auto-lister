@@ -185,6 +185,36 @@
             "asset_id": "50747189128",
             "reserve_price": 310,
             "description": "NIKO GOLD"
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.378603309393",
+            "asset_id": "50804838177",
+            "reserve_price": 260,
+            "description": "Kato 2015 GOLD full set"
+        },
+        {
+            "name": "Nova | Walnut 0.375074565411",
+            "asset_id": "50804838204",
+            "reserve_price": 250,
+            "description": "Kato 2015 GOLD full set"
+        },
+        {
+            "name": "Nova | Walnut 0.170005932450",
+            "asset_id": "50804838234",
+            "reserve_price": 250,
+            "description": "Kato 2015 GOLD full set"
+        },
+        {
+            "name": "G3SG1 | Safari Mesh 0.358405858278 KennyS gold",
+            "asset_id": "50804838244",
+            "reserve_price": 150,
+            "description": "KennyS GOLD"
+        },
+        {
+            "name": "G3SG1 | Desert Storm 0.366299480200 KennyS Gold",
+            "asset_id": "50804838282",
+            "reserve_price": 150,
+            "description": "KennyS GOLD"
         }
     ]
 }
