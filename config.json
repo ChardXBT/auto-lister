@@ -221,6 +221,12 @@
             "asset_id": "50650991083",
             "reserve_price": 690,
             "description": "Highfloat clean 4X"
+        },
+        {
+            "name": "Nova | Walnut 0.276886135340",
+            "asset_id": "50835875491",
+            "reserve_price": 220,
+            "description": "Katowice 2015 GOLD"
         }
     ]
 }
