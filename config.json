@@ -203,6 +203,24 @@
             "asset_id": "50804838282",
             "reserve_price": 150,
             "description": "KennyS GOLD"
+        },
+        {
+            "name": "Glock Ground water titan scrapped: 0.306939482689",
+            "asset_id": "50745323548",
+            "reserve_price": 6900,
+            "description": "Titan Vs Mouz"
+        },
+        {
+            "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916 ",
+            "asset_id": "50810796378",
+            "reserve_price": 3200,
+            "description": "Low float 5X clean"
+        },
+        {
+            "name": "SSG Abyss Highfloat 4x liquid fire",
+            "asset_id": "50650991083",
+            "reserve_price": 690,
+            "description": "Highfloat clean 4X"
         }
     ]
 }
