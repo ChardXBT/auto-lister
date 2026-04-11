@@ -121,12 +121,6 @@
             "description": "KATO WOLF MW SSG"
         },
         {
-            "name": "Ump indigo kato gold 0.152052029967",
-            "asset_id": "50669584608",
-            "reserve_price": 420,
-            "description": "Kato 2015 gold SET + good float"
-        },
-        {
             "name": "MAG-7 | Sand Dune 0.260002315044",
             "asset_id": "50690835207",
             "reserve_price": 310,
@@ -161,12 +155,6 @@
             "asset_id": "50747074740",
             "reserve_price": 350,
             "description": "KennyS GOLD CHEAPEST"
-        },
-        {
-            "name": "MAG-7 | Irradiated Alert 0.723311305046",
-            "asset_id": "50747189128",
-            "reserve_price": 310,
-            "description": "NIKO GOLD"
         },
         {
             "name": "MAG-7 | Sand Dune 0.378603309393",
