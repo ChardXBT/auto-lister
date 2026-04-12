@@ -209,6 +209,12 @@
             "asset_id": "50835875491",
             "reserve_price": 220,
             "description": "Katowice 2015 GOLD"
+        },
+        {
+            "name": "M4a1s Lotus 5X 0.189052015543",
+            "asset_id": "50863377276",
+            "reserve_price": 2200,
+            "description": "5X Lotus on Lotus"
         }
     ]
 }
