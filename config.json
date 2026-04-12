@@ -127,12 +127,6 @@
             "description": "Col 2014 Foil"
         },
         {
-            "name": "0.402479261160 Nova walnut kato2015",
-            "asset_id": "50729390374",
-            "reserve_price": 210,
-            "description": "Kato 2015 GOLD"
-        },
-        {
             "name": "0.0.384038507938 Nova walnut kato2015",
             "asset_id": "50729391950",
             "reserve_price": 240,
@@ -143,12 +137,6 @@
             "asset_id": "50729391950",
             "reserve_price": 240,
             "description": "Kato 2015 GOLD FULL SET"
-        },
-        {
-            "name": "Nova Walnut 0.402479261160",
-            "asset_id": "50729390374",
-            "reserve_price": 210,
-            "description": "Kato 2015 GOLD"
         },
         {
             "name": "G3SG1 | Safari Mesh 0.291830509901",
