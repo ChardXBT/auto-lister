@@ -9,7 +9,7 @@
         {
             "name": "Sawed-Off | Irradiated Alert 3dMax kato gold (not full set) 0.392642",
             "asset_id": "49873046044",
-            "reserve_price": 550,
+            "reserve_price": 620,
             "description": "3DMAX GOLD Kato2015"
         },
         {
@@ -197,6 +197,18 @@
             "asset_id": "50863377276",
             "reserve_price": 2200,
             "description": "5X Lotus on Lotus"
+        },
+        {
+            "name": "Niko Gold Nova | Walnut 0.150634825230",
+            "asset_id": "50884025842",
+            "reserve_price": 310,
+            "description": "Niko Gold Cheapest"
+        },
+        {
+            "name": "MAG-7 | Sand Dune .152819916606",
+            "asset_id": "50871952328",
+            "reserve_price": 310,
+            "description": "ESL 2014 FOIL"
         }
     ]
 }
