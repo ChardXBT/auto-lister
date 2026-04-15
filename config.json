@@ -185,6 +185,42 @@
             "asset_id": "50871952328",
             "reserve_price": 310,
             "description": "ESL 2014 FOIL"
+        },
+        {
+            "name": "SG 553 | Fallout Warning 0.300346434116 Kato 2015 gold",
+            "asset_id": "50889454475",
+            "reserve_price": 600,
+            "description": "Kato 2015 Gold Full Set Kato 2015 gold"
+        },
+        {
+            "name": "P90 Storm 0.378162145615 Kato 2015 gold",
+            "asset_id": "50896312620",
+            "reserve_price": 330,
+            "description": "Kato 2015 Gold Full Set"
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.157031267881 Kato 2015 gold",
+            "asset_id": "50914639487",
+            "reserve_price": 270,
+            "description": "Kato 2015 Gold Full Set Low float"
+        },
+        {
+            "name": "MAG-7 | Storm 0.297249525785 Device Gold Krakow",
+            "asset_id": "50892646511",
+            "reserve_price": 290,
+            "description": "Device GOLD Krakow"
+        },
+        {
+            "name": "G3SG1 | Safari Mesh 0.360429555178",
+            "asset_id": "50889452926",
+            "reserve_price": 140,
+            "description": "Cheapest S1mple Gold"
+        },
+        {
+            "name": "MAG-7 | Irradiated Alert 0.384096920490",
+            "asset_id": "50898695525",
+            "reserve_price": 1300,
+            "description": "London Foil RARE"
         }
     ]
 }
