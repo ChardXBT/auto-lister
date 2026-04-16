@@ -1,5 +1,6 @@
 Key Functions: 
-
+Runs every 2h 5m on odd interval: 1:05, 3:05, 5:05, 7:05, 9:05, 11:05, etc.
+So the Bid bot and Listing bot never split API usage, and allows this script to have more runway as listings increase. 
 The bot (bot.py):
 
 Reads your items from config.json and credentials from .env
