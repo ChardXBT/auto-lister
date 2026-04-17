@@ -39,7 +39,7 @@
         {
             "name": "G3SG1 | Safari Mesh 0.169273003936",
             "asset_id": "50248954099",
-            "reserve_price": 310,
+            "reserve_price": 260,
             "description": "Kato 2015 GOLD"
         },
         {
@@ -57,7 +57,7 @@
         {
             "name": "Ak Inhertance 5x MVP ",
             "asset_id": "50355173202",
-            "reserve_price": 6400,
+            "reserve_price": 6100,
             "description": "1/1 Clean New Craft"
         },
         {
@@ -93,7 +93,7 @@
         {
             "name": "SSG MW bluespruce ESL wolf GOLD 2014 0.135453134775",
             "asset_id": "50622087978",
-            "reserve_price": 6898,
+            "reserve_price": 6600,
             "description": "KATO WOLF MW SSG"
         },
         {
@@ -105,7 +105,7 @@
         {
             "name": "Nova Walnut: 0.384038507938",
             "asset_id": "50729391950",
-            "reserve_price": 240,
+            "reserve_price": 220,
             "description": "Kato 2015 GOLD FULL SET"
         },
         {
@@ -117,13 +117,13 @@
         {
             "name": "Nova | Walnut 0.375074565411",
             "asset_id": "50804838204",
-            "reserve_price": 250,
+            "reserve_price": 230,
             "description": "Kato 2015 GOLD full set"
         },
         {
             "name": "Nova | Walnut 0.170005932450",
             "asset_id": "50804838234",
-            "reserve_price": 250,
+            "reserve_price": 230,
             "description": "Kato 2015 GOLD full set"
         },
         {
@@ -141,7 +141,7 @@
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
-            "reserve_price": 6900,
+            "reserve_price": 6800,
             "description": "Titan Vs Mouz"
         },
         {
@@ -177,7 +177,7 @@
         {
             "name": "P90 Storm 0.378162145615 Kato 2015 gold",
             "asset_id": "50896312620",
-            "reserve_price": 330,
+            "reserve_price": 310,
             "description": "Kato 2015 Gold Full Set"
         },
         {
@@ -251,6 +251,24 @@
             "asset_id": "50878568687",
             "reserve_price": 3000,
             "description": "Cheapest DH 2013 shooter Foil"
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.283958375454",
+            "asset_id": "50962031588",
+            "reserve_price": 210,
+            "description": "Kato 2015 gold full set"
+        },
+        {
+            "name": "SG 553 | Gator Mesh 0.266827195883",
+            "asset_id": "50969106746",
+            "reserve_price": 520,
+            "description": "Kato 2015 gold full set"
+        },
+        {
+            "name": "P250 | Sand Dune 0.338557213545",
+            "asset_id": "50976249477",
+            "reserve_price": 410,
+            "description": "Kato 2015 gold + Sand dune"
         }
     ]
 }
