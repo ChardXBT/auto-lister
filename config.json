@@ -195,14 +195,32 @@
         {
             "name": "Ak Inhertance 5x MVP ",
             "asset_id": "50355173202",
-            "reserve_price": 6200,
+            "reserve_price": 6100,
             "description": "1/1 Clean New Craft + Name tag"
         },
         {
             "name": "Awp Assimove crown foil ",
             "asset_id": "51198687534",
-            "reserve_price": 21000,
+            "reserve_price": 19500,
             "description": "2nd best pos crown foil Cheapest"
+        },
+        {
+            "name": "UMP-45 | Indigo 0.324368596077",
+            "asset_id": "51052857481",
+            "reserve_price": 350,
+            "description": "Kato 2015 Gold FULL SET"
+        },
+        {
+            "name": "MP9 | Sand Dashed 0.746735513210",
+            "asset_id": "51052834395",
+            "reserve_price": 290,
+            "description": "Kato 2015 Gold FULL SET"
+        },
+        {
+            "name": "MP9 | Sand Dashed 0.130889981985",
+            "asset_id": "51053969038",
+            "reserve_price": 410,
+            "description": "Best pos full kato gold"
         }
     ]
 }
