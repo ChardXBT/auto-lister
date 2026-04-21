@@ -73,12 +73,6 @@
             "description": "Kato 2015 GOLD"
         },
         {
-            "name": "Nova Walnut: 0.384038507938",
-            "asset_id": "50729391950",
-            "reserve_price": 220,
-            "description": "Kato 2015 GOLD FULL SET"
-        },
-        {
             "name": "Nova | Walnut 0.170005932450",
             "asset_id": "50804838234",
             "reserve_price": 230,
@@ -158,7 +152,7 @@
         },
         {
             "name": "SG 553 | Fallout Warning 0.300346434116 Kato 2015 gold",
-            "asset_id": "50889454475",
+            "asset_id": "51045458048",
             "reserve_price": 600,
             "description": "Kato 2015 Gold Full Set"
         },
