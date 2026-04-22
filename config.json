@@ -73,12 +73,6 @@
             "description": "Kato 2015 GOLD"
         },
         {
-            "name": "Nova | Walnut 0.170005932450",
-            "asset_id": "50804838234",
-            "reserve_price": 230,
-            "description": "Kato 2015 GOLD full set"
-        },
-        {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
             "reserve_price": 6700,
@@ -115,12 +109,6 @@
             "description": "Device GOLD Krakow"
         },
         {
-            "name": "G3SG1 | Safari Mesh 0.360429555178",
-            "asset_id": "50889452926",
-            "reserve_price": 140,
-            "description": "Cheapest S1mple Gold"
-        },
-        {
             "name": "MAG-7 | Irradiated Alert 0.384096920490",
             "asset_id": "50898695525",
             "reserve_price": 1300,
@@ -143,12 +131,6 @@
             "asset_id": "50953376360",
             "reserve_price": 1150,
             "description": "Deagle Krakow MVPless Rare"
-        },
-        {
-            "name": "P250 | Facility Draft 0.148605942726 Zywoo gold kato 2019",
-            "asset_id": "50953680500",
-            "reserve_price": 350,
-            "description": "ZywOo GOLD goat"
         },
         {
             "name": "SG 553 | Fallout Warning 0.300346434116 Kato 2015 gold",
