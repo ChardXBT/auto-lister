@@ -133,7 +133,7 @@
             "description": "Deagle Krakow MVPless Rare"
         },
         {
-            "name": "SG 553 | Fallout Warning 0.300346434116 Kato 2015 gold",
+            "name": "SG 553 | Fallout Warning 0.331505894661 Kato 2015 gold",
             "asset_id": "51045458048",
             "reserve_price": 600,
             "description": "Kato 2015 Gold Full Set"
@@ -185,6 +185,18 @@
             "asset_id": "51053969038",
             "reserve_price": 410,
             "description": "Best pos full kato gold"
+        },
+        {
+            "name": "SG 553 | Fallout Warning 0.300346434116 Kato 2015 gold",
+            "asset_id": "50889454475",
+            "reserve_price": 610,
+            "description": "Kato 2015 Gold Full Set"
+        },
+        {
+            "name": "MP7 | Gunsmoke 0.457860261202",
+            "asset_id": "51067421870",
+            "reserve_price": 220,
+            "description": "Krakow full set"
         }
     ]
 }
