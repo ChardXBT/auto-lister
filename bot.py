@@ -58,15 +58,17 @@ Setup:
   3. Fill in config.json  (your items)
   4. python bot.py
 """
-import requests
 import json
-import time
 import logging
-import sys
-from pathlib import Path
-from dotenv import load_dotenv
-from datetime import datetime, timezone
 import os
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+import requests
+from dotenv import load_dotenv
+
 from excel_logger import log_sale
 
 load_dotenv()
@@ -96,9 +98,11 @@ def load_config() -> dict:
     discord_webhook = os.getenv("DISCORD_WEBHOOK")
 
     if not api_key:
-        log.error("CSFLOAT_API_KEY missing from .env"); sys.exit(1)
+        log.error("CSFLOAT_API_KEY missing from .env")
+        sys.exit(1)
     if not steam_id:
-        log.error("CSFLOAT_STEAM_ID missing from .env"); sys.exit(1)
+        log.error("CSFLOAT_STEAM_ID missing from .env")
+        sys.exit(1)
 
     if not Path(CONFIG_FILE).exists():
         log.error(f"'{CONFIG_FILE}' not found — creating template, fill it in and restart.")
@@ -119,7 +123,8 @@ def load_config() -> dict:
         cfg = json.load(f)
 
     if not cfg.get("items"):
-        log.error("No items in config.json"); sys.exit(1)
+        log.error("No items in config.json")
+        sys.exit(1)
 
     cfg["api_key"]         = api_key
     cfg["steam_id"]        = steam_id
@@ -151,6 +156,7 @@ def send_discord(webhook_url: str, updates: list[dict]):
             "inline": True,
         })
 
+    # Discord caps embeds at 25 fields each and 10 embeds per webhook call
     chunks = [all_fields[i:i+25] for i in range(0, len(all_fields), 25)]
     embeds = []
     for i, chunk in enumerate(chunks):
@@ -165,7 +171,7 @@ def send_discord(webhook_url: str, updates: list[dict]):
             embed["footer"] = {"text": "CSFloat Auto-Lister"}
         embeds.append(embed)
 
-    payload = {"embeds": embeds[:10]}
+    payload = {"embeds": embeds[:10]}  # Discord hard limit: 10 embeds per message
 
     try:
         r = requests.post(webhook_url, json=payload, timeout=10)
@@ -209,10 +215,12 @@ class CSFloatClient:
             if r.status_code == 400:
                 body = r.json()
                 if body.get("code") == 4:
+                    # CSFloat API code 4: item already has an active listing
                     return {"__already_listed": True}
             if r.status_code == 403:
                 body = r.json()
                 if body.get("code") == 17:
+                    # CSFloat API code 17: item is not in the seller's inventory
                     return {"__not_in_inventory": True}
             r.raise_for_status()
             return r.json()
@@ -315,9 +323,11 @@ class AuctionBot:
         live = self.client.get_my_active_auctions(self.steam_id)
         if live is None:
             log.warning("Could not fetch listings — rate limited or network issue. Skipping relist to avoid false positives, will retry in 10 mins.")
+            # Sentinel key: schedule a retry in 10 min without touching real asset expiries
             self.expires_at["__retry"] = time.time() + 600
             return
 
+        # Clear the retry sentinel now that the fetch succeeded
         self.expires_at.pop("__retry", None)
 
         live_asset_ids = {l["item"]["asset_id"] for l in live}
@@ -352,6 +362,7 @@ class AuctionBot:
                     log.info(f"[{name}] Auction ended — relisting now...")
                     result = self._do_relist(asset_id)
                     updates.append(result)
+                    # Pause between listings to avoid triggering CSFloat rate limits
                     if i < len(self.watched) - 1:
                         time.sleep(45)
                 else:
@@ -384,14 +395,16 @@ class AuctionBot:
         log.info(f"[{name}] Listing @ reserve={item_cfg['reserve_price']} '{item_cfg['description']}'")
 
         result = self.client.create_auction(
-            asset_id      = asset_id,
-            reserve_price = item_cfg["reserve_price"],
-            description   = item_cfg["description"],
+            asset_id=asset_id,
+            reserve_price=item_cfg["reserve_price"],
+            description=item_cfg["description"],
         )
 
         if result and result.get("__not_in_inventory"):
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             not_in_inv_count = self.failures[asset_id]
+            # Require 5 consecutive "not in inventory" responses before treating the item
+            # as sold — guards against transient Steam inventory sync delays
             if not_in_inv_count >= 5:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
@@ -431,6 +444,8 @@ class AuctionBot:
         else:
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             fail_count = self.failures[asset_id]
+            # 10 consecutive generic API failures most likely means the item sold
+            # through a channel the bot didn't detect (trade, direct sale, etc.)
             if fail_count >= 10:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
