@@ -14,11 +14,10 @@ Usage (called automatically by the bot):
 """
 
 import os
-from datetime import datetime
 from pathlib import Path
-
 from openpyxl import load_workbook
-from openpyxl.styles import Alignment, Border, Font, Side
+from openpyxl.styles import Font, Alignment, Border, Side
+from datetime import datetime
 
 # ── Config ─────────────────────────────────────────────────────────────────────
 EXCEL_FILE  = os.getenv("EXCEL_PATH", "CS_GO_PnL_Tracker_Final.xlsx")
@@ -36,12 +35,21 @@ COL_ROI    = 7  # G
 COL_LINK   = 8  # H
 
 
+# Your sheet's summary block starts at row 1149, so data rows are 3–1147
+DATA_START_ROW = 3
+DATA_END_ROW   = 1147  # hard cap — never write into or past the summary
+
+
 def _find_next_row(sheet) -> int:
-    """Return the first empty row after the data (skips header rows)."""
-    for row in range(sheet.max_row, 1, -1):
+    """Return the first empty row within the data range (rows 3–1147)."""
+    for row in range(DATA_END_ROW, DATA_START_ROW - 1, -1):
         if sheet.cell(row=row, column=COL_NAME).value is not None:
-            return row + 1
-    return 3  # fallback: row 3 (row 1 = fee rate, row 2 = headers)
+            next_row = row + 1
+            if next_row > DATA_END_ROW:
+                print(f"[excel_logger] WARNING: Data range is full (row {DATA_END_ROW}). Expand your sheet!")
+                return DATA_END_ROW
+            return next_row
+    return DATA_START_ROW  # sheet is empty, start at row 3
 
 
 def _copy_row_style(sheet, src_row: int, dst_row: int):
