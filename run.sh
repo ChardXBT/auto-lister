@@ -17,5 +17,5 @@ git fetch origin && git reset --hard origin/main
 python3 bot.py
 
 # Push any config changes (e.g. sold items removed) back to GitHub
-git add config.json bot_state.json
+git add config.json bot_state.json CS_GO_PnL_Tracker_Final.xlsx
 git diff --cached --quiet || git commit -m "auto: remove sold items" && git push origin master:main
