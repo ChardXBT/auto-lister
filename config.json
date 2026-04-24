@@ -76,18 +76,20 @@
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
             "reserve_price": 6700,
-            "description": "Titan Vs Mouz"
+            "description": "Titan Vs Mouz",
+            "lowest_sell": 6500,
+            "decrease": 50
         },
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916 ",
             "asset_id": "50810796378",
-            "reserve_price": 3100,
+            "reserve_price": 3300,
             "description": "Low float 5X clean"
         },
         {
             "name": "SSG Abyss Highfloat 4x liquid fire",
             "asset_id": "50650991083",
-            "reserve_price": 690,
+            "reserve_price": 700,
             "description": "Highfloat clean 4X"
         },
         {
@@ -148,7 +150,9 @@
             "name": "Awp Assimove crown foil ",
             "asset_id": "51198687534",
             "reserve_price": 19500,
-            "description": "2nd best pos crown foil Cheapest"
+            "description": "2nd best pos crown foil Cheapest",
+            "lowest_sell": 17000,
+            "decrease": 500
         },
         {
             "name": "UMP-45 | Indigo 0.324368596077",

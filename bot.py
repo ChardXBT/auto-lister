@@ -360,6 +360,7 @@ class AuctionBot:
                 if asset_id in self.active:
                     self.expires_at.pop(asset_id, None)
                     log.info(f"[{name}] Auction ended — relisting now...")
+                    self._apply_price_decrease(asset_id)
                     result = self._do_relist(asset_id)
                     updates.append(result)
                     # Pause between listings to avoid triggering CSFloat rate limits
@@ -388,6 +389,51 @@ class AuctionBot:
             log.info(f"Removed asset {asset_id} from config.json")
         except Exception as e:
             log.warning(f"Could not remove asset {asset_id} from config: {e}")
+
+    def _apply_price_decrease(self, asset_id: str):
+        """
+        If the item has 'decrease' and 'lowest_sell', drop reserve_price by
+        decrease amount (floored at lowest_sell) and save to config.json.
+        Only called when an auction has ended and we are about to relist.
+        """
+        item_cfg    = self.watched[asset_id]
+        decrease    = item_cfg.get("decrease")
+        lowest_sell = item_cfg.get("lowest_sell")
+        name        = self._item_name(asset_id)
+
+        # Skip if either field is missing or invalid
+        if not decrease or not lowest_sell:
+            return
+        if not isinstance(decrease, (int, float)) or not isinstance(lowest_sell, (int, float)):
+            log.warning(f"[{name}] Invalid decrease/lowest_sell values — skipping price drop.")
+            return
+
+        current_price = item_cfg["reserve_price"]
+
+        # Already at or below floor — nothing to do
+        if current_price <= lowest_sell:
+            log.info(f"[{name}] Price already at floor ({current_price}) — no decrease applied.")
+            return
+
+        new_price = max(current_price - decrease, lowest_sell)
+
+        # Update in-memory config
+        item_cfg["reserve_price"] = new_price
+        self.watched[asset_id]["reserve_price"] = new_price
+
+        # Persist to config.json so restarts use the updated price
+        try:
+            with open(CONFIG_FILE) as f:
+                cfg = json.load(f)
+            for item in cfg["items"]:
+                if item["asset_id"] == asset_id:
+                    item["reserve_price"] = new_price
+                    break
+            with open(CONFIG_FILE, "w") as f:
+                json.dump(cfg, f, indent=4)
+            log.info(f"[{name}] Price decreased: {current_price} → {new_price} (floor: {lowest_sell})")
+        except Exception as e:
+            log.warning(f"[{name}] Could not save price decrease to config: {e}")
 
     def _do_relist(self, asset_id: str) -> dict:
         item_cfg = self.watched[asset_id]
