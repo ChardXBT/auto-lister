@@ -39,7 +39,7 @@
         {
             "name": "MAG 7 All star holo 0.353214085102",
             "asset_id": "50534877482",
-            "reserve_price": 1450,
+            "reserve_price": 1500,
             "description": "All Star Holo FULL SET"
         },
         {
@@ -197,6 +197,66 @@
             "asset_id": "51067421870",
             "reserve_price": 220,
             "description": "Krakow full set"
+        },
+        {
+            "name": "Nova | Walnut 0.325330734253",
+            "asset_id": "51110301432",
+            "reserve_price": 260,
+            "description": "Kato 2015 gold fullset"
+        },
+        {
+            "name": "G3SG1 | Desert Storm 0.797657728195",
+            "asset_id": "51110303404",
+            "reserve_price": 450,
+            "description": "Col 2014 foil full set"
+        },
+        {
+            "name": "Nova | Polar Mesh 0.217678815126",
+            "asset_id": "51116513941",
+            "reserve_price": 290,
+            "description": "Niko gold"
+        },
+        {
+            "name": "Sawed-Off | Irradiated Alert 0.781168520451",
+            "asset_id": "51110303389",
+            "reserve_price": 1680,
+            "description": "All Stars full set High float"
+        },
+        {
+            "name": "PP-Bizon | Irradiated Alert 0.797088861465",
+            "asset_id": "51110305616",
+            "reserve_price": 1800,
+            "description": "All Stars full set High float"
+        },
+        {
+            "name": "MAG-7 | Irradiated Alert 0.795957326889",
+            "asset_id": "51110310523",
+            "reserve_price": 1800,
+            "description": "All Stars full set High float"
+        },
+        {
+            "name": "PP-Bizon | Irradiated Alert 0.206050664186",
+            "asset_id": "51128342265",
+            "reserve_price": 1600,
+            "description": "All Stars full set"
+        },
+        {
+            "name": "P90 | Fallout Warning 0.795384109020",
+            "asset_id": "51110303399",
+            "reserve_price": 6000,
+            "description": "All Stars full set High float"
+        },
+        {
+            "name": "UMP-45 | Fallout Warning 0.773714900017",
+            "asset_id": "51110307338",
+            "reserve_price": 6000,
+            "description": "All Stars full set High float"
+        },
+        {
+            "name": "XM1014 | Fallout Warning 0.788281977177",
+            "asset_id": "51110308918",
+            "reserve_price": 6000,
+            "description": "All Stars full set High float"
         }
     ]
 }
