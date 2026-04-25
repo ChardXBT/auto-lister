@@ -65,7 +65,7 @@ def _copy_row_style(sheet, src_row: int, dst_row: int):
                 dst.number_format = src.number_format
 
 
-def log_sale(item_name: str, sold_price_cents: int) -> bool:
+def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> bool:
     """
     Append a sold item row to the Excel tracker.
 
@@ -104,7 +104,7 @@ def log_sale(item_name: str, sold_price_cents: int) -> bool:
 
         # Write data
         ws.cell(row=next_row, column=COL_NAME).value  = item_name
-        ws.cell(row=next_row, column=COL_COST).value  = None   # you fill this in
+        ws.cell(row=next_row, column=COL_COST).value  = (cost_cents / 100.0) if cost_cents else None
         ws.cell(row=next_row, column=COL_SOLD).value  = sold_price_usd
 
         # Replicate existing formulas (mirrors your sheet's formula pattern)

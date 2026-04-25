@@ -24,7 +24,9 @@ Place new bids with empty parameters;
             "name": "",
             "asset_id": "",
             "reserve_price": ,
-            "description": ""
+            "description": "",
+            "cost":
+
         }
 
 """
@@ -455,7 +457,7 @@ class AuctionBot:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
                 self.sold.add(asset_id)
-                log_sale(name, item_cfg["reserve_price"])
+                log_sale(name, item_cfg["reserve_price"], item_cfg.get("cost"))
                 return {
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Item sold — confirmed {not_in_inv_count}x not in inventory",
@@ -495,7 +497,7 @@ class AuctionBot:
             if fail_count >= 10:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
-                log_sale(name, item_cfg["reserve_price"])
+                log_sale(name, item_cfg["reserve_price"], item_cfg.get("cost"))
                 return {
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
