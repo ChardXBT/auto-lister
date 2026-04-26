@@ -147,28 +147,10 @@
             "description": "Best pos full kato gold"
         },
         {
-            "name": "SG 553 | Fallout Warning 0.300346434116 Kato 2015 gold",
-            "asset_id": "50889454475",
-            "reserve_price": 610,
-            "description": "Kato 2015 Gold Full Set"
-        },
-        {
             "name": "Nova | Walnut 0.325330734253",
             "asset_id": "51110301432",
             "reserve_price": 260,
             "description": "Kato 2015 gold fullset"
-        },
-        {
-            "name": "G3SG1 | Desert Storm 0.797657728195",
-            "asset_id": "51110303404",
-            "reserve_price": 450,
-            "description": "Col 2014 foil full set"
-        },
-        {
-            "name": "Nova | Polar Mesh 0.217678815126",
-            "asset_id": "51116513941",
-            "reserve_price": 290,
-            "description": "Niko gold"
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.781168520451",
