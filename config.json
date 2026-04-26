@@ -232,6 +232,34 @@
             "reserve_price": 3980,
             "description": "Road Rash IEM GOLD",
             "cost": 2123
+        },
+        {
+            "name": "Nova | Polar Mesh Nova | Polar Mesh",
+            "asset_id": "51162440601",
+            "reserve_price": 300,
+            "description": "Titan Gold full set",
+            "cost": 22
+        },
+        {
+            "name": "Nova | Predator 0.378227680922",
+            "asset_id": "51162440628",
+            "reserve_price": 300,
+            "description": "Titan Gold full set",
+            "cost": 13
+        },
+        {
+            "name": "MP9 | Sand Dashed 0.241834059358",
+            "asset_id": "51162440642",
+            "reserve_price": 340,
+            "description": "Titan Gold full set",
+            "cost": 24
+        },
+        {
+            "name": "P250 | Bone Mask 0.366579562426",
+            "asset_id": "51164728957",
+            "reserve_price": 4050,
+            "description": "Katowice 2014 Foil fullset cheap",
+            "cost": 2500
         }
     ]
 }
