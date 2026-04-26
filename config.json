@@ -123,12 +123,6 @@
             "description": "Kato 2015 Gold Full Set"
         },
         {
-            "name": "USP-S | Royal Blue 0.383412957191",
-            "asset_id": "50945843380",
-            "reserve_price": 1600,
-            "description": "All top pos Kato 2015 Gold"
-        },
-        {
             "name": "Dual Berettas | Contractor 0.340188771486 DH 2013 Shooter Foil",
             "asset_id": "50878568687",
             "reserve_price": 2600,
@@ -224,7 +218,6 @@
             "reserve_price": 295,
             "description": "Niko GOLD",
             "cost": 142
-
         },
         {
             "name": "G3SG1 | Safari Mesh 0.128206089139",
@@ -232,7 +225,6 @@
             "reserve_price": 180,
             "description": "TonyBlack Gold",
             "cost": 53
-
         },
         {
             "name": "USP-S | Road Rash 0.410679906607",
@@ -240,7 +232,6 @@
             "reserve_price": 3980,
             "description": "Road Rash IEM GOLD",
             "cost": 2123
-
         }
     ]
 }
