@@ -230,6 +230,13 @@
             "reserve_price": 4050,
             "description": "Katowice 2014 Foil fullset cheap",
             "cost": 2500
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.386119425297",
+            "asset_id": "51181492222",
+            "reserve_price": 1320,
+            "description": "DH2014 GOLD BEST POS",
+            "cost": 717
         }
     ]
 }
