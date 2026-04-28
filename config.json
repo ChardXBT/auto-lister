@@ -230,6 +230,41 @@
             "asset_id": "50945843380",
             "reserve_price": 1600,
             "description": "All top pos Kato 2015 Gold"
+        },
+        {
+            "name": "XM1014 | Fallout Warning 0.392979562283",
+            "asset_id": "51192433638",
+            "reserve_price": 5000,
+            "description": "All star full set cheap",
+            "cost": 647
+        },
+        {
+            "name": "Sawed-Off | Irradiated Alert 0.456468969584",
+            "asset_id": "51192440308",
+            "reserve_price": 1400,
+            "description": "All star full set",
+            "cost": 61
+        },
+        {
+            "name": "Sawed-Off | Sage Spray 0.349741399288",
+            "asset_id": "51192438101",
+            "reserve_price": 950,
+            "description": "SDY Gold cheapest",
+            "cost": 473
+        },
+        {
+            "name": "Tec-9 | Army Mesh 0.218766435981",
+            "asset_id": "51196666789",
+            "reserve_price": 4300,
+            "description": "Tec9 Kato 2014 best pos",
+            "cost": 2704
+        },
+        {
+            "name": "Nova | Walnut 0.689443826675",
+            "asset_id": "51202954129",
+            "reserve_price": 800,
+            "description": "NIP Dreamhack Gold 2014",
+            "cost": 675
         }
     ]
 }
