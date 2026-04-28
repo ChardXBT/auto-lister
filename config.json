@@ -224,6 +224,12 @@
             "reserve_price": 1320,
             "description": "DH2014 GOLD BEST POS",
             "cost": 717
+        },
+        {
+            "name": "USP-S | Royal Blue 0.383412957191",
+            "asset_id": "50945843380",
+            "reserve_price": 1600,
+            "description": "All top pos Kato 2015 Gold"
         }
     ]
 }

@@ -455,7 +455,7 @@ class AuctionBot:
             not_in_inv_count = self.failures[asset_id]
             # Require 5 consecutive "not in inventory" responses before treating the item
             # as sold — guards against transient Steam inventory sync delays
-            if not_in_inv_count >= 2:
+            if not_in_inv_count >= 5:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
                 self.sold.add(asset_id)
