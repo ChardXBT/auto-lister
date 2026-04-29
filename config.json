@@ -275,6 +275,24 @@
             "reserve_price": 550,
             "description": "Katowice 2015 GOLD full set",
             "cost": 98
+        },
+        {
+            "name": "M249 | Contrast Spray 0.207938030362 Kenny Gold krakow ",
+            "asset_id": "50929013441",
+            "reserve_price": 965,
+            "description": "Cheapest KennyS Gold Krakow 2017"
+        },
+        {
+            "name": "Mag7 Sand dune 0.152819916606 nip + fnatic kato 2015 gold (scrapped)",
+            "asset_id": "49238456081",
+            "reserve_price": 210,
+            "description": "CLEAN STICKERS Check Stall"
+        },
+        {
+            "name": "Sawed-Off | Irradiated Alert 3dMax kato gold (not full set) 0.392642647028",
+            "asset_id": "49873046044",
+            "reserve_price": 595,
+            "description": "3DMAX GOLD Kato2015"
         }
     ]
 }

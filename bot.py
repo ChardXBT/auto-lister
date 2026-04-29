@@ -496,7 +496,7 @@ class AuctionBot:
             fail_count = self.failures[asset_id]
             # 10 consecutive generic API failures most likely means the item sold
             # through a channel the bot didn't detect (trade, direct sale, etc.)
-            if fail_count >= 10:
+            if fail_count >= 30:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
                 log_sale(name, item_cfg["reserve_price"], item_cfg.get("cost"))
