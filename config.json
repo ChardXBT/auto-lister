@@ -259,6 +259,27 @@
             "reserve_price": 800,
             "description": "NIP Dreamhack Gold 2014",
             "cost": 675
+        },
+        {
+            "name": "M249 | Contrast Spray 0.165465533733",
+            "asset_id": "51217727728",
+            "reserve_price": 270,
+            "description": "Katowice 2015 GOLD full set",
+            "cost": 111
+        },
+        {
+            "name": "Nova | Walnut 0.549327969551",
+            "asset_id": "51214353600",
+            "reserve_price": 260,
+            "description": "Katowice 2015 GOLD full set",
+            "cost": 47
+        },
+        {
+            "name": "G3SG1 | Polar Camo 0.383077621460",
+            "asset_id": "51207725545",
+            "reserve_price": 750,
+            "description": "Cheapest DICK GOLD",
+            "cost": 301
         }
     ]
 }
