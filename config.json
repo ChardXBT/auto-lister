@@ -280,6 +280,13 @@
             "reserve_price": 750,
             "description": "Cheapest DICK GOLD",
             "cost": 301
+        },
+        {
+            "name": "UMP-45 | Indigo 0.252622604370",
+            "asset_id": "51208581186",
+            "reserve_price": 550,
+            "description": "Katowice 2015 GOLD full set",
+            "cost": 98
         }
     ]
 }
