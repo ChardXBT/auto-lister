@@ -4,31 +4,36 @@
             "name": "MAG-7 | Sand Dune .160451918840",
             "asset_id": "50110075035",
             "reserve_price": 260,
-            "description": "Nip Col 2014 Rare"
+            "description": "Nip Col 2014 Rare",
+            "cost": 39
         },
         {
             "name": "Sawed off dick gold 0.266699075699",
             "asset_id": "50482379026",
             "reserve_price": 1800,
-            "description": "DICK GOLD GOOD POS"
+            "description": "DICK GOLD GOOD POS",
+            "cost": 8
         },
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
             "reserve_price": 610,
-            "description": "London 2018 Low float clean"
+            "description": "London 2018 Low float clean",
+            "cost": 61
         },
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
             "reserve_price": 2100,
-            "description": "S1mple All STAR BEST POS FullSET"
+            "description": "S1mple All STAR BEST POS fullset",
+            "cost": 47
         },
         {
             "name": "MLG gold MP7 | Gunsmoke 0.318869739771",
             "asset_id": "50609144115",
             "reserve_price": 490,
-            "description": "MLG GOLD cheapest on Gunsmoke"
+            "description": "MLG GOLD cheapest on Gunsmoke",
+            "cost": 41
         },
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
@@ -36,61 +41,71 @@
             "reserve_price": 6700,
             "description": "Titan Vs Mouz",
             "lowest_sell": 6500,
-            "decrease": 50
+            "decrease": 50,
+            "cost": 5570
         },
         {
             "name": "SSG Abyss Highfloat 4x liquid fire",
             "asset_id": "50650991083",
             "reserve_price": 700,
-            "description": "Highfloat clean 4X"
+            "description": "Highfloat clean 4X",
+            "cost": 302
         },
         {
             "name": "P90 Storm 0.378162145615 Kato 2015 gold",
             "asset_id": "50896312620",
             "reserve_price": 310,
-            "description": "Kato 2015 Gold Full Set"
+            "description": "Kato 2015 Gold Full Set",
+            "cost": 77
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.384096920490",
             "asset_id": "50898695525",
             "reserve_price": 1300,
-            "description": "London Foil RARE"
+            "description": "London Foil RARE",
+            "cost": 75
         },
         {
             "name": "M249 | Contrast Spray 0.283993452787 Kenny Gold krakow",
             "asset_id": "50929013428",
             "reserve_price": 950,
-            "description": "Cheapest KennyS Gold Krakow 2017"
+            "description": "Cheapest KennyS Gold Krakow 2017",
+            "cost": 675
         },
         {
             "name": "Desert Eagle | Urban DDPAT 0.240540176630 Krakow MVPless",
             "asset_id": "50953376360",
             "reserve_price": 1150,
-            "description": "Deagle Krakow MVPless Rare"
+            "description": "Deagle Krakow MVPless Rare",
+            "cost": 400
         },
         {
             "name": "SG 553 | Fallout Warning 0.331505894661 Kato 2015 gold",
             "asset_id": "51045458048",
             "reserve_price": 600,
-            "description": "Kato 2015 Gold Full Set"
+            "description": "Kato 2015 Gold Full Set",
+            "cost": 134
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.781168520451",
             "asset_id": "51110303389",
             "reserve_price": 1680,
-            "description": "All Stars full set High float"
+            "description": "All Stars full set High float",
+            "cost": 990
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.797088861465",
             "asset_id": "51110305616",
             "reserve_price": 1800,
-            "description": "All Stars full set High float"
+            "description": "All Stars full set High float",
+            "cost": 990
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.206050664186",
             "asset_id": "51128342265",
             "reserve_price": 1600,
-            "description": "All Stars full set"
+            "description": "All Stars full set",
+            "cost": 990
         },
         {
             "name": "AUG | Colony 0.386405706406",
@@ -145,7 +160,8 @@
             "name": "USP-S | Royal Blue 0.383412957191",
             "asset_id": "50945843380",
             "reserve_price": 1600,
-            "description": "All top pos Kato 2015 Gold"
+            "description": "All top pos Kato 2015 Gold",
+            "cost": 12.68
         },
         {
             "name": "XM1014 | Fallout Warning 0.392979562283",
@@ -207,19 +223,29 @@
             "name": "M249 | Contrast Spray 0.207938030362 Kenny Gold krakow ",
             "asset_id": "50929013441",
             "reserve_price": 965,
-            "description": "Cheapest KennyS Gold Krakow 2017"
+            "description": "Cheapest KennyS Gold Krakow 2017",
+            "cost": 675
         },
         {
             "name": "Sawed-Off | Irradiated Alert 3dMax kato gold (not full set) 0.392642647028",
             "asset_id": "49873046044",
             "reserve_price": 595,
-            "description": "3DMAX GOLD Kato2015"
+            "description": "3DMAX GOLD Kato2015",
+            "cost": 73
         },
         {
             "name": "MAG-7 | Sand Dune 0.152819916606",
             "asset_id": "50871952328",
             "reserve_price": 250,
-            "description": "Col 2014 Foil"
+            "description": "Col 2014 Foil",
+            "cost": 120
+        },
+        {
+            "name": "MP9 | Storm 0.315184056759",
+            "asset_id": "51261967844",
+            "reserve_price": 1200,
+            "description": "Dick Gold MP9",
+            "cost": 24
         }
     ]
 }
