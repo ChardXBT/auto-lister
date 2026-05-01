@@ -31,6 +31,8 @@ Place new bids with empty parameters;
 
         }
 
+For Manual Excel Add: {"name": "", "sold": 100, "cost": 50},
+
 """
 """
 CSFloat Auto-Auction Bot
