@@ -244,6 +244,12 @@
             "asset_id": "49873046044",
             "reserve_price": 595,
             "description": "3DMAX GOLD Kato2015"
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.152819916606",
+            "asset_id": "50871952328",
+            "reserve_price": 220,
+            "description": "Col 2014 Foil"
         }
     ]
 }
