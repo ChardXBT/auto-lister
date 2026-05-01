@@ -293,6 +293,48 @@ class AuctionBot:
             except Exception as e:
                 log.warning(f"Could not load state file: {e}")
 
+    def _process_manual_sales(self):
+        """
+        Reads manual_sales.json, logs each entry to Excel, then clears the file.
+        Called once at the start of each run before any listing logic.
+        """
+        manual_file = Path("manual_sales.json")
+
+        if not manual_file.exists():
+            return
+
+        try:
+            content = manual_file.read_text().strip()
+            if not content or content == "[]":
+                return
+
+            sales = json.loads(content)
+            if not isinstance(sales, list) or len(sales) == 0:
+                return
+
+            log.info(f"Processing {len(sales)} manual sale(s) from manual_sales.json...")
+
+            for sale in sales:
+                name = sale.get("name")
+                sold = sale.get("sold")
+                cost = sale.get("cost")
+
+                if not name or not sold:
+                    log.warning(f"Skipping invalid manual sale entry: {sale}")
+                    continue
+
+                log_sale(name, sold, cost)
+                log.info(f"[manual] Logged: '{name}' @ {sold} cost={cost}")
+
+            # Clear the file after successful processing
+            manual_file.write_text("[]")
+            log.info("manual_sales.json cleared after processing.")
+
+        except json.JSONDecodeError:
+            log.warning("manual_sales.json is not valid JSON — skipping. Fix the file and it will process next run.")
+        except Exception as e:
+            log.warning(f"Error processing manual_sales.json: {e}")
+
     def _save_state(self):
         try:
             self.state_file.write_text(json.dumps({
@@ -315,6 +357,7 @@ class AuctionBot:
     def run(self):
         log.info("Running.")
         try:
+            self._process_manual_sales()
             self.tick()
         except Exception as e:
             log.exception(f"Unexpected error: {e}")
