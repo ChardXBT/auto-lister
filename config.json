@@ -244,7 +244,29 @@
             "name": "MAG-7 | Irradiated Alert 0.384096920490",
             "asset_id": "50898695525",
             "reserve_price": 1300,
-            "description": "London Foil RARE"
+            "description": "London Foil RARE",
+            "cost": 75
+        },
+        {
+            "name": "PP-Bizon | Irradiated Alert 0.274698585272",
+            "asset_id": "51294769639",
+            "reserve_price": 1250,
+            "description": "All Stars Holo",
+            "cost": 899
+        },
+        {
+            "name": "Nova | Walnut 0.370155155659",
+            "asset_id": "51287162085",
+            "reserve_price": 280,
+            "description": "Kato 2015 Gold full set",
+            "cost": 68
+        },
+        {
+            "name": "AUG | Sweeper 0.540548026562",
+            "asset_id": "51283878910",
+            "reserve_price": 190,
+            "description": "Niko Gold",
+            "cost": 3
         }
     ]
 }
