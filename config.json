@@ -239,6 +239,12 @@
             "reserve_price": 1200,
             "description": "Dick Gold MP9",
             "cost": 24
+        },
+        {
+            "name": "MAG-7 | Irradiated Alert 0.384096920490",
+            "asset_id": "50898695525",
+            "reserve_price": 1300,
+            "description": "London Foil RARE"
         }
     ]
 }
