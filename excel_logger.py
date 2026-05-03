@@ -30,7 +30,7 @@ COL_FEE  = 4  # D
 
 # Your sheet's summary block starts at row 1149, so data rows are 3-1147
 DATA_START_ROW = 3
-DATA_END_ROW   = 1147  # hard cap - never write into or past the summary
+DATA_END_ROW   = 1145  # hard cap - never write into or past the summary
 
 
 def _find_next_row(sheet) -> int:
