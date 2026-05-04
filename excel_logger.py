@@ -34,15 +34,12 @@ DATA_END_ROW   = 1145  # hard cap - never write into or past the summary
 
 
 def _find_next_row(sheet) -> int:
-    """Return the first empty row within the data range (rows 3-1147)."""
-    for row in range(DATA_END_ROW, DATA_START_ROW - 1, -1):
-        if sheet.cell(row=row, column=COL_NAME).value is not None:
-            next_row = row + 1
-            if next_row > DATA_END_ROW:
-                print(f"[excel_logger] WARNING: Data range is full (row {DATA_END_ROW}). Expand your sheet!")
-                return DATA_END_ROW
-            return next_row
-    return DATA_START_ROW  # sheet is empty, start at row 3
+    """Return the first empty row within the data range (rows 3-1145)."""
+    for row in range(DATA_START_ROW, DATA_END_ROW + 1):
+        if sheet.cell(row=row, column=COL_NAME).value is None:
+            return row
+    print(f"[excel_logger] WARNING: Data range is full (row {DATA_END_ROW}). Expand your sheet!")
+    return DATA_END_ROW
 
 
 def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> bool:
