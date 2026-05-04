@@ -122,13 +122,6 @@
             "cost": 2500
         },
         {
-            "name": "USP-S | Royal Blue 0.383412957191",
-            "asset_id": "50945843380",
-            "reserve_price": 1600,
-            "description": "All top pos Kato 2015 Gold",
-            "cost": 12.68
-        },
-        {
             "name": "XM1014 | Fallout Warning 0.392979562283",
             "asset_id": "51192433638",
             "reserve_price": 5000,
@@ -204,13 +197,6 @@
             "reserve_price": 1250,
             "description": "All Stars Holo",
             "cost": 899
-        },
-        {
-            "name": "Nova | Walnut 0.370155155659",
-            "asset_id": "51287162085",
-            "reserve_price": 280,
-            "description": "Kato 2015 Gold full set",
-            "cost": 68
         },
         {
             "name": "AUG | Sweeper 0.540548026562",
