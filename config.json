@@ -98,7 +98,9 @@
             "asset_id": "51138811309",
             "reserve_price": 3980,
             "description": "Road Rash IEM GOLD",
-            "cost": 2123
+            "cost": 2123,
+            "decrease": 50,
+            "lowest_sell": 3500
         },
         {
             "name": "Nova | Polar Mesh Nova | Polar Mesh",
@@ -126,7 +128,9 @@
             "asset_id": "51192433638",
             "reserve_price": 5000,
             "description": "All star full set cheap",
-            "cost": 647
+            "cost": 647,
+            "decrease": 25,
+            "lowest_sell": 4500
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.456468969584",
@@ -147,7 +151,9 @@
             "asset_id": "51196666789",
             "reserve_price": 4300,
             "description": "Tec9 Kato 2014 best pos",
-            "cost": 2704
+            "cost": 2704,
+            "decrease": 25,
+            "lowest_sell": 4100
         },
         {
             "name": "Nova | Walnut 0.689443826675",
