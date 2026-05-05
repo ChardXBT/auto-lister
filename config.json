@@ -1,13 +1,6 @@
 {
     "items": [
         {
-            "name": "MAG-7 | Sand Dune .160451918840",
-            "asset_id": "50110075035",
-            "reserve_price": 260,
-            "description": "Nip Col 2014 Rare",
-            "cost": 39
-        },
-        {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
             "reserve_price": 610,
@@ -189,13 +182,6 @@
             "reserve_price": 1250,
             "description": "All Stars Holo",
             "cost": 899
-        },
-        {
-            "name": "AUG | Sweeper 0.540548026562",
-            "asset_id": "51283878910",
-            "reserve_price": 190,
-            "description": "Niko Gold",
-            "cost": 3
         },
         {
             "name": "Sawed-Off | Snake Camo 0.250000000000",
