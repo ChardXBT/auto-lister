@@ -218,6 +218,13 @@
             "reserve_price": 170,
             "description": "KennyS Gold",
             "cost": 18
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.207860738039",
+            "asset_id": "51346974892",
+            "reserve_price": 180,
+            "description": "Twist Gold",
+            "cost": 40
         }
     ]
 }
