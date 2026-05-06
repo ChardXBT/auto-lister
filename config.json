@@ -82,36 +82,11 @@
             "cost": 13
         },
         {
-            "name": "P250 | Bone Mask 0.366579562426",
-            "asset_id": "51164728957",
-            "reserve_price": 4050,
-            "description": "Katowice 2014 Foil fullset cheap",
-            "cost": 2500
-        },
-        {
-            "name": "XM1014 | Fallout Warning 0.392979562283",
-            "asset_id": "51192433638",
-            "reserve_price": 5000,
-            "description": "All star full set cheap",
-            "cost": 647,
-            "decrease": 25,
-            "lowest_sell": 4500
-        },
-        {
             "name": "Sawed-Off | Irradiated Alert 0.456468969584",
             "asset_id": "51192440308",
             "reserve_price": 1400,
             "description": "All star full set",
             "cost": 61
-        },
-        {
-            "name": "Tec-9 | Army Mesh 0.218766435981",
-            "asset_id": "51196666789",
-            "reserve_price": 4300,
-            "description": "Tec9 Kato 2014 best pos",
-            "cost": 2704,
-            "decrease": 25,
-            "lowest_sell": 4100
         },
         {
             "name": "Nova | Walnut 0.689443826675",
