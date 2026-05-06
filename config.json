@@ -24,7 +24,7 @@
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
-            "reserve_price": 6600,
+            "reserve_price": 6550,
             "description": "Titan Vs Mouz",
             "lowest_sell": 6500,
             "decrease": 50,
@@ -61,7 +61,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3880,
+            "reserve_price": 3830,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 50,
@@ -151,14 +151,14 @@
             "description": "5X Mouz Holo",
             "cost": 600
         },
-{
+        {
             "name": "Tec9 Sand Storm Purple mag 3X envy kato 2015",
             "asset_id": "50499268430",
             "reserve_price": 1100,
             "description": "Matching 3X Kato 2015",
             "cost": 960
         },
-{
+        {
             "name": "ESL One Katowice 2015 Dust II Souvenir Package Navi Vs Envy",
             "asset_id": "51306338645",
             "reserve_price": 5300,
