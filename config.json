@@ -24,7 +24,7 @@
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
-            "reserve_price": 6650,
+            "reserve_price": 6600,
             "description": "Titan Vs Mouz",
             "lowest_sell": 6500,
             "decrease": 50,
@@ -61,7 +61,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3930,
+            "reserve_price": 3880,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 50,
