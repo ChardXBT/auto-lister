@@ -150,6 +150,20 @@
             "reserve_price": 990,
             "description": "5X Mouz Holo",
             "cost": 600
+        },
+{
+            "name": "Tec9 Sand Storm Purple mag 3X envy kato 2015",
+            "asset_id": "50499268430",
+            "reserve_price": 1100,
+            "description": "Matching 3X Kato 2015",
+            "cost": 960
+        },
+{
+            "name": "ESL One Katowice 2015 Dust II Souvenir Package Navi Vs Envy",
+            "asset_id": "51306338645",
+            "reserve_price": 5300,
+            "description": "Cheapest Navi Vs Envy",
+            "cost": 4321
         }
     ]
 }
