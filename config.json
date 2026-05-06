@@ -124,25 +124,11 @@
             "cost": 899
         },
         {
-            "name": "Sawed-Off | Snake Camo 0.250000000000",
-            "asset_id": "51326408468",
-            "reserve_price": 120,
-            "description": ".25 perfect float",
-            "cost": 63
-        },
-        {
             "name": "Sawed-Off | Snake Camo 0.250000000000 (2)",
             "asset_id": "51326408472",
             "reserve_price": 120,
             "description": ".25 perfect float",
             "cost": 63
-        },
-        {
-            "name": "PP-Bizon | Urban Dashed 0.368814378977",
-            "asset_id": "51332908956",
-            "reserve_price": 170,
-            "description": "KennyS Gold",
-            "cost": 18
         },
         {
             "name": "MAG-7 | Sand Dune 0.207860738039",
