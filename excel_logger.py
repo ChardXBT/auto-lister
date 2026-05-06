@@ -59,10 +59,10 @@ def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> b
         print(f"[excel_logger] ERROR: '{EXCEL_FILE}' not found - skipping log.")
         return False
 
-    sold_price_usd = sold_price_cents / 100.0
-    cost_usd       = (cost_cents / 100.0) if cost_cents else None
-
     try:
+        sold_price_usd = sold_price_cents / 100.0
+        cost_usd       = (cost_cents / 100.0) if cost_cents else None
+
         wb = load_workbook(excel_path)
 
         if SHEET_NAME not in wb.sheetnames:
