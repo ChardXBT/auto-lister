@@ -290,7 +290,8 @@ class AuctionBot:
             try:
                 data = json.loads(self.state_file.read_text())
                 self.failures = data.get("failures", {})
-                self.sold     = set(data.get("sold", []))
+                self.sold = set(data.get("sold", []))
+                self.active = data.get("active", {})  # ✅ added
                 log.info(f"Loaded state: {len(self.sold)} sold, {len(self.failures)} tracked failures.")
             except Exception as e:
                 log.warning(f"Could not load state file: {e}")
@@ -341,7 +342,8 @@ class AuctionBot:
         try:
             self.state_file.write_text(json.dumps({
                 "failures": self.failures,
-                "sold":     list(self.sold),
+                "sold": list(self.sold),
+                "active": self.active,  # ✅ ADD THIS LINE
             }, indent=2))
         except Exception as e:
             log.warning(f"Could not save state file: {e}")
