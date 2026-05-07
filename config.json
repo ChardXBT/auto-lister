@@ -164,48 +164,6 @@
             "reserve_price": 5300,
             "description": "Cheapest Navi Vs Envy",
             "cost": 4321
-        },
-        {
-            "name": "P250 | Contamination 0.583681046963",
-            "asset_id": "51398427470",
-            "reserve_price": 480,
-            "description": "Katowice 2015 gold full set",
-            "cost": 190
-        },
-        {
-            "name": "PP-Bizon | Irradiated Alert 0.750360727310",
-            "asset_id": "51393076726",
-            "reserve_price": 250,
-            "description": "Katowice 2015 gold full set",
-            "cost": 84
-        },
-        {
-            "name": "PP-Bizon | Irradiated Alert 0.365386217833",
-            "asset_id": "51393238858",
-            "reserve_price": 250,
-            "description": "Katowice 2015 gold full set",
-            "cost": 65
-        },
-        {
-            "name": "Nova | Walnut 0.302821218967",
-            "asset_id": "51394771107",
-            "reserve_price": 260,
-            "description": "Katowice 2015 gold full set",
-            "cost": 132
-        },
-        {
-            "name": "Sawed-Off | Irradiated Alert 0.154564380646",
-            "asset_id": "51394775142",
-            "reserve_price": 260,
-            "description": "Katowice 2015 gold full set",
-            "cost": 132
-        },
-        {
-            "name": "Nova | Walnut 0.366425216198",
-            "asset_id": "51396730304",
-            "reserve_price": 310,
-            "description": "Col foil 2014 full set",
-            "cost": 53
         }
     ]
 }
