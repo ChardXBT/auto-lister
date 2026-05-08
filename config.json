@@ -245,8 +245,8 @@
         {
             "name": "MAG-7 | Irradiated Alert 0.471062302589",
             "asset_id": "51406618246",
-            "reserve_price": 12.5,
-            "description": "All star holo",
+            "reserve_price": 1250,
+            "description": "All star holo set",
             "cost": 1010
         },
         {
@@ -276,6 +276,27 @@
             "reserve_price": 1600,
             "description": "Goat stickers cheap",
             "cost": 1405
+        },
+        {
+            "name": "UMP-45 | Indigo 0.252622604370",
+            "asset_id": "51208581186",
+            "reserve_price": 600,
+            "description": "4X Katowice 2015 GOLD full set",
+            "cost": 98
+        },
+        {
+            "name": "P2000 | Grassland 0.299911409616",
+            "asset_id": "51354773399",
+            "reserve_price": 480,
+            "description": "P2000 ESL gold 2015",
+            "cost": 60
+        },
+        {
+            "name": "P2000 | Grassland",
+            "asset_id": "51378411528",
+            "reserve_price": 210,
+            "description": "P2000 Atlanta 2017",
+            "cost": 60
         }
     ]
 }
