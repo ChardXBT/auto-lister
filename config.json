@@ -89,13 +89,6 @@
             "cost": 111
         },
         {
-            "name": "MAG-7 | Sand Dune 0.152819916606",
-            "asset_id": "50871952328",
-            "reserve_price": 250,
-            "description": "Col 2014 Foil",
-            "cost": 120
-        },
-        {
             "name": "PP-Bizon | Irradiated Alert 0.274698585272",
             "asset_id": "51294769639",
             "reserve_price": 1250,
@@ -198,49 +191,49 @@
             "asset_id": "51406622291",
             "reserve_price": 1330,
             "description": "All star holo full set",
-            "cost":1010
+            "cost": 1010
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.384995698929",
             "asset_id": "51407103988",
             "reserve_price": 1330,
             "description": "All star holo full set",
-            "cost":1010
+            "cost": 1010
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.162274256349",
             "asset_id": "51406618247",
             "reserve_price": 1320,
             "description": "All star holo full set",
-            "cost":1010
+            "cost": 1010
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.262479603291",
             "asset_id": "51406618245",
             "reserve_price": 1310,
             "description": "All star holo full set",
-            "cost":1010
+            "cost": 1010
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.276612162590",
             "asset_id": "51406618244",
             "reserve_price": 1300,
             "description": "All star holo full set",
-            "cost":1010
+            "cost": 1010
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.280755698681",
             "asset_id": "51406537968",
             "reserve_price": 1350,
             "description": "All star holo full set",
-            "cost":999
+            "cost": 999
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.376527249813",
             "asset_id": "51406537967",
             "reserve_price": 1350,
             "description": "All star holo full set",
-            "cost":999
+            "cost": 999
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.471062302589",
