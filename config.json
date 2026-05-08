@@ -233,14 +233,14 @@
             "asset_id": "51406537968",
             "reserve_price": 1350,
             "description": "All star holo full set",
-            "cost":1010
+            "cost":999
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.376527249813",
             "asset_id": "51406537967",
             "reserve_price": 1350,
             "description": "All star holo full set",
-            "cost":1010
+            "cost":999
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.471062302589",
@@ -248,6 +248,34 @@
             "reserve_price": 12.5,
             "description": "All star holo",
             "cost": 1010
+        },
+        {
+            "name": "M4A1-S | Black Lotus 0.298507064581",
+            "asset_id": "51408734706",
+            "reserve_price": 2200,
+            "description": "5X Lotus clean craft",
+            "cost": 1860
+        },
+        {
+            "name": "M4A1-S | Black Lotus 0.197799623013",
+            "asset_id": "51413560677",
+            "reserve_price": 2205,
+            "description": "5X Lotus clean craft",
+            "cost": 1690
+        },
+        {
+            "name": "M4A1-S | Black Lotus 0.153355076909",
+            "asset_id": "51408734707",
+            "reserve_price": 2210,
+            "description": "5X Lotus clean craft",
+            "cost": 1860
+        },
+        {
+            "name": "USP-S | Blueprint 0.299943238497",
+            "asset_id": "51085514881",
+            "reserve_price": 1600,
+            "description": "Goat stickers cheap",
+            "cost": 1405
         }
     ]
 }
