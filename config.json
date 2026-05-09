@@ -276,6 +276,27 @@
             "reserve_price": 210,
             "description": "P2000 Atlanta 2017",
             "cost": 60
+        },
+        {
+            "name": "G3SG1 | Desert Storm 0.181939452887",
+            "asset_id": "51429732240",
+            "reserve_price": 260,
+            "description": "Kato 2015 Gold Full set",
+            "cost": 132
+        },
+        {
+            "name": "AUG | Colony 0.136085629463",
+            "asset_id": "51430178184",
+            "reserve_price": 310,
+            "description": "Niko Gold MW",
+            "cost": 67
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.356272578239",
+            "asset_id": "51439094707",
+            "reserve_price": 190,
+            "description": "Device Gold Krakow",
+            "cost": 31
         }
     ]
 }
