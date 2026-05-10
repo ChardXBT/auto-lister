@@ -3,7 +3,7 @@
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
-            "reserve_price": 575,
+            "reserve_price": 570,
             "description": "London 2018 Low float clean",
             "cost": 61,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 2065,
+            "reserve_price": 2060,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -28,20 +28,11 @@
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
-            "reserve_price": 6730,
+            "reserve_price": 6720,
             "description": "Titan Vs Mouz",
             "lowest_sell": 6500,
             "decrease": 10,
             "cost": 5570
-        },
-        {
-            "name": "Desert Eagle | Urban DDPAT 0.240540176630 Krakow MVPless",
-            "asset_id": "50953376360",
-            "reserve_price": 1115,
-            "description": "Deagle Krakow MVPless Rare",
-            "cost": 400,
-            "decrease": 5,
-            "lowest_sell": 900
         },
         {
             "name": "SG 553 | Fallout Warning 0.331505894661 Kato 2015 gold",
@@ -60,7 +51,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3465,
+            "reserve_price": 3460,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -125,7 +116,7 @@
         {
             "name": "AK-47 | Slate 0.147975370288",
             "asset_id": "51483544864",
-            "reserve_price": 955,
+            "reserve_price": 950,
             "description": "5X Mouz Holo",
             "cost": 600,
             "decrease": 5,
@@ -281,7 +272,7 @@
         {
             "name": "R8 Revolver | Nitro 0.144783005118",
             "asset_id": "51450495811",
-            "reserve_price": 1570,
+            "reserve_price": 1565,
             "description": "SDY GOLD",
             "cost": 26,
             "decrease": 5,
