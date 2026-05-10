@@ -243,20 +243,6 @@
             "cost": 1860
         },
         {
-            "name": "UMP-45 | Indigo 0.252622604370",
-            "asset_id": "51208581186",
-            "reserve_price": 600,
-            "description": "4X Katowice 2015 GOLD full set",
-            "cost": 98
-        },
-        {
-            "name": "P2000 | Grassland 0.299911409616",
-            "asset_id": "51354773399",
-            "reserve_price": 480,
-            "description": "P2000 ESL gold 2015",
-            "cost": 60
-        },
-        {
             "name": "P2000 | Grassland",
             "asset_id": "51378411528",
             "reserve_price": 210,
