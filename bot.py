@@ -31,6 +31,15 @@ Place new bids with empty parameters;
 
         }
 
+        ,
+        {
+            "name": "",
+            "asset_id": "",
+            "reserve_price": ,
+            "description": "",
+            "cost":
+        }
+
 For Manual Excel Add: {"name": "", "sold": 100, "cost": 50},
 
 """

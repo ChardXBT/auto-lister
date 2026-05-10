@@ -5,14 +5,18 @@
             "asset_id": "50401569978",
             "reserve_price": 610,
             "description": "London 2018 Low float clean",
-            "cost": 61
+            "cost": 61,
+            "decrease": 5,
+            "lowest_sell": 400
         },
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
             "reserve_price": 2100,
             "description": "S1mple All STAR BEST POS fullset",
-            "cost": 47
+            "cost": 47,
+            "decrease": 5,
+            "lowest_sell": 1800
         },
         {
             "name": "MLG gold MP7 | Gunsmoke 0.318869739771",
@@ -24,10 +28,10 @@
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
-            "reserve_price": 6500,
+            "reserve_price": 6800,
             "description": "Titan Vs Mouz",
             "lowest_sell": 6500,
-            "decrease": 50,
+            "decrease": 10,
             "cost": 5570
         },
         {
@@ -35,7 +39,9 @@
             "asset_id": "50953376360",
             "reserve_price": 1150,
             "description": "Deagle Krakow MVPless Rare",
-            "cost": 400
+            "cost": 400,
+            "decrease": 5,
+            "lowest_sell": 900
         },
         {
             "name": "SG 553 | Fallout Warning 0.331505894661 Kato 2015 gold",
@@ -57,8 +63,8 @@
             "reserve_price": 3500,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
-            "decrease": 50,
-            "lowest_sell": 3500
+            "decrease": 5,
+            "lowest_sell": 3300
         },
         {
             "name": "Nova | Polar Mesh Nova | Polar Mesh",
@@ -121,7 +127,9 @@
             "asset_id": "51483544864",
             "reserve_price": 990,
             "description": "5X Mouz Holo",
-            "cost": 600
+            "cost": 600,
+            "decrease": 5,
+            "lowest_sell": 950
         },
         {
             "name": "Tec9 Sand Storm Purple mag 3X envy kato 2015",
@@ -269,6 +277,22 @@
             "reserve_price": 190,
             "description": "Device Gold Krakow",
             "cost": 31
+        },
+        {
+            "name": "R8 Revolver | Nitro 0.144783005118",
+            "asset_id": "51450495811",
+            "reserve_price": 1600,
+            "description": "SDY GOLD",
+            "cost": 26,
+            "decrease": 5,
+            "lowest_sell": 1200
+        },
+        {
+            "name": "MP9 | Sand Dashed 0.305512368679",
+            "asset_id": "51454546241",
+            "reserve_price": 290,
+            "description": "All top pos kato 2015 gold",
+            "cost": 132
         }
     ]
 }
