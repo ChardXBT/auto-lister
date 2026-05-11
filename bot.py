@@ -44,17 +44,27 @@ For Manual Excel Add: {"name": "", "sold": 100, "cost": 50},
 
 For changing excel:
 
-   cd "C:\Users\ericy\OneDrive\Documents\GitHub\auto-lister" && python -c "
-   import openpyxl
-   wb = openpyxl.load_workbook('CS_GO_PnL_Tracker_Final.xlsx')
+  import openpyxl
 
-   cd "C:\Users\ericy\OneDrive\Documents\GitHub\auto-lister" && python -c "
-   import openpyxl
-   wb = openpyxl.load_workbook('CS_GO_PnL_Tracker_Final.xlsx')
-   print('Sheets:', wb.sheetnames)
-   print('Number of sheets:', len(wb.sheetnames))
-   "
-   List sheets in the Excel file
+  wb = openpyxl.load_workbook('CS_GO_PnL_Tracker_Final.xlsx')
+  ws = wb['CSGO PnL Tracker']  # sheet name
+
+  ws['C286'] = 11.5  # set the cell value
+
+  wb.save('CS_GO_PnL_Tracker_Final.xlsx')
+
+  Key things to know:
+
+  - load_workbook(path) — opens the file
+  - wb['Sheet Name'] — selects a sheet by name
+  - ws['C286'] — standard Excel cell notation (column letter + row number)
+  - wb.save(path) — writes changes back to disk (overwrites in place)
+
+  If you don't know the sheet name, wb.sheetnames returns a list of all sheets.
+
+  Install the library once with:
+  pip install openpyxl
+
 
 """
 """
