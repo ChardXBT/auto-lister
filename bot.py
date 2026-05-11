@@ -42,6 +42,20 @@ Place new bids with empty parameters;
 
 For Manual Excel Add: {"name": "", "sold": 100, "cost": 50},
 
+For changing excel:
+
+   cd "C:\Users\ericy\OneDrive\Documents\GitHub\auto-lister" && python -c "
+   import openpyxl
+   wb = openpyxl.load_workbook('CS_GO_PnL_Tracker_Final.xlsx')
+
+   cd "C:\Users\ericy\OneDrive\Documents\GitHub\auto-lister" && python -c "
+   import openpyxl
+   wb = openpyxl.load_workbook('CS_GO_PnL_Tracker_Final.xlsx')
+   print('Sheets:', wb.sheetnames)
+   print('Number of sheets:', len(wb.sheetnames))
+   "
+   List sheets in the Excel file
+
 """
 """
 CSFloat Auto-Auction Bot
