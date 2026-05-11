@@ -3,7 +3,7 @@
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
-            "reserve_price": 520,
+            "reserve_price": 515,
             "description": "London 2018 Low float clean",
             "cost": 61,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 2010,
+            "reserve_price": 2005,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -28,7 +28,7 @@
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
             "asset_id": "50745323548",
-            "reserve_price": 6620,
+            "reserve_price": 6610,
             "description": "Titan Vs Mouz",
             "lowest_sell": 6500,
             "decrease": 10,
@@ -51,7 +51,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3410,
+            "reserve_price": 3405,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -265,7 +265,7 @@
         {
             "name": "R8 Revolver | Nitro 0.144783005118",
             "asset_id": "51450495811",
-            "reserve_price": 1515,
+            "reserve_price": 1510,
             "description": "SDY GOLD",
             "cost": 26,
             "decrease": 5,
