@@ -3,7 +3,7 @@
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
-            "reserve_price": 455,
+            "reserve_price": 450,
             "description": "London 2018 Low float clean",
             "cost": 61,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 1945,
+            "reserve_price": 1940,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -51,7 +51,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3345,
+            "reserve_price": 3340,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -193,13 +193,6 @@
             "cost": 1010
         },
         {
-            "name": "Sawed-Off | Irradiated Alert 0.280755698681",
-            "asset_id": "51406537968",
-            "reserve_price": 1350,
-            "description": "All star holo full set",
-            "cost": 999
-        },
-        {
             "name": "Sawed-Off | Irradiated Alert 0.376527249813",
             "asset_id": "51406537967",
             "reserve_price": 1350,
@@ -249,23 +242,9 @@
             "cost": 132
         },
         {
-            "name": "AUG | Colony 0.136085629463",
-            "asset_id": "51430178184",
-            "reserve_price": 310,
-            "description": "Niko Gold MW",
-            "cost": 67
-        },
-        {
-            "name": "MAG-7 | Sand Dune 0.356272578239",
-            "asset_id": "51439094707",
-            "reserve_price": 190,
-            "description": "Device Gold Krakow",
-            "cost": 31
-        },
-        {
             "name": "R8 Revolver | Nitro 0.144783005118",
             "asset_id": "51450495811",
-            "reserve_price": 1450,
+            "reserve_price": 1445,
             "description": "SDY GOLD",
             "cost": 26,
             "decrease": 5,
