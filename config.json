@@ -3,7 +3,7 @@
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
-            "reserve_price": 445,
+            "reserve_price": 440,
             "description": "London 2018 Low float clean",
             "cost": 61,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 1935,
+            "reserve_price": 1930,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -51,7 +51,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3335,
+            "reserve_price": 3330,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -244,7 +244,7 @@
         {
             "name": "R8 Revolver | Nitro 0.144783005118",
             "asset_id": "51450495811",
-            "reserve_price": 1300,
+            "reserve_price": 1295,
             "description": "SDY GOLD",
             "cost": 26,
             "decrease": 5,
