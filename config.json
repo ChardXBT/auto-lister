@@ -277,6 +277,27 @@
             "reserve_price": 290,
             "description": "All top pos kato 2015 gold",
             "cost": 132
+        },
+        {
+            "name": "Desert Eagle | Urban DDPAT 0.458946824074",
+            "asset_id": "51467910695",
+            "reserve_price": 600,
+            "description": "Stewie full set",
+            "cost": 55
+        },
+        {
+            "name": "MP9 | Sand Dashed 0.368502467871",
+            "asset_id": "51472542720",
+            "reserve_price": 310,
+            "description": "S1mple Gold",
+            "cost": 18
+        },
+        {
+            "name": "SG 553 | Gator Mesh 0.188301473856",
+            "asset_id": "51479714177",
+            "reserve_price": 420,
+            "description": "Kato gold 2015 full set",
+            "cost": 117
         }
     ]
 }
