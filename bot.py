@@ -11,6 +11,7 @@ This means it always wakes up at the right moment regardless of daily drift.
 ssh root@147.182.158.184
 cd /root/csfloat-bot // Go to project directory 
 cat auction_bot.log // Check Log
+nano ~/csfloat-bot/run.sh to check run script. Ctr 0, enter and Ctr X to save and exit
 ./run.sh runs the script
 crontab -l
 grep "Running" auction_bot.log | tail -5 
