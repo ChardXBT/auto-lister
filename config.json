@@ -338,6 +338,41 @@
             "reserve_price": 300,
             "description": "Atlanta Gold full set rare",
             "cost": 31
+        },
+        {
+            "name": "PP-Bizon | Chemical Green 0.823722779751",
+            "asset_id": "51487469650",
+            "reserve_price": 1500,
+            "description": "ECS DH 2014 gold full set rare",
+            "cost": 1340
+        },
+        {
+            "name": "Sawed-Off | Irradiated Alert 0.376977741718",
+            "asset_id": "51487467929",
+            "reserve_price": 900,
+            "description": "Dh2014 Gold full set",
+            "cost": 705
+        },
+        {
+            "name": "PP-Bizon | Irradiated Alert 0.790591835976",
+            "asset_id": "51487467928",
+            "reserve_price": 800,
+            "description": "Nip DH 2014 Gold",
+            "cost": 710
+        },
+        {
+            "name": "MAG-7 | Rust Coat 0.226636052132 ",
+            "asset_id": "51488805586",
+            "reserve_price": 420,
+            "description": "KennyS Gold cheapest",
+            "cost": 3
+        },
+        {
+            "name": "M4A1-S | Black Lotus 0.197799623013",
+            "asset_id": "51484374824",
+            "reserve_price": 2300,
+            "description": "Perfect 5X craft",
+            "cost": 1757
         }
     ]
 }
