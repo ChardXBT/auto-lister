@@ -81,7 +81,7 @@
         {
             "name": "PP-Bizon | Irradiated Alert 0.274698585272",
             "asset_id": "51294769639",
-            "reserve_price": 1250,
+            "reserve_price": 1280,
             "description": "All Stars Holo",
             "cost": 899
         },
@@ -160,35 +160,35 @@
         {
             "name": "Sawed-Off | Irradiated Alert 0.371810972691",
             "asset_id": "51406622291",
-            "reserve_price": 1330,
+            "reserve_price": 1400,
             "description": "All star holo full set",
             "cost": 1010
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.384995698929",
             "asset_id": "51407103988",
-            "reserve_price": 1330,
+            "reserve_price": 1400,
             "description": "All star holo full set",
             "cost": 1010
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.162274256349",
             "asset_id": "51406618247",
-            "reserve_price": 1320,
+            "reserve_price": 1400,
             "description": "All star holo full set",
             "cost": 1010
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.262479603291",
             "asset_id": "51406618245",
-            "reserve_price": 1310,
+            "reserve_price": 1400,
             "description": "All star holo full set",
             "cost": 1010
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.276612162590",
             "asset_id": "51406618244",
-            "reserve_price": 1300,
+            "reserve_price": 1400,
             "description": "All star holo full set",
             "cost": 1010
         },
@@ -202,7 +202,7 @@
         {
             "name": "MAG-7 | Irradiated Alert 0.471062302589",
             "asset_id": "51406618246",
-            "reserve_price": 1250,
+            "reserve_price": 1280,
             "description": "All star holo set",
             "cost": 1010
         },
