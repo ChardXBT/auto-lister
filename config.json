@@ -3,7 +3,7 @@
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
-            "reserve_price": 425,
+            "reserve_price": 420,
             "description": "London 2018 Low float clean",
             "cost": 61,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 1915,
+            "reserve_price": 1910,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -51,7 +51,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3315,
+            "reserve_price": 3310,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -242,15 +242,6 @@
             "cost": 132
         },
         {
-            "name": "R8 Revolver | Nitro 0.144783005118",
-            "asset_id": "51450495811",
-            "reserve_price": 1280,
-            "description": "SDY GOLD",
-            "cost": 26,
-            "decrease": 5,
-            "lowest_sell": 1200
-        },
-        {
             "name": "MP9 | Sand Dashed 0.305512368679",
             "asset_id": "51454546241",
             "reserve_price": 290,
@@ -283,7 +274,7 @@
             "asset_id": "50878568687",
             "reserve_price": 2800,
             "description": "Cheapest DH 2013 shooter Foil",
-            "cost":1689,
+            "cost": 1689,
             "decrease": 5,
             "lowest_sell": 2500
         },
@@ -331,7 +322,6 @@
             "cost": 2900,
             "decrease": 10,
             "lowest_sell": 4900
-
         },
         {
             "name": "P90 | Sand Spray 0.358815312386 Kato foils best pos",
@@ -341,7 +331,6 @@
             "cost": 1350,
             "decrease": 10,
             "lowest_sell": 3000
-
         },
         {
             "name": "MP7 | Gunsmoke 0.285015642643",
