@@ -322,6 +322,27 @@
             "reserve_price": 2300,
             "description": "Perfect 5X craft",
             "cost": 1757
+        },
+        {
+            "name": "Five-SeveN | Contractor 0.514321208000",
+            "asset_id": "51497888771",
+            "reserve_price": 4200,
+            "description": "All op pos",
+            "cost": 3350
+        },
+        {
+            "name": "SCAR-20 | Sand Mesh 0.227959647775",
+            "asset_id": "51505186664",
+            "reserve_price": 300,
+            "description": "Titan GOld",
+            "cost": 250
+        },
+        {
+            "name": "G3SG1 | Polar Camo 0.382729262114",
+            "asset_id": "51505186665",
+            "reserve_price": 300,
+            "description": "Titan GOld",
+            "cost": 250
         }
     ]
 }
