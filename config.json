@@ -197,21 +197,27 @@
             "asset_id": "51408734706",
             "reserve_price": 2200,
             "description": "5X Lotus clean craft",
-            "cost": 1860
+            "cost": 1860,
+            "decrease": 5,
+            "lowest_sell": 2050
         },
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51413560677",
             "reserve_price": 2205,
             "description": "5X Lotus clean craft",
-            "cost": 1690
+            "cost": 1690,
+            "decrease": 5,
+            "lowest_sell": 2080
         },
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
             "reserve_price": 2210,
             "description": "5X Lotus clean craft",
-            "cost": 1860
+            "cost": 1860,
+            "decrease": 5,
+            "lowest_sell": 2050
         },
         {
             "name": "P2000 | Grassland",
@@ -321,7 +327,9 @@
             "asset_id": "51484374824",
             "reserve_price": 2300,
             "description": "Perfect 5X craft",
-            "cost": 1757
+            "cost": 1757,
+            "decrease": 5,
+            "lowest_sell": 2200
         },
         {
             "name": "Five-SeveN | Contractor 0.514321208000",
@@ -343,6 +351,55 @@
             "reserve_price": 300,
             "description": "Titan GOld",
             "cost": 250
+        },
+        {
+            "name": "MP7 | Gunsmoke 0.299461662769",
+            "asset_id": "51516992287",
+            "reserve_price": 310,
+            "description": "Atlanta gold full set",
+            "cost": 36
+        },
+        {
+            "name": "MP7 | Gunsmoke 0.632306337357",
+            "asset_id": "51516994813",
+            "reserve_price": 420,
+            "description": "Krakow gold full set",
+            "cost": 60
+        },
+        {
+            "name": "Dual Berettas | Colony 0.216993585229",
+            "asset_id": "51516994814",
+            "reserve_price": 220,
+            "description": "S1mple Gold full set",
+            "cost": 56
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.498238325119",
+            "asset_id": "51516997181",
+            "reserve_price": 280,
+            "description": "Katowice gold 2015 full set",
+            "cost": 42
+        },
+        {
+            "name": "P90 | Sand Spray 0.125937327743",
+            "asset_id": "51525450700",
+            "reserve_price": 300,
+            "description": "MW Katowice 2015 gold full set",
+            "cost": 165
+        },
+        {
+            "name": "P250 | Bone  Mask 0.484390467405",
+            "asset_id": "51533121805",
+            "reserve_price": 290,
+            "description": "Niko Gold full set",
+            "cost": 27
+        },
+        {
+            "name": "MAG-7 | Rust Coat 0.442764282227",
+            "asset_id": "51540328734",
+            "reserve_price": 130,
+            "description": "Niko Gold full set",
+            "cost": 3
         }
     ]
 }
