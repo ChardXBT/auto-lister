@@ -317,6 +317,7 @@ class AuctionBot:
         self.state_file = Path("bot_state.json")
         self.failures: dict[str, int] = {}
         self.sold: set = set()
+        self.pending_sale_prices: dict[str, int] = {}
         self._load_state()
 
     def _load_state(self):
@@ -326,6 +327,7 @@ class AuctionBot:
                 self.failures = data.get("failures", {})
                 self.sold = set(data.get("sold", []))
                 self.active = data.get("active", {})  # ✅ added
+                self.pending_sale_prices = data.get("pending_sale_prices", {})
                 log.info(f"Loaded state: {len(self.sold)} sold, {len(self.failures)} tracked failures.")
             except Exception as e:
                 log.warning(f"Could not load state file: {e}")
@@ -378,6 +380,7 @@ class AuctionBot:
                 "failures": self.failures,
                 "sold": list(self.sold),
                 "active": self.active,  # ✅ ADD THIS LINE
+                "pending_sale_prices": self.pending_sale_prices,
             }, indent=2))
         except Exception as e:
             log.warning(f"Could not save state file: {e}")
@@ -391,6 +394,9 @@ class AuctionBot:
             return dt.timestamp()
         except Exception:
             return None
+
+    def _sale_log_price(self, asset_id: str) -> int:
+        return self.pending_sale_prices.get(asset_id, self.watched[asset_id]["reserve_price"])
 
     def run(self):
         log.info("Running.")
@@ -430,6 +436,7 @@ class AuctionBot:
                 expiry_ts   = self._parse_expiry(expires_str)
 
                 self.active[asset_id] = listing_id
+                self.pending_sale_prices.pop(asset_id, None)
                 if expiry_ts:
                     self.expires_at[asset_id] = expiry_ts
 
@@ -443,6 +450,9 @@ class AuctionBot:
 
             else:
                 if asset_id in self.active:
+                    self.pending_sale_prices[asset_id] = item_cfg["reserve_price"]
+                    # Consume the ended listing so failed relist retries do not keep dropping the price.
+                    self.active.pop(asset_id, None)
                     self.expires_at.pop(asset_id, None)
                     log.info(f"[{name}] Auction ended — relisting now...")
                     self._apply_price_decrease(asset_id)
@@ -540,7 +550,9 @@ class AuctionBot:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
                 self.sold.add(asset_id)
-                log_sale(name, item_cfg["reserve_price"], item_cfg.get("cost"))
+                sold_price = self._sale_log_price(asset_id)
+                log_sale(name, sold_price, item_cfg.get("cost"))
+                self.pending_sale_prices.pop(asset_id, None)
                 return {
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Item sold — confirmed {not_in_inv_count}x not in inventory",
@@ -554,6 +566,7 @@ class AuctionBot:
         if result and result.get("__already_listed"):
             log.info(f"[{name}] Already listed — marking as active.")
             self.active[asset_id] = "unknown"
+            self.pending_sale_prices.pop(asset_id, None)
             self.failures.pop(asset_id, None)
             return {
                 "name": name, "asset_id": asset_id,
@@ -567,6 +580,7 @@ class AuctionBot:
             self.active[asset_id] = new_id
             if expiry_ts:
                 self.expires_at[asset_id] = expiry_ts
+            self.pending_sale_prices.pop(asset_id, None)
             log.info(f"[{name}] Listed! ID={new_id}  expires={expires_str}")
             return {
                 "name": name, "asset_id": asset_id,
@@ -580,7 +594,9 @@ class AuctionBot:
             if fail_count >= 30:
                 self.sold.add(asset_id)
                 log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
-                log_sale(name, item_cfg["reserve_price"], item_cfg.get("cost"))
+                sold_price = self._sale_log_price(asset_id)
+                log_sale(name, sold_price, item_cfg.get("cost"))
+                self.pending_sale_prices.pop(asset_id, None)
                 return {
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
