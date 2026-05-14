@@ -51,7 +51,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3300,
+            "reserve_price": 3295,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -186,7 +186,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2145,
+            "reserve_price": 2140,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -195,7 +195,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51413560677",
-            "reserve_price": 2150,
+            "reserve_price": 2145,
             "description": "5X Lotus clean craft",
             "cost": 1690,
             "decrease": 5,
@@ -204,7 +204,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
-            "reserve_price": 2155,
+            "reserve_price": 2150,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -309,7 +309,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51484374824",
-            "reserve_price": 2245,
+            "reserve_price": 2240,
             "description": "Perfect 5X craft",
             "cost": 1757,
             "decrease": 5,
