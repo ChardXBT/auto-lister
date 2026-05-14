@@ -195,7 +195,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2190,
+            "reserve_price": 2185,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -204,7 +204,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51413560677",
-            "reserve_price": 2195,
+            "reserve_price": 2190,
             "description": "5X Lotus clean craft",
             "cost": 1690,
             "decrease": 5,
@@ -213,7 +213,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
-            "reserve_price": 2200,
+            "reserve_price": 2195,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -250,7 +250,7 @@
         {
             "name": "Dual Berettas | Contractor 0.340188771486 DH 2013 Shooter Foil",
             "asset_id": "50878568687",
-            "reserve_price": 2505,
+            "reserve_price": 2500,
             "description": "Cheapest DH 2013 shooter Foil",
             "cost": 1689,
             "decrease": 5,
@@ -259,7 +259,7 @@
         {
             "name": "UMP-45 | Fallout Warning 0.773714900017",
             "asset_id": "51110307338",
-            "reserve_price": 4905,
+            "reserve_price": 4900,
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 5,
@@ -268,7 +268,7 @@
         {
             "name": "XM1014 | Fallout Warning 0.788281977177",
             "asset_id": "51110308918",
-            "reserve_price": 4905,
+            "reserve_price": 4900,
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 5,
@@ -325,7 +325,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51484374824",
-            "reserve_price": 2290,
+            "reserve_price": 2285,
             "description": "Perfect 5X craft",
             "cost": 1757,
             "decrease": 5,
