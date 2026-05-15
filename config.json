@@ -385,9 +385,17 @@
         {
             "name": "MAG-7 | Rust Coat 0.442764282227",
             "asset_id": "51540328734",
-            "reserve_price": 130,
+            "reserve_price": 160,
             "description": "Niko Gold full set",
             "cost": 3
+        },
+        {
+            "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916 ",
+            "asset_id": "50810796378",
+            "reserve_price": 3500,
+            "description": "Very Low float custom 5X",
+            "decrease": 5,
+            "lowest_sell": 3200
         }
     ]
 }
