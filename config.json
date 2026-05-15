@@ -388,6 +388,56 @@
             "reserve_price": 160,
             "description": "Niko Gold full set",
             "cost": 3
+        },
+        {
+            "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916 ",
+            "asset_id": "50810796378",
+            "reserve_price": 3500,
+            "description": "Very Low float custom 5X",
+            "decrease": 5,
+            "lowest_sell": 3200
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.368882775307",
+            "asset_id": "51547871822",
+            "reserve_price": 280,
+            "description": "Katowice 2015 gold full set",
+            "cost": 165
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.352720558643",
+            "asset_id": "51547871823",
+            "reserve_price": 280,
+            "description": "Katowice 2015 gold full set",
+            "cost": 165
+        },
+        {
+            "name": "Nova | Walnut 0.650051534176",
+            "asset_id": "51547871824",
+            "reserve_price": 280,
+            "description": "Katowice 2015 gold full set",
+            "cost": 165
+        },
+        {
+            "name": "G3SG1 | Desert Storm 0.249819234014",
+            "asset_id": "51548446506",
+            "reserve_price": 240,
+            "description": "Katowice 2015 gold full set",
+            "cost": 165
+        },
+        {
+            "name": "G3SG1 | Desert Storm 0.275247901678",
+            "asset_id": "51548447824",
+            "reserve_price": 200,
+            "description": "TSM Katowice 2015 gold",
+            "cost": 150
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.196928262711",
+            "asset_id": "51550419030",
+            "reserve_price": 600,
+            "description": "Rare Copen Wolves foil 2014",
+            "cost": 35
         }
     ]
 }
