@@ -3,7 +3,7 @@
         {
             "name": "P90 Facility Negative Faceit Gold",
             "asset_id": "50401569978",
-            "reserve_price": 460,
+            "reserve_price": 455,
             "description": "London 2018 Low float clean",
             "cost": 61,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 2060,
+            "reserve_price": 2055,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -21,7 +21,7 @@
         {
             "name": "MLG gold MP7 | Gunsmoke 0.318869739771",
             "asset_id": "50609144115",
-            "reserve_price": 465,
+            "reserve_price": 460,
             "description": "MLG GOLD cheapest on Gunsmoke",
             "cost": 41,
             "decrease": 5,
@@ -46,7 +46,7 @@
         {
             "name": "PP-Bizon | Irradiated Alert 0.206050664186",
             "asset_id": "51128342265",
-            "reserve_price": 1560,
+            "reserve_price": 1555,
             "description": "All Stars full set",
             "cost": 990,
             "decrease": 5,
@@ -55,7 +55,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3255,
+            "reserve_price": 3250,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -190,7 +190,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2160,
+            "reserve_price": 2155,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -199,7 +199,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51413560677",
-            "reserve_price": 2160,
+            "reserve_price": 2155,
             "description": "5X Lotus clean craft",
             "cost": 1690,
             "decrease": 5,
@@ -208,7 +208,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
-            "reserve_price": 2160,
+            "reserve_price": 2155,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -313,7 +313,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51484374824",
-            "reserve_price": 2205,
+            "reserve_price": 2200,
             "description": "Perfect 5X craft",
             "cost": 1757,
             "decrease": 5,
