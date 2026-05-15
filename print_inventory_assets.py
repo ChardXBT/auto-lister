@@ -1,5 +1,6 @@
 import os
 import sys
+from pathlib import Path
 from typing import Any
 
 import requests
@@ -9,6 +10,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 INVENTORY_URL = "https://csfloat.com/api/v1/me/inventory"
+PREV_INVENTORY_FILE = Path("prev_inventory_assets.txt")
+NEW_INVENTORY_FILE = Path("new_inventory_assets.txt")
 
 
 def fetch_inventory() -> Any:
@@ -39,6 +42,40 @@ def walk(value: Any):
     elif isinstance(value, list):
         for child in value:
             yield from walk(child)
+
+
+def format_row(name: str, float_value: float, asset_id: str) -> str:
+    return f"{name} | {float_value:.12f} | {asset_id}"
+
+
+def load_previous_asset_ids() -> set[str]:
+    if not PREV_INVENTORY_FILE.exists():
+        return set()
+
+    asset_ids = set()
+    for line in PREV_INVENTORY_FILE.read_text(encoding="utf-8").splitlines():
+        parts = [part.strip() for part in line.rsplit("|", maxsplit=2)]
+        if len(parts) == 3 and parts[2]:
+            asset_ids.add(parts[2])
+    return asset_ids
+
+
+def write_inventory_files(rows: list[tuple[str, float, str]]) -> int:
+    previous_asset_ids = load_previous_asset_ids()
+    new_rows = [row for row in rows if row[2] not in previous_asset_ids]
+
+    # Always recreate this file from scratch so it only reflects the latest run.
+    NEW_INVENTORY_FILE.write_text(
+        "\n".join(format_row(*row) for row in new_rows),
+        encoding="utf-8",
+    )
+
+    PREV_INVENTORY_FILE.write_text(
+        "\n".join(format_row(*row) for row in rows),
+        encoding="utf-8",
+    )
+
+    return len(new_rows)
 
 
 def main() -> int:
@@ -76,8 +113,14 @@ def main() -> int:
         print("No inventory items with asset_id + float_value found.")
         return 1
 
+    new_count = write_inventory_files(rows)
+
     for name, float_value, asset_id in rows:
-        print(f"{name} | {float_value:.12f} | {asset_id}")
+        print(format_row(name, float_value, asset_id))
+
+    print()
+    print(f"Saved full inventory snapshot to {PREV_INVENTORY_FILE}")
+    print(f"Saved {new_count} new item(s) to {NEW_INVENTORY_FILE}")
 
     return 0
 
