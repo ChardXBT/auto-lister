@@ -3,7 +3,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 1990,
+            "reserve_price": 1985,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -181,7 +181,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2100,
+            "reserve_price": 2095,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -190,7 +190,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51413560677",
-            "reserve_price": 2095,
+            "reserve_price": 2090,
             "description": "5X Lotus clean craft",
             "cost": 1690,
             "decrease": 5,
@@ -369,7 +369,7 @@
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
             "asset_id": "51699899160",
-            "reserve_price": 3470,
+            "reserve_price": 3465,
             "description": "Very Low float custom 5X",
             "decrease": 5,
             "lowest_sell": 3200
