@@ -128,6 +128,7 @@ log = logging.getLogger("csfloat_bot")
 # ── Constants ──────────────────────────────────────────────────────────────────
 BASE_URL     = "https://csfloat.com/api/v1"
 CONFIG_FILE  = "config.json"
+RELIST_COUNTS_FILE = "relist_counts.json"
 RELIST_DELAY = 120
 
 
@@ -315,10 +316,13 @@ class AuctionBot:
         self.expires_at: dict[str, float] = {}
 
         self.state_file = Path("bot_state.json")
+        self.relist_counts_file = Path(RELIST_COUNTS_FILE)
         self.failures: dict[str, int] = {}
         self.sold: set = set()
         self.pending_sale_prices: dict[str, int] = {}
+        self.relist_counts: dict[str, dict] = {}
         self._load_state()
+        self._load_relist_counts()
 
     def _load_state(self):
         if self.state_file.exists():
@@ -384,6 +388,55 @@ class AuctionBot:
             }, indent=2))
         except Exception as e:
             log.warning(f"Could not save state file: {e}")
+
+    def _load_relist_counts(self):
+        existing = {}
+        if self.relist_counts_file.exists():
+            try:
+                data = json.loads(self.relist_counts_file.read_text())
+                existing = {
+                    item["asset_id"]: item
+                    for item in data.get("items", [])
+                    if isinstance(item, dict) and item.get("asset_id")
+                }
+            except Exception as e:
+                log.warning(f"Could not load relist count file: {e}")
+
+        self.relist_counts = existing
+        for asset_id, item_cfg in self.watched.items():
+            old = self.relist_counts.get(asset_id, {})
+            self.relist_counts[asset_id] = {
+                "asset_id": asset_id,
+                "name": item_cfg.get("name", asset_id),
+                "relist_count": old.get("relist_count", 0),
+            }
+        self._save_relist_counts()
+
+    def _save_relist_counts(self):
+        try:
+            current_items = [
+                self.relist_counts[asset_id]
+                for asset_id in self.watched
+                if asset_id in self.relist_counts
+            ]
+            historical_items = [
+                item
+                for asset_id, item in self.relist_counts.items()
+                if asset_id not in self.watched
+            ]
+            items = current_items + historical_items
+            self.relist_counts_file.write_text(json.dumps({"items": items}, indent=4))
+        except Exception as e:
+            log.warning(f"Could not save relist count file: {e}")
+
+    def _increment_relist_count(self, asset_id: str):
+        entry = self.relist_counts.setdefault(asset_id, {
+            "asset_id": asset_id,
+            "name": self._item_name(asset_id),
+            "relist_count": 0,
+        })
+        entry["relist_count"] += 1
+        self._save_relist_counts()
 
     def _item_name(self, asset_id: str) -> str:
         return self.watched[asset_id].get("name", asset_id)
@@ -456,7 +509,7 @@ class AuctionBot:
                     self.expires_at.pop(asset_id, None)
                     log.info(f"[{name}] Auction ended — relisting now...")
                     self._apply_price_decrease(asset_id)
-                    result = self._do_relist(asset_id)
+                    result = self._do_relist(asset_id, is_true_relist=True)
                     updates.append(result)
                     # Pause between listings to avoid triggering CSFloat rate limits
                     if i < len(self.watched) - 1:
@@ -473,6 +526,7 @@ class AuctionBot:
             send_discord(self.discord_webhook, notable)
 
         self._save_state()
+        self._save_relist_counts()
 
     def _remove_from_config(self, asset_id: str):
         try:
@@ -481,6 +535,7 @@ class AuctionBot:
             cfg["items"] = [i for i in cfg["items"] if i["asset_id"] != asset_id]
             with open(CONFIG_FILE, "w") as f:
                 json.dump(cfg, f, indent=4)
+            self._save_relist_counts()
             log.info(f"Removed asset {asset_id} from config.json")
         except Exception as e:
             log.warning(f"Could not remove asset {asset_id} from config: {e}")
@@ -530,7 +585,7 @@ class AuctionBot:
         except Exception as e:
             log.warning(f"[{name}] Could not save price decrease to config: {e}")
 
-    def _do_relist(self, asset_id: str) -> dict:
+    def _do_relist(self, asset_id: str, is_true_relist: bool = False) -> dict:
         item_cfg = self.watched[asset_id]
         name     = self._item_name(asset_id)
         log.info(f"[{name}] Listing @ reserve={item_cfg['reserve_price']} '{item_cfg['description']}'")
@@ -581,6 +636,8 @@ class AuctionBot:
             if expiry_ts:
                 self.expires_at[asset_id] = expiry_ts
             self.pending_sale_prices.pop(asset_id, None)
+            if is_true_relist:
+                self._increment_relist_count(asset_id)
             log.info(f"[{name}] Listed! ID={new_id}  expires={expires_str}")
             return {
                 "name": name, "asset_id": asset_id,

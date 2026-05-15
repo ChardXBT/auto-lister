@@ -8,5 +8,7 @@ git pull origin main
 
 python3 bot.py
 
-git add config.json bot_state.json CS_GO_PnL_Tracker_Final.xlsx
-git diff --cached --quiet || git commit -m "auto: remove sold items" && git push origin HEAD:main
+git add config.json bot_state.json relist_counts.json CS_GO_PnL_Tracker_Final.xlsx manual_sales.json run.sh
+git diff --cached --quiet || git commit -m "auto: remove sold items"
+git pull --rebase origin main
+git push origin HEAD:main
