@@ -12,7 +12,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 2010,
+            "reserve_price": 2005,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -46,7 +46,7 @@
         {
             "name": "PP-Bizon | Irradiated Alert 0.206050664186",
             "asset_id": "51128342265",
-            "reserve_price": 1515,
+            "reserve_price": 1510,
             "description": "All Stars full set",
             "cost": 990,
             "decrease": 5,
@@ -55,7 +55,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3205,
+            "reserve_price": 3200,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -190,7 +190,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2120,
+            "reserve_price": 2115,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -199,7 +199,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.197799623013",
             "asset_id": "51413560677",
-            "reserve_price": 2115,
+            "reserve_price": 2110,
             "description": "5X Lotus clean craft",
             "cost": 1690,
             "decrease": 5,
@@ -208,7 +208,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
-            "reserve_price": 2110,
+            "reserve_price": 2105,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -385,7 +385,7 @@
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
             "asset_id": "51699899160",
-            "reserve_price": 3490,
+            "reserve_price": 3485,
             "description": "Very Low float custom 5X",
             "decrease": 5,
             "lowest_sell": 3200
