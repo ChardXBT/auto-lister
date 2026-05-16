@@ -46,7 +46,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3155,
+            "reserve_price": 3150,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -174,7 +174,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2065,
+            "reserve_price": 2060,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -192,7 +192,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
-            "reserve_price": 2060,
+            "reserve_price": 2055,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -362,7 +362,7 @@
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
             "asset_id": "51699899160",
-            "reserve_price": 3435,
+            "reserve_price": 3430,
             "description": "Very Low float custom 5X",
             "decrease": 5,
             "lowest_sell": 3200
