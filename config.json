@@ -394,6 +394,29 @@
             "reserve_price": 600,
             "description": "Rare Copen Wolves foil 2014",
             "cost": 35
+        },
+        {
+            "name": "Nova | Walnut 0.297510683537",
+            "asset_id": "51569263152",
+            "reserve_price": 260,
+            "description": "Katowice gold 2015 full set",
+            "cost": 160
+        },
+        {
+            "name": "Desert Eagle | Urban DDPAT 0.377394080162",
+            "asset_id": "51572601362",
+            "reserve_price": 400,
+            "description": "All Top Pos clean",
+            "cost": 50,
+            "decrease": 5,
+            "lowest_sell": 350
+        },
+        {
+            "name": "Sawed-Off | Sage Spray 0.785566389561",
+            "asset_id": "51572870486",
+            "reserve_price": 750,
+            "description": "DICK GOLD High BS",
+            "cost": 294
         }
     ]
 }
