@@ -46,11 +46,6 @@
             "relist_count": 0
         },
         {
-            "asset_id": "50831875214",
-            "name": "AK-47 | Slate 0.990183711052",
-            "relist_count": 0
-        },
-        {
             "asset_id": "50557489835",
             "name": "AK-47 | Slate 0.422036379576",
             "relist_count": 1
@@ -203,17 +198,17 @@
         {
             "asset_id": "51516994813",
             "name": "MP7 | Gunsmoke 0.632306337357",
-            "relist_count": 0
+            "relist_count": 1
         },
         {
             "asset_id": "51516997181",
             "name": "MAG-7 | Sand Dune 0.498238325119",
-            "relist_count": 0
+            "relist_count": 1
         },
         {
             "asset_id": "51525450700",
             "name": "P90 | Sand Spray 0.125937327743",
-            "relist_count": 0
+            "relist_count": 1
         },
         {
             "asset_id": "51533121805",
@@ -223,7 +218,7 @@
         {
             "asset_id": "51540328734",
             "name": "MAG-7 | Rust Coat 0.442764282227",
-            "relist_count": 0
+            "relist_count": 1
         },
         {
             "asset_id": "51699899160",
@@ -273,6 +268,11 @@
         {
             "asset_id": "51572870486",
             "name": "Sawed-Off | Sage Spray 0.785566389561",
+            "relist_count": 0
+        },
+        {
+            "asset_id": "50831875214",
+            "name": "AK-47 | Slate 0.990183711052",
             "relist_count": 0
         },
         {
