@@ -236,11 +236,6 @@
             "relist_count": 1
         },
         {
-            "asset_id": "51547871824",
-            "name": "Nova | Walnut 0.650051534176",
-            "relist_count": 0
-        },
-        {
             "asset_id": "51548446506",
             "name": "G3SG1 | Desert Storm 0.249819234014",
             "relist_count": 0
@@ -268,6 +263,11 @@
         {
             "asset_id": "51572870486",
             "name": "Sawed-Off | Sage Spray 0.785566389561",
+            "relist_count": 0
+        },
+        {
+            "asset_id": "51547871824",
+            "name": "Nova | Walnut 0.650051534176",
             "relist_count": 0
         },
         {
