@@ -46,7 +46,7 @@
         {
             "name": "USP-S | Road Rash 0.410679906607",
             "asset_id": "51138811309",
-            "reserve_price": 3170,
+            "reserve_price": 3165,
             "description": "Road Rash IEM GOLD",
             "cost": 2123,
             "decrease": 5,
@@ -79,13 +79,6 @@
             "reserve_price": 1280,
             "description": "All Stars Holo",
             "cost": 899
-        },
-        {
-            "name": "Sawed-Off | Snake Camo 0.250000000000 (2)",
-            "asset_id": "51326408472",
-            "reserve_price": 120,
-            "description": ".25 perfect float",
-            "cost": 63
         },
         {
             "name": "AK-47 | Slate 0.990183711052",
@@ -181,7 +174,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2080,
+            "reserve_price": 2075,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -199,7 +192,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.153355076909",
             "asset_id": "51408734707",
-            "reserve_price": 2075,
+            "reserve_price": 2070,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -369,7 +362,7 @@
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
             "asset_id": "51699899160",
-            "reserve_price": 3450,
+            "reserve_price": 3445,
             "description": "Very Low float custom 5X",
             "decrease": 5,
             "lowest_sell": 3200
