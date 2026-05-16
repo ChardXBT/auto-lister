@@ -33,17 +33,12 @@
         {
             "asset_id": "51162440601",
             "name": "Nova | Polar Mesh Nova | Polar Mesh",
-            "relist_count": 0
+            "relist_count": 1
         },
         {
             "asset_id": "51192440308",
             "name": "Sawed-Off | Irradiated Alert 0.456468969584",
             "relist_count": 1
-        },
-        {
-            "asset_id": "51217727728",
-            "name": "M249 | Contrast Spray 0.165465533733",
-            "relist_count": 0
         },
         {
             "asset_id": "51294769639",
@@ -128,11 +123,6 @@
         {
             "asset_id": "51408734707",
             "name": "M4A1-S | Black Lotus 0.153355076909",
-            "relist_count": 0
-        },
-        {
-            "asset_id": "51378411528",
-            "name": "P2000 | Grassland 0.370970904827",
             "relist_count": 0
         },
         {
@@ -268,6 +258,16 @@
         {
             "asset_id": "51550419030",
             "name": "MAG-7 | Sand Dune 0.196928262711",
+            "relist_count": 0
+        },
+        {
+            "asset_id": "51217727728",
+            "name": "M249 | Contrast Spray 0.165465533733",
+            "relist_count": 0
+        },
+        {
+            "asset_id": "51378411528",
+            "name": "P2000 | Grassland 0.370970904827",
             "relist_count": 0
         },
         {

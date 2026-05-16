@@ -167,7 +167,7 @@
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
             "asset_id": "51408734706",
-            "reserve_price": 2055,
+            "reserve_price": 2050,
             "description": "5X Lotus clean craft",
             "cost": 1860,
             "decrease": 5,
@@ -348,7 +348,7 @@
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
             "asset_id": "51699899160",
-            "reserve_price": 3425,
+            "reserve_price": 3420,
             "description": "Very Low float custom 5X",
             "decrease": 5,
             "lowest_sell": 3200
