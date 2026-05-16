@@ -13,6 +13,7 @@ Usage (called automatically by the bot):
     log_sale("MP9 | Sand Dashed 0.130889981985", sold_price_cents=410, cost_cents=310)
 """
 
+import logging
 import os
 from pathlib import Path
 from openpyxl import load_workbook
@@ -31,15 +32,16 @@ COL_FEE  = 4  # D
 # Your sheet's summary block starts at row 1149, so data rows are 3-1147
 DATA_START_ROW = 3
 DATA_END_ROW   = 1145  # hard cap - never write into or past the summary
+log = logging.getLogger("csfloat_bot.excel_logger")
 
 
-def _find_next_row(sheet) -> int:
+def _find_next_row(sheet) -> int | None:
     """Return the first empty row within the data range (rows 3-1145)."""
     for row in range(DATA_START_ROW, DATA_END_ROW + 1):
         if sheet.cell(row=row, column=COL_NAME).value is None:
             return row
-    print(f"[excel_logger] WARNING: Data range is full (row {DATA_END_ROW}). Expand your sheet!")
-    return DATA_END_ROW
+    log.warning("Data range is full (row %s). Expand your sheet.", DATA_END_ROW)
+    return None
 
 
 def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> bool:
@@ -56,7 +58,7 @@ def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> b
     """
     excel_path = Path(EXCEL_FILE)
     if not excel_path.exists():
-        print(f"[excel_logger] ERROR: '{EXCEL_FILE}' not found - skipping log.")
+        log.error("'%s' not found - skipping log.", EXCEL_FILE)
         return False
 
     try:
@@ -66,13 +68,15 @@ def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> b
         wb = load_workbook(excel_path)
 
         if SHEET_NAME not in wb.sheetnames:
-            print(f"[excel_logger] ERROR: Sheet '{SHEET_NAME}' not found.")
+            log.error("Sheet '%s' not found.", SHEET_NAME)
             return False
 
         ws = wb[SHEET_NAME]
 
         # Find the next empty row in the data range
         r = _find_next_row(ws)
+        if r is None:
+            return False
 
         # The sheet has pre-formatted rows with formulas already in D-G.
         # We only need to write A (name), B (cost), C (sold price).
@@ -90,9 +94,9 @@ def log_sale(item_name: str, sold_price_cents: int, cost_cents: int = None) -> b
             ws.cell(row=r, column=7).value = f"=IF(OR(B{r}=\"\",B{r}=0),\"\",F{r}/B{r})"
 
         wb.save(excel_path)
-        print(f"[excel_logger] Logged sale -> row {r}: '{item_name}' @ ${sold_price_usd:.2f} cost=${cost_usd}")
+        log.info("Logged sale -> row %s: '%s' @ $%.2f cost=$%s", r, item_name, sold_price_usd, cost_usd)
         return True
 
     except Exception as e:
-        print(f"[excel_logger] ERROR writing to Excel: {e}")
+        log.error("Error writing to Excel: %s", e)
         return False

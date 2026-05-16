@@ -130,6 +130,9 @@ BASE_URL     = "https://csfloat.com/api/v1"
 CONFIG_FILE  = "config.json"
 RELIST_COUNTS_FILE = "relist_counts.json"
 RELIST_DELAY = 120
+NOT_IN_INVENTORY_THRESHOLD = 5
+GET_RETRIES = 3
+POST_RETRIES = 3
 
 
 # ── Config ─────────────────────────────────────────────────────────────────────
@@ -171,6 +174,12 @@ def load_config() -> dict:
     cfg["steam_id"]        = steam_id
     cfg["discord_webhook"] = discord_webhook
     return cfg
+
+
+def write_json_atomic(path: Path, payload: dict, indent: int = 2) -> None:
+    temp_path = path.with_name(f"{path.name}.tmp")
+    temp_path.write_text(json.dumps(payload, indent=indent), encoding="utf-8")
+    os.replace(temp_path, path)
 
 
 # ── Discord ────────────────────────────────────────────────────────────────────
@@ -231,7 +240,7 @@ class CSFloatClient:
             "Content-Type":  "application/json",
         })
 
-    def _get(self, path: str, params: dict = None, _retries: int = 3):
+    def _get(self, path: str, params: dict = None, _retries: int = GET_RETRIES):
         for attempt in range(_retries):
             try:
                 r = self.session.get(f"{BASE_URL}{path}", params=params, timeout=15)
@@ -244,38 +253,60 @@ class CSFloatClient:
                 return r.json()
             except requests.HTTPError as e:
                 log.error(f"GET {path} -> {e.response.status_code}: {e.response.text}")
+                if 500 <= e.response.status_code < 600 and attempt < _retries - 1:
+                    time.sleep(5 * (attempt + 1))
+                    continue
                 break
             except requests.RequestException as e:
                 log.error(f"GET {path} failed: {e}")
+                if attempt < _retries - 1:
+                    time.sleep(5 * (attempt + 1))
+                    continue
                 break
         return None
 
-    def _post(self, path: str, payload: dict):
-        try:
-            r = self.session.post(f"{BASE_URL}{path}", json=payload, timeout=15)
-            if r.status_code == 400:
-                body = r.json()
-                if body.get("code") == 4:
-                    # CSFloat API code 4: item already has an active listing
-                    return {"__already_listed": True}
-            if r.status_code == 403:
-                body = r.json()
-                if body.get("code") == 17:
-                    # CSFloat API code 17: item is not in the seller's inventory
-                    return {"__not_in_inventory": True}
-            r.raise_for_status()
-            return r.json()
-        except requests.HTTPError as e:
-            log.error(f"POST {path} -> {e.response.status_code}: {e.response.text}")
-        except requests.RequestException as e:
-            log.error(f"POST {path} failed: {e}")
+    def _post(self, path: str, payload: dict, _retries: int = POST_RETRIES):
+        for attempt in range(_retries):
+            try:
+                r = self.session.post(f"{BASE_URL}{path}", json=payload, timeout=15)
+                if r.status_code == 429:
+                    wait = 10 * (attempt + 1)
+                    log.warning(f"Rate limited — waiting {wait}s before retry...")
+                    time.sleep(wait)
+                    continue
+                if r.status_code == 400:
+                    body = r.json()
+                    if body.get("code") == 4:
+                        # CSFloat API code 4: item already has an active listing
+                        return {"__already_listed": True}
+                if r.status_code == 403:
+                    body = r.json()
+                    if body.get("code") == 17:
+                        # CSFloat API code 17: item is not in the seller's inventory
+                        return {"__not_in_inventory": True}
+                r.raise_for_status()
+                return r.json()
+            except requests.HTTPError as e:
+                log.error(f"POST {path} -> {e.response.status_code}: {e.response.text}")
+                if 500 <= e.response.status_code < 600 and attempt < _retries - 1:
+                    time.sleep(5 * (attempt + 1))
+                    continue
+                break
+            except requests.RequestException as e:
+                log.error(f"POST {path} failed: {e}")
+                if attempt < _retries - 1:
+                    time.sleep(5 * (attempt + 1))
+                    continue
+                break
         return None
 
-    def get_my_active_auctions(self, steam_id: str) -> list:
+    def get_my_active_auctions(self, steam_id: str) -> list | None:
         results = []
         params  = {"user_id": steam_id, "type": "auction", "limit": 50}
         while True:
             data = self._get("/listings", params=params)
+            if data is None:
+                return None
             if not data:
                 break
             batch  = data if isinstance(data, list) else data.get("data", [])
@@ -357,6 +388,7 @@ class AuctionBot:
 
             log.info(f"Processing {len(sales)} manual sale(s) from manual_sales.json...")
 
+            remaining_sales = []
             for sale in sales:
                 name = sale.get("name")
                 sold = sale.get("sold")
@@ -366,12 +398,17 @@ class AuctionBot:
                     log.warning(f"Skipping invalid manual sale entry: {sale}")
                     continue
 
-                log_sale(name, sold, cost)
-                log.info(f"[manual] Logged: '{name}' @ {sold} cost={cost}")
+                if log_sale(name, sold, cost):
+                    log.info(f"[manual] Logged: '{name}' @ {sold} cost={cost}")
+                else:
+                    remaining_sales.append(sale)
+                    log.warning(f"[manual] Could not log '{name}' — keeping it for the next run.")
 
-            # Clear the file after successful processing
-            manual_file.write_text("[]")
-            log.info("manual_sales.json cleared after processing.")
+            manual_file.write_text(json.dumps(remaining_sales, indent=2))
+            if remaining_sales:
+                log.warning(f"Kept {len(remaining_sales)} manual sale(s) for retry.")
+            else:
+                log.info("manual_sales.json cleared after processing.")
 
         except json.JSONDecodeError:
             log.warning("manual_sales.json is not valid JSON — skipping. Fix the file and it will process next run.")
@@ -380,12 +417,12 @@ class AuctionBot:
 
     def _save_state(self):
         try:
-            self.state_file.write_text(json.dumps({
+            write_json_atomic(self.state_file, {
                 "failures": self.failures,
                 "sold": list(self.sold),
                 "active": self.active,  # ✅ ADD THIS LINE
                 "pending_sale_prices": self.pending_sale_prices,
-            }, indent=2))
+            })
         except Exception as e:
             log.warning(f"Could not save state file: {e}")
 
@@ -425,7 +462,7 @@ class AuctionBot:
                 if asset_id not in self.watched
             ]
             items = current_items + historical_items
-            self.relist_counts_file.write_text(json.dumps({"items": items}, indent=4))
+            write_json_atomic(self.relist_counts_file, {"items": items}, indent=4)
         except Exception as e:
             log.warning(f"Could not save relist count file: {e}")
 
@@ -474,7 +511,7 @@ class AuctionBot:
         # Clear the retry sentinel now that the fetch succeeded
         self.expires_at.pop("__retry", None)
 
-        live_asset_ids = {l["item"]["asset_id"] for l in live}
+        live_by_id = {l["item"]["asset_id"]: l for l in live}
 
         for i, (asset_id, item_cfg) in enumerate(self.watched.items()):
             name = self._item_name(asset_id)
@@ -482,8 +519,8 @@ class AuctionBot:
             if asset_id in self.sold:
                 continue
 
-            if asset_id in live_asset_ids:
-                matched     = next(l for l in live if l["item"]["asset_id"] == asset_id)
+            if asset_id in live_by_id:
+                matched     = live_by_id[asset_id]
                 listing_id  = matched["id"]
                 expires_str = matched.get("auction_details", {}).get("expires_at", "")
                 expiry_ts   = self._parse_expiry(expires_str)
@@ -533,8 +570,7 @@ class AuctionBot:
             with open(CONFIG_FILE) as f:
                 cfg = json.load(f)
             cfg["items"] = [i for i in cfg["items"] if i["asset_id"] != asset_id]
-            with open(CONFIG_FILE, "w") as f:
-                json.dump(cfg, f, indent=4)
+            write_json_atomic(Path(CONFIG_FILE), cfg, indent=4)
             self._save_relist_counts()
             log.info(f"Removed asset {asset_id} from config.json")
         except Exception as e:
@@ -579,8 +615,7 @@ class AuctionBot:
                 if item["asset_id"] == asset_id:
                     item["reserve_price"] = new_price
                     break
-            with open(CONFIG_FILE, "w") as f:
-                json.dump(cfg, f, indent=4)
+            write_json_atomic(Path(CONFIG_FILE), cfg, indent=4)
             log.info(f"[{name}] Price decreased: {current_price} → {new_price} (floor: {lowest_sell})")
         except Exception as e:
             log.warning(f"[{name}] Could not save price decrease to config: {e}")
@@ -588,12 +623,13 @@ class AuctionBot:
     def _do_relist(self, asset_id: str, is_true_relist: bool = False) -> dict:
         item_cfg = self.watched[asset_id]
         name     = self._item_name(asset_id)
-        log.info(f"[{name}] Listing @ reserve={item_cfg['reserve_price']} '{item_cfg['description']}'")
+        description = item_cfg.get("description", "")
+        log.info(f"[{name}] Listing @ reserve={item_cfg['reserve_price']} '{description}'")
 
         result = self.client.create_auction(
             asset_id=asset_id,
             reserve_price=item_cfg["reserve_price"],
-            description=item_cfg["description"],
+            description=description,
         )
 
         if result and result.get("__not_in_inventory"):
@@ -601,7 +637,7 @@ class AuctionBot:
             not_in_inv_count = self.failures[asset_id]
             # Require 5 consecutive "not in inventory" responses before treating the item
             # as sold — guards against transient Steam inventory sync delays
-            if not_in_inv_count >= 5:
+            if not_in_inv_count >= NOT_IN_INVENTORY_THRESHOLD:
                 log.warning(f"[{name}] Not in inventory {not_in_inv_count} times — marking as sold.")
                 self._remove_from_config(asset_id)
                 self.sold.add(asset_id)
@@ -612,10 +648,17 @@ class AuctionBot:
                     "name": name, "asset_id": asset_id,
                     "status": "failed", "detail": f"Item sold — confirmed {not_in_inv_count}x not in inventory",
                 }
-            log.warning(f"[{name}] Not in inventory ({not_in_inv_count}/10) — will confirm before marking sold.")
+            log.warning(
+                f"[{name}] Not in inventory ({not_in_inv_count}/{NOT_IN_INVENTORY_THRESHOLD}) "
+                "— will confirm before marking sold."
+            )
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Not in inventory ({not_in_inv_count}/10) — confirming before removing",
+                "status": "failed",
+                "detail": (
+                    f"Not in inventory ({not_in_inv_count}/{NOT_IN_INVENTORY_THRESHOLD}) "
+                    "— confirming before removing"
+                ),
             }
 
         if result and result.get("__already_listed"):
@@ -646,22 +689,10 @@ class AuctionBot:
         else:
             self.failures[asset_id] = self.failures.get(asset_id, 0) + 1
             fail_count = self.failures[asset_id]
-            # 10 consecutive generic API failures most likely means the item sold
-            # through a channel the bot didn't detect (trade, direct sale, etc.)
-            if fail_count >= 30:
-                self.sold.add(asset_id)
-                log.warning(f"[{name}] Failed {fail_count} times — marking as sold, will no longer relist.")
-                sold_price = self._sale_log_price(asset_id)
-                log_sale(name, sold_price, item_cfg.get("cost"))
-                self.pending_sale_prices.pop(asset_id, None)
-                return {
-                    "name": name, "asset_id": asset_id,
-                    "status": "failed", "detail": f"Marked as sold after {fail_count} failures",
-                }
-            log.error(f"[{name}] Listing failed ({fail_count}/10) — retrying next run.")
+            log.error(f"[{name}] Listing failed ({fail_count}) — retrying next run.")
             return {
                 "name": name, "asset_id": asset_id,
-                "status": "failed", "detail": f"Failed to list ({fail_count}/10) — retrying next run",
+                "status": "failed", "detail": f"Failed to list ({fail_count}) — retrying next run",
             }
 
 

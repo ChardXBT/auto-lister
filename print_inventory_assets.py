@@ -37,6 +37,7 @@ def walk(value: Any):
     if isinstance(value, dict):
         if "asset_id" in value and "float_value" in value:
             yield value
+            return
         for child in value.values():
             yield from walk(child)
     elif isinstance(value, list):

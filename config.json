@@ -32,7 +32,9 @@
             "asset_id": "51045458048",
             "reserve_price": 600,
             "description": "Kato 2015 Gold Full Set",
-            "cost": 134
+            "cost": 134,
+            "decrease": 0,
+            "lowest_sell": 600
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.206050664186",
@@ -57,105 +59,135 @@
             "asset_id": "51162440601",
             "reserve_price": 300,
             "description": "Titan Gold full set",
-            "cost": 22
+            "cost": 22,
+            "decrease": 0,
+            "lowest_sell": 300
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.456468969584",
             "asset_id": "51192440308",
             "reserve_price": 1400,
             "description": "All star full set",
-            "cost": 61
+            "cost": 61,
+            "decrease": 0,
+            "lowest_sell": 1400
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.274698585272",
             "asset_id": "51294769639",
             "reserve_price": 1280,
             "description": "All Stars Holo",
-            "cost": 899
+            "cost": 899,
+            "decrease": 0,
+            "lowest_sell": 1280
         },
         {
             "name": "AK-47 | Slate 0.422036379576",
             "asset_id": "50557489835",
             "reserve_price": 650,
             "description": "Clean 4X craft",
-            "cost": 432
+            "cost": 432,
+            "decrease": 0,
+            "lowest_sell": 650
         },
         {
             "name": "Tec9 Sand Storm Purple mag 3X envy kato 2015",
             "asset_id": "50499268430",
             "reserve_price": 1100,
             "description": "Matching 3X Kato 2015",
-            "cost": 960
+            "cost": 960,
+            "decrease": 0,
+            "lowest_sell": 1100
         },
         {
             "name": "P250 | Contamination 0.583681046963",
             "asset_id": "51398427470",
             "reserve_price": 480,
             "description": "Katowice 2015 gold full set",
-            "cost": 190
+            "cost": 190,
+            "decrease": 0,
+            "lowest_sell": 480
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.750360727310",
             "asset_id": "51393076726",
             "reserve_price": 250,
             "description": "Katowice 2015 gold full set",
-            "cost": 84
+            "cost": 84,
+            "decrease": 0,
+            "lowest_sell": 250
         },
         {
             "name": "Nova | Walnut 0.302821218967",
             "asset_id": "51394771107",
             "reserve_price": 260,
             "description": "Katowice 2015 gold full set",
-            "cost": 132
+            "cost": 132,
+            "decrease": 0,
+            "lowest_sell": 260
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.154564380646",
             "asset_id": "51394775142",
             "reserve_price": 260,
             "description": "Katowice 2015 gold full set",
-            "cost": 132
+            "cost": 132,
+            "decrease": 0,
+            "lowest_sell": 260
         },
         {
             "name": "Sawed-Off | Irradiated Alert 0.371810972691",
             "asset_id": "51406622291",
             "reserve_price": 1400,
             "description": "All star holo full set",
-            "cost": 1010
+            "cost": 1010,
+            "decrease": 0,
+            "lowest_sell": 1400
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.384995698929",
             "asset_id": "51407103988",
             "reserve_price": 1400,
             "description": "All star holo full set",
-            "cost": 1010
+            "cost": 1010,
+            "decrease": 0,
+            "lowest_sell": 1400
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.162274256349",
             "asset_id": "51406618247",
             "reserve_price": 1400,
             "description": "All star holo full set",
-            "cost": 1010
+            "cost": 1010,
+            "decrease": 0,
+            "lowest_sell": 1400
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.262479603291",
             "asset_id": "51406618245",
             "reserve_price": 1400,
             "description": "All star holo full set",
-            "cost": 1010
+            "cost": 1010,
+            "decrease": 0,
+            "lowest_sell": 1400
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.276612162590",
             "asset_id": "51406618244",
             "reserve_price": 1400,
             "description": "All star holo full set",
-            "cost": 1010
+            "cost": 1010,
+            "decrease": 0,
+            "lowest_sell": 1400
         },
         {
             "name": "MAG-7 | Irradiated Alert 0.471062302589",
             "asset_id": "51406618246",
             "reserve_price": 1280,
             "description": "All star holo set",
-            "cost": 1010
+            "cost": 1010,
+            "decrease": 0,
+            "lowest_sell": 1280
         },
         {
             "name": "M4A1-S | Black Lotus 0.298507064581",
@@ -189,7 +221,9 @@
             "asset_id": "51479714177",
             "reserve_price": 420,
             "description": "Kato gold 2015 full set",
-            "cost": 117
+            "cost": 117,
+            "decrease": 0,
+            "lowest_sell": 420
         },
         {
             "name": "Dual Berettas | Contractor 0.340188771486 DH 2013 Shooter Foil",
@@ -250,21 +284,27 @@
             "asset_id": "50803168905",
             "reserve_price": 300,
             "description": "Atlanta Gold full set rare",
-            "cost": 31
+            "cost": 31,
+            "decrease": 0,
+            "lowest_sell": 300
         },
         {
             "name": "PP-Bizon | Chemical Green 0.823722779751",
             "asset_id": "51487469650",
             "reserve_price": 1500,
             "description": "ECS DH 2014 gold full set rare",
-            "cost": 1340
+            "cost": 1340,
+            "decrease": 0,
+            "lowest_sell": 1500
         },
         {
             "name": "MAG-7 | Rust Coat 0.226636052132 ",
             "asset_id": "51488805586",
             "reserve_price": 420,
             "description": "KennyS Gold cheapest",
-            "cost": 3
+            "cost": 3,
+            "decrease": 0,
+            "lowest_sell": 420
         },
         {
             "name": "M4A1-S | Black Lotus 0.194462686777",
@@ -280,63 +320,81 @@
             "asset_id": "51497888771",
             "reserve_price": 4200,
             "description": "All op pos",
-            "cost": 3350
+            "cost": 3350,
+            "decrease": 0,
+            "lowest_sell": 4200
         },
         {
             "name": "SCAR-20 | Sand Mesh 0.227959647775",
             "asset_id": "51505186664",
             "reserve_price": 300,
             "description": "Titan GOld",
-            "cost": 250
+            "cost": 250,
+            "decrease": 0,
+            "lowest_sell": 300
         },
         {
             "name": "G3SG1 | Polar Camo 0.382729262114",
             "asset_id": "51505186665",
             "reserve_price": 300,
             "description": "Titan GOld",
-            "cost": 250
+            "cost": 250,
+            "decrease": 0,
+            "lowest_sell": 300
         },
         {
             "name": "MP7 | Gunsmoke 0.299461662769",
             "asset_id": "51516992287",
             "reserve_price": 310,
             "description": "Atlanta gold full set",
-            "cost": 36
+            "cost": 36,
+            "decrease": 0,
+            "lowest_sell": 310
         },
         {
             "name": "MP7 | Gunsmoke 0.632306337357",
             "asset_id": "51516994813",
             "reserve_price": 420,
             "description": "Krakow gold full set",
-            "cost": 60
+            "cost": 60,
+            "decrease": 0,
+            "lowest_sell": 420
         },
         {
             "name": "MAG-7 | Sand Dune 0.498238325119",
             "asset_id": "51516997181",
             "reserve_price": 280,
             "description": "Katowice gold 2015 full set",
-            "cost": 42
+            "cost": 42,
+            "decrease": 0,
+            "lowest_sell": 280
         },
         {
             "name": "P90 | Sand Spray 0.125937327743",
             "asset_id": "51525450700",
             "reserve_price": 300,
             "description": "MW Katowice 2015 gold full set",
-            "cost": 165
+            "cost": 165,
+            "decrease": 0,
+            "lowest_sell": 300
         },
         {
             "name": "P250 | Bone  Mask 0.484390467405",
             "asset_id": "51533121805",
             "reserve_price": 290,
             "description": "Niko Gold full set",
-            "cost": 27
+            "cost": 27,
+            "decrease": 0,
+            "lowest_sell": 290
         },
         {
             "name": "MAG-7 | Rust Coat 0.442764282227",
             "asset_id": "51540328734",
             "reserve_price": 160,
             "description": "Niko Gold full set",
-            "cost": 3
+            "cost": 3,
+            "decrease": 0,
+            "lowest_sell": 160
         },
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
@@ -351,42 +409,54 @@
             "asset_id": "51547871822",
             "reserve_price": 280,
             "description": "Katowice 2015 gold full set",
-            "cost": 165
+            "cost": 165,
+            "decrease": 0,
+            "lowest_sell": 280
         },
         {
             "name": "MAG-7 | Sand Dune 0.352720558643",
             "asset_id": "51547871823",
             "reserve_price": 280,
             "description": "Katowice 2015 gold full set",
-            "cost": 165
+            "cost": 165,
+            "decrease": 0,
+            "lowest_sell": 280
         },
         {
             "name": "G3SG1 | Desert Storm 0.249819234014",
             "asset_id": "51548446506",
             "reserve_price": 240,
             "description": "Katowice 2015 gold full set",
-            "cost": 165
+            "cost": 165,
+            "decrease": 0,
+            "lowest_sell": 240
         },
         {
             "name": "G3SG1 | Desert Storm 0.275247901678",
             "asset_id": "51548447824",
             "reserve_price": 200,
             "description": "TSM Katowice 2015 gold",
-            "cost": 150
+            "cost": 150,
+            "decrease": 0,
+            "lowest_sell": 200
         },
         {
             "name": "MAG-7 | Sand Dune 0.196928262711",
             "asset_id": "51550419030",
             "reserve_price": 600,
             "description": "Rare Copen Wolves foil 2014",
-            "cost": 35
+            "cost": 35,
+            "decrease": 0,
+            "lowest_sell": 600
         },
         {
             "name": "Nova | Walnut 0.297510683537",
             "asset_id": "51569263152",
             "reserve_price": 260,
             "description": "Katowice gold 2015 full set",
-            "cost": 160
+            "cost": 160,
+            "decrease": 0,
+            "lowest_sell": 260
         },
         {
             "name": "Desert Eagle | Urban DDPAT 0.377394080162",
@@ -402,7 +472,9 @@
             "asset_id": "51572870486",
             "reserve_price": 750,
             "description": "DICK GOLD High BS",
-            "cost": 294
+            "cost": 294,
+            "decrease": 0,
+            "lowest_sell": 750
         }
     ]
 }
