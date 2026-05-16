@@ -51,11 +51,6 @@
             "relist_count": 0
         },
         {
-            "asset_id": "51326408472",
-            "name": "Sawed-Off | Snake Camo 0.250000000000 (2)",
-            "relist_count": 0
-        },
-        {
             "asset_id": "50831875214",
             "name": "AK-47 | Slate 0.990183711052",
             "relist_count": 0
@@ -273,6 +268,11 @@
         {
             "asset_id": "51550419030",
             "name": "MAG-7 | Sand Dune 0.196928262711",
+            "relist_count": 0
+        },
+        {
+            "asset_id": "51326408472",
+            "name": "Sawed-Off | Snake Camo 0.250000000000 (2)",
             "relist_count": 0
         }
     ]
