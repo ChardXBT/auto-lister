@@ -206,9 +206,9 @@
             "lowest_sell": 2050
         },
         {
-            "name": "P2000 | Grassland",
+            "name": "P2000 | Grassland 0.370970904827",
             "asset_id": "51378411528",
-            "reserve_price": 210,
+            "reserve_price": 400,
             "description": "P2000 Atlanta 2017",
             "cost": 60
         },
