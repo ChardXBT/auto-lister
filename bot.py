@@ -106,11 +106,13 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
 
 from excel_logger import log_sale
+from print_inventory_assets import refresh_inventory_files
 
 load_dotenv()
 
@@ -134,6 +136,8 @@ RELIST_DELAY = 120
 NOT_IN_INVENTORY_THRESHOLD = 5
 GET_RETRIES = 3
 POST_RETRIES = 3
+INVENTORY_SNAPSHOT_HOUR = 2
+LOCAL_TIMEZONE = ZoneInfo("America/Toronto")
 
 
 # ── Config ─────────────────────────────────────────────────────────────────────
@@ -368,6 +372,7 @@ class AuctionBot:
         self.failures: dict[str, int] = {}
         self.sold: set = set()
         self.pending_sale_prices: dict[str, int] = {}
+        self.last_inventory_snapshot_date: str | None = None
         self.relist_counts: dict[str, dict] = {}
         self._load_state()
         self._load_relist_counts()
@@ -380,6 +385,7 @@ class AuctionBot:
                 self.sold = set(data.get("sold", []))
                 self.active = data.get("active", {})  # ✅ added
                 self.pending_sale_prices = data.get("pending_sale_prices", {})
+                self.last_inventory_snapshot_date = data.get("last_inventory_snapshot_date")
                 log.info(f"Loaded state: {len(self.sold)} sold, {len(self.failures)} tracked failures.")
             except Exception as e:
                 log.warning(f"Could not load state file: {e}")
@@ -439,6 +445,7 @@ class AuctionBot:
                 "sold": list(self.sold),
                 "active": self.active,  # ✅ ADD THIS LINE
                 "pending_sale_prices": self.pending_sale_prices,
+                "last_inventory_snapshot_date": self.last_inventory_snapshot_date,
             })
         except Exception as e:
             log.warning(f"Could not save state file: {e}")
@@ -509,10 +516,35 @@ class AuctionBot:
         log.info("Running.")
         try:
             self._process_manual_sales()
+            self._maybe_refresh_inventory_snapshot()
             self.tick()
         except Exception as e:
             log.exception(f"Unexpected error: {e}")
         log.info("Done — exiting.")
+
+    def _maybe_refresh_inventory_snapshot(self):
+        now_local = datetime.now(LOCAL_TIMEZONE)
+        today = now_local.date().isoformat()
+
+        if now_local.hour < INVENTORY_SNAPSHOT_HOUR:
+            return
+        if self.last_inventory_snapshot_date == today:
+            return
+
+        try:
+            total_count, new_count = refresh_inventory_files()
+            if total_count == 0:
+                log.warning("Daily inventory snapshot found no float-bearing items; will retry next run.")
+                return
+            self.last_inventory_snapshot_date = today
+            self._save_state()
+            log.info(
+                "Daily inventory snapshot complete: %s tracked item(s), %s new item(s).",
+                total_count,
+                new_count,
+            )
+        except Exception as e:
+            log.warning("Daily inventory snapshot failed; will retry next run: %s", e)
 
     def tick(self):
         now     = time.time()

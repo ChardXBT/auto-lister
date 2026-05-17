@@ -79,17 +79,7 @@ def write_inventory_files(rows: list[tuple[str, float, str]]) -> int:
     return len(new_rows)
 
 
-def main() -> int:
-    try:
-        inventory = fetch_inventory()
-    except requests.HTTPError as exc:
-        body = exc.response.text[:500] if exc.response is not None else ""
-        print(f"Failed to fetch inventory: {exc}\n{body}", file=sys.stderr)
-        return 1
-    except Exception as exc:
-        print(f"Failed to fetch inventory: {exc}", file=sys.stderr)
-        return 1
-
+def build_inventory_rows(inventory: Any) -> list[tuple[str, float, str]]:
     rows = []
     for item in walk(inventory):
         asset_id = str(item.get("asset_id") or "").strip()
@@ -109,6 +99,28 @@ def main() -> int:
             rows.append((name, float_value, asset_id))
 
     rows.sort(key=lambda row: (row[0].lower(), row[1], row[2]))
+    return rows
+
+
+def refresh_inventory_files() -> tuple[int, int]:
+    rows = build_inventory_rows(fetch_inventory())
+    if not rows:
+        return 0, 0
+    return len(rows), write_inventory_files(rows)
+
+
+def main() -> int:
+    try:
+        inventory = fetch_inventory()
+    except requests.HTTPError as exc:
+        body = exc.response.text[:500] if exc.response is not None else ""
+        print(f"Failed to fetch inventory: {exc}\n{body}", file=sys.stderr)
+        return 1
+    except Exception as exc:
+        print(f"Failed to fetch inventory: {exc}", file=sys.stderr)
+        return 1
+
+    rows = build_inventory_rows(inventory)
 
     if not rows:
         print("No inventory items with asset_id + float_value found.")
