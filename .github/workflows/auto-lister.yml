@@ -3,7 +3,7 @@ name: Auto Lister
 on:
   workflow_dispatch:
   schedule:
-    
+    - cron: "5 */2 * * *"
 
 permissions:
   contents: write

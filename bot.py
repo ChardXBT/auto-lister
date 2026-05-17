@@ -321,19 +321,31 @@ class CSFloatClient:
 
     def get_my_active_auctions(self, steam_id: str) -> list | None:
         results = []
-        params  = {"user_id": steam_id, "type": "auction", "limit": 50}
-        log.info("Fetching active auctions with params=%s", {"user_id": "***", "type": "auction", "limit": 50})
+        params  = {"limit": 40, "type": "auction"}
+        path = f"/users/{steam_id}/stall"
+        log.info("Fetching active stall listings for configured account.")
         while True:
-            data = self._get("/listings", params=params)
+            data = self._get(path, params=params)
             if data is None:
-                log.warning("Active auction fetch returned None before pagination completed.")
+                log.warning("Active stall fetch returned None before pagination completed.")
                 return None
             if not data:
                 break
-            batch  = data if isinstance(data, list) else data.get("data", [])
-            results.extend(batch)
+            batch = data if isinstance(data, list) else data.get("data", [])
+            results.extend(
+                listing
+                for listing in batch
+                if isinstance(listing, dict) and listing.get("type") == "auction"
+            )
             cursor = data.get("cursor") if isinstance(data, dict) else None
-            if not cursor or len(batch) < 50:
+            log.info(
+                "Stall page fetched: batch_size=%s auction_count=%s cursor_present=%s",
+                len(batch),
+                sum(1 for listing in batch if isinstance(listing, dict) and listing.get("type") == "auction"),
+                bool(cursor),
+            )
+
+            if not cursor or len(batch) < 40:
                 break
             params["cursor"] = cursor
         return results
