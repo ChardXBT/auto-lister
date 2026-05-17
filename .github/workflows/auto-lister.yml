@@ -1,0 +1,48 @@
+name: Auto Lister
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 */2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: auto-lister
+  cancel-in-progress: false
+
+jobs:
+  run-auto-lister:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run auto-lister
+        env:
+          CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
+          CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: python bot.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config.json bot_state.json relist_counts.json prev_inventory_assets.txt new_inventory_assets.txt CS_GO_PnL_Tracker_Final.xlsx
+          git diff --cached --quiet || git commit -m "auto: update lister state"
+          git pull --rebase origin main
+          git push origin HEAD:main
