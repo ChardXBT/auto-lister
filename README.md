@@ -4,7 +4,7 @@ So the Bid bot and Listing bot never split API usage, and allows this script to 
 The bot (bot.py):
 
 Reads your items from config.json and credentials from .env
-Calls GET /listings?user_id=... on CSFloat to check which of your items are currently on auction
+Calls GET /listings?user_id=... on Marketplace to check which of your items are currently on auction
 If an item is listed → saves the expiry time and moves on
 If an item isn't listed → lists it immediately via POST /listings
 Sends a Discord embed summarising everything
@@ -13,13 +13,13 @@ Then exits
 The cloud server (Digital Ocean Droplet):
 
 $6/month Ubuntu VM running 24/7 in Toronto
-Bot files live in /root/csfloat-bot
+Bot files live in /root/marketplace-bot
 The bot runs via nohup ./run.sh & which keeps it alive in the background
 run.sh pulls the latest code from GitHub before every run so it's always up to date
 
 The 24h auction cycle:
 
-Bot lists your items as 24h auctions on CSFloat
+Bot lists your items as 24h auctions on Marketplace
 24h later the auction expires
 Bot detects the listing is gone, waits 5 mins, relists it
 Repeats forever
@@ -37,7 +37,7 @@ If float fucks something up and the bot runs but cannot list etc it will place t
 ```mermaid
 flowchart TD
     A["⏱️ Cron Scheduler\n(DigitalOcean / GitHub Actions)"] --> B["🐍 Python Controller\n(bot.py)"]
-    B --> C["🌐 Market API\n(CSFloat REST)"]
+    B --> C["🌐 Market API\n(Marketplace REST)"]
     C --> D{"Listing Active?"}
     D -- Yes --> E["📝 Log Expiry Time"]
     D -- No --> F["📤 Post New Listing"]
