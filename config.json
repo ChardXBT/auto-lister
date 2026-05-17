@@ -3,7 +3,7 @@
         {
             "name": "S1mple All stars full set PP Bizon 0.164580106735",
             "asset_id": "50553166086",
-            "reserve_price": 1880,
+            "reserve_price": 1875,
             "description": "S1mple All STAR BEST POS fullset",
             "cost": 47,
             "decrease": 5,
@@ -12,7 +12,7 @@
         {
             "name": "MLG gold MP7 | Gunsmoke 0.318869739771",
             "asset_id": "50609144115",
-            "reserve_price": 450,
+            "reserve_price": 445,
             "description": "MLG GOLD cheapest on Gunsmoke",
             "cost": 41,
             "decrease": 5,
@@ -30,7 +30,7 @@
         {
             "name": "SG 553 | Fallout Warning 0.331505894661 Kato 2015 gold",
             "asset_id": "51045458048",
-            "reserve_price": 600,
+            "reserve_price": 595,
             "description": "Kato 2015 Gold Full Set",
             "cost": 134,
             "decrease": 5,
@@ -39,7 +39,7 @@
         {
             "name": "PP-Bizon | Irradiated Alert 0.206050664186",
             "asset_id": "51128342265",
-            "reserve_price": 1500,
+            "reserve_price": 1495,
             "description": "All Stars full set",
             "cost": 990,
             "decrease": 5,
@@ -102,7 +102,7 @@
         {
             "name": "P250 | Contamination 0.583681046963",
             "asset_id": "51398427470",
-            "reserve_price": 480,
+            "reserve_price": 475,
             "description": "Katowice 2015 gold full set",
             "cost": 190,
             "decrease": 5,
@@ -237,7 +237,7 @@
         {
             "name": "UMP-45 | Fallout Warning 0.773714900017",
             "asset_id": "51110307338",
-            "reserve_price": 4900,
+            "reserve_price": 4895,
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 5,
@@ -246,7 +246,7 @@
         {
             "name": "XM1014 | Fallout Warning 0.788281977177",
             "asset_id": "51110308918",
-            "reserve_price": 4900,
+            "reserve_price": 4895,
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 5,
@@ -255,7 +255,7 @@
         {
             "name": "XM1014 | Fallout Warning 0.392979562283",
             "asset_id": "51192433638",
-            "reserve_price": 4500,
+            "reserve_price": 4490,
             "description": "All star full set cheap",
             "cost": 647,
             "decrease": 10,
@@ -264,7 +264,7 @@
         {
             "name": "P90 | Fallout Warning 0.795384109020",
             "asset_id": "51110303399",
-            "reserve_price": 4900,
+            "reserve_price": 4890,
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 10,
@@ -273,7 +273,7 @@
         {
             "name": "MP7 | Army Recon 0.13435064256 Dig Kato foil 2014",
             "asset_id": "51398427469",
-            "reserve_price": 4900,
+            "reserve_price": 4890,
             "description": "Dig Kato full set MW",
             "cost": 2900,
             "decrease": 10,
@@ -399,7 +399,7 @@
         {
             "name": "Glock-18 | Wraiths Low float 5X battlescared 0.000269792916",
             "asset_id": "51699899160",
-            "reserve_price": 3340,
+            "reserve_price": 3335,
             "description": "Very Low float custom 5X",
             "decrease": 5,
             "lowest_sell": 3200
