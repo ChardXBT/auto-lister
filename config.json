@@ -16,7 +16,7 @@
             "description": "MLG GOLD cheapest on Gunsmoke",
             "cost": 41,
             "decrease": 5,
-            "lowest_sell": 450
+            "lowest_sell": 400
         },
         {
             "name": "Glock Ground water titan scrapped: 0.306939482689",
@@ -33,8 +33,8 @@
             "reserve_price": 600,
             "description": "Kato 2015 Gold Full Set",
             "cost": 134,
-            "decrease": 0,
-            "lowest_sell": 600
+            "decrease": 5,
+            "lowest_sell": 450
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.206050664186",
@@ -43,7 +43,7 @@
             "description": "All Stars full set",
             "cost": 990,
             "decrease": 5,
-            "lowest_sell": 1500
+            "lowest_sell": 1400
         },
         {
             "name": "USP-S | Road Rash 0.410679906607",
@@ -105,8 +105,8 @@
             "reserve_price": 480,
             "description": "Katowice 2015 gold full set",
             "cost": 190,
-            "decrease": 0,
-            "lowest_sell": 480
+            "decrease": 5,
+            "lowest_sell": 350
         },
         {
             "name": "PP-Bizon | Irradiated Alert 0.750360727310",
@@ -241,7 +241,7 @@
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 5,
-            "lowest_sell": 4900
+            "lowest_sell": 4100
         },
         {
             "name": "XM1014 | Fallout Warning 0.788281977177",
@@ -250,7 +250,7 @@
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 5,
-            "lowest_sell": 4900
+            "lowest_sell": 4100
         },
         {
             "name": "XM1014 | Fallout Warning 0.392979562283",
@@ -259,7 +259,7 @@
             "description": "All star full set cheap",
             "cost": 647,
             "decrease": 10,
-            "lowest_sell": 4500
+            "lowest_sell": 4100
         },
         {
             "name": "P90 | Fallout Warning 0.795384109020",
@@ -268,7 +268,7 @@
             "description": "All Stars full set High float",
             "cost": 2130,
             "decrease": 10,
-            "lowest_sell": 4900
+            "lowest_sell": 4100
         },
         {
             "name": "MP7 | Army Recon 0.13435064256 Dig Kato foil 2014",
@@ -277,7 +277,7 @@
             "description": "Dig Kato full set MW",
             "cost": 2900,
             "decrease": 10,
-            "lowest_sell": 4900
+            "lowest_sell": 4100
         },
         {
             "name": "MP7 | Gunsmoke 0.285015642643",
@@ -475,6 +475,51 @@
             "cost": 294,
             "decrease": 0,
             "lowest_sell": 750
+        },
+        {
+            "name": "MAG-7 | Sand Dune 0.623863339424",
+            "asset_id": "51589740138",
+            "reserve_price": 420,
+            "description": "Niko Gold Krakow MVP",
+            "cost": 99,
+            "decrease": 0,
+            "lowest_sell": 420
+        },
+        {
+            "name": "P90 | Scorched 0.201311692595",
+            "asset_id": "51742158639",
+            "reserve_price": 170,
+            "description": "S1mple Gold cheapest MVP",
+            "cost": 84,
+            "decrease": 0,
+            "lowest_sell": 170
+        },
+        {
+            "name": "SCAR-20 | Sand Mesh 0.289153605700",
+            "asset_id": "51590705803",
+            "reserve_price": 250,
+            "description": "Katowice gold 2015",
+            "cost":,
+            "decrease": 0,
+            "lowest_sell": 250
+        },
+        {
+            "name": "UMP-45 | Scorched 0.382481336594",
+            "asset_id": "51596952578",
+            "reserve_price": 190,
+            "description": "Device Gold Krakow MVP",
+            "cost": 84,
+            "decrease": 0,
+            "lowest_sell": 190
+        },
+        {
+            "name": "P90 | Scorched 0.310763388872",
+            "asset_id": "51598491335",
+            "reserve_price": 1800,
+            "description": "ESC VS PlanetKEY Rare",
+            "cost": 1310,
+            "decrease": 5,
+            "lowest_sell": 1600
         }
     ]
 }

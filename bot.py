@@ -27,11 +27,12 @@ Place new bids with empty parameters;
             "reserve_price": ,
             "description": "",
             "cost":,
-            "decrease": ,        # Amount to drop price each time auction ends (e.g. 50 = $0.50)
-            "lowest_sell":      # Floor price — bot won't go below this (e.g. 1500 = $15.00)
-
+            "decrease": 0,
+            "lowest_sell":
         }
 
+            "decrease": ,        # Amount to drop price each time auction ends (e.g. 50 = $0.50)
+            "lowest_sell":      # Floor price — bot won't go below this (e.g. 1500 = $15.00)
         ,
         {
             "name": "",

@@ -48,6 +48,7 @@ Souvenir Glock-18 | Groundwater (Field-Tested) | 0.306939482689 | 50745323548
 Souvenir Glock-18 | High Beam (Factory New) | 0.031439438462 | 51474376679
 Souvenir M249 | Contrast Spray (Battle-Scarred) | 0.628736555576 | 51551516634
 Souvenir M249 | Contrast Spray (Battle-Scarred) | 0.700547993183 | 48696942494
+Souvenir M249 | Contrast Spray (Field-Tested) | 0.209638744593 | 51589738990
 Souvenir M249 | Contrast Spray (Field-Tested) | 0.282593309879 | 51551768181
 Souvenir M249 | Contrast Spray (Field-Tested) | 0.299142777920 | 51207724018
 Souvenir M249 | Contrast Spray (Field-Tested) | 0.304186165333 | 49860692474
@@ -70,6 +71,8 @@ Souvenir MAG-7 | Rust Coat (Field-Tested) | 0.226636052132 | 51488805586
 Souvenir MAG-7 | Rust Coat (Well-Worn) | 0.433516830206 | 50863611939
 Souvenir MAG-7 | Rust Coat (Well-Worn) | 0.442764282227 | 51540328734
 Souvenir MAG-7 | Sand Dune (Battle-Scarred) | 0.498238325119 | 51516997181
+Souvenir MAG-7 | Sand Dune (Battle-Scarred) | 0.527231991291 | 51593398765
+Souvenir MAG-7 | Sand Dune (Battle-Scarred) | 0.623863339424 | 51589740138
 Souvenir MAG-7 | Sand Dune (Field-Tested) | 0.196928262711 | 51550419030
 Souvenir MAG-7 | Sand Dune (Field-Tested) | 0.352720558643 | 51547871823
 Souvenir MAG-7 | Sand Dune (Field-Tested) | 0.368882775307 | 51547871822
@@ -113,6 +116,7 @@ Souvenir MP7 | Prey (Minimal Wear) | 0.124264821410 | 51188112949
 Souvenir MP7 | Prey (Minimal Wear) | 0.141677677631 | 50510598716
 Souvenir MP7 | Prey (Minimal Wear) | 0.141680598259 | 50370158571
 Souvenir MP7 | Prey (Minimal Wear) | 0.143711328506 | 51188113245
+Souvenir MP9 | Sand Dashed (Battle-Scarred) | 0.637386560440 | 51591513670
 Souvenir MP9 | Sand Dashed (Field-Tested) | 0.249955028296 | 50871954735
 Souvenir MP9 | Sand Dashed (Well-Worn) | 0.380193233490 | 50932319574
 Souvenir MP9 | Slide (Field-Tested) | 0.214636802673 | 51378411529
@@ -120,6 +124,7 @@ Souvenir MP9 | Slide (Field-Tested) | 0.234506860375 | 50379869152
 Souvenir MP9 | Storm (Battle-Scarred) | 0.523662507534 | 49964310844
 Souvenir MP9 | Storm (Battle-Scarred) | 0.570892333984 | 51308635764
 Souvenir MP9 | Storm (Battle-Scarred) | 0.770144999027 | 51162440651
+Souvenir MP9 | Storm (Minimal Wear) | 0.145686224103 | 51602373864
 Souvenir Negev | Wall Bang (Battle-Scarred) | 0.607097148895 | 51188112874
 Souvenir Negev | Wall Bang (Battle-Scarred) | 0.639497339725 | 51188113430
 Souvenir Negev | Wall Bang (Field-Tested) | 0.296987742186 | 51507521774
@@ -136,9 +141,9 @@ Souvenir Nova | Polar Mesh (Field-Tested) | 0.273021996021 | 51162440601
 Souvenir Nova | Polar Mesh (Field-Tested) | 0.291449636221 | 50913790745
 Souvenir Nova | Polar Mesh (Field-Tested) | 0.337398558855 | 48932684912
 Souvenir Nova | Polar Mesh (Well-Worn) | 0.400864303112 | 51292096526
+Souvenir Nova | Predator (Battle-Scarred) | 0.772752285004 | 51593398766
 Souvenir Nova | Predator (Field-Tested) | 0.275639683008 | 51354773402
 Souvenir Nova | Predator (Field-Tested) | 0.301837682724 | 50964763157
-Souvenir Nova | Walnut (Battle-Scarred) | 0.650051534176 | 51547871824
 Souvenir Nova | Walnut (Field-Tested) | 0.297510683537 | 51569263152
 Souvenir Nova | Walnut (Field-Tested) | 0.302821218967 | 51394771107
 Souvenir P250 | Bone Mask (Battle-Scarred) | 0.484390467405 | 51533121805
@@ -187,6 +192,8 @@ Souvenir P90 | Sand Spray (Minimal Wear) | 0.125937327743 | 51525450700
 Souvenir P90 | Scorched (Field-Tested) | 0.151573956013 | 51126473422
 Souvenir P90 | Scorched (Field-Tested) | 0.152115821838 | 50418323193
 Souvenir P90 | Scorched (Field-Tested) | 0.167437791824 | 51429730266
+Souvenir P90 | Scorched (Field-Tested) | 0.201311692595 | 51742158639
+Souvenir P90 | Scorched (Field-Tested) | 0.310763388872 | 51598491335
 Souvenir P90 | Scorched (Field-Tested) | 0.349692821503 | 51192442072
 Souvenir P90 | Wash me (Field-Tested) | 0.157755434513 | 51507521772
 Souvenir P90 | Wash me (Field-Tested) | 0.173182457685 | 51188112719
@@ -283,6 +290,7 @@ Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.152204513550 | 51577459518
 Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.227959647775 | 51505186664
 Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.263941168785 | 51305003858
 Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.279495418072 | 51325181368
+Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.289153605700 | 51590705803
 Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.354898720980 | 51429730265
 Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.357135415077 | 51354774298
 Souvenir SCAR-20 | Sand Mesh (Field-Tested) | 0.367461115122 | 51341034203
@@ -336,6 +344,7 @@ Souvenir UMP-45 | Scorched (Minimal Wear) | 0.135265007615 | 50552921895
 Souvenir UMP-45 | Scorched (Minimal Wear) | 0.140397533774 | 51327842530
 Souvenir UMP-45 | Scorched (Minimal Wear) | 0.145255222917 | 49612935986
 Souvenir UMP-45 | Scorched (Minimal Wear) | 0.149865314364 | 51408428461
+Souvenir UMP-45 | Scorched (Well-Worn) | 0.382481336594 | 51596952578
 Souvenir UMP-45 | Urban DDPAT (Field-Tested) | 0.289733111858 | 51047447725
 Souvenir UMP-45 | Urban DDPAT (Field-Tested) | 0.353218108416 | 49005637605
 Souvenir UMP-45 | Urban DDPAT (Field-Tested) | 0.365756809711 | 51483448578
