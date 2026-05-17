@@ -141,7 +141,6 @@ Souvenir Nova | Polar Mesh (Field-Tested) | 0.273021996021 | 51162440601
 Souvenir Nova | Polar Mesh (Field-Tested) | 0.291449636221 | 50913790745
 Souvenir Nova | Polar Mesh (Field-Tested) | 0.337398558855 | 48932684912
 Souvenir Nova | Polar Mesh (Well-Worn) | 0.400864303112 | 51292096526
-Souvenir Nova | Predator (Battle-Scarred) | 0.772752285004 | 51593398766
 Souvenir Nova | Predator (Field-Tested) | 0.275639683008 | 51354773402
 Souvenir Nova | Predator (Field-Tested) | 0.301837682724 | 50964763157
 Souvenir Nova | Walnut (Field-Tested) | 0.297510683537 | 51569263152
