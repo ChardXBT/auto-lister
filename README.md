@@ -43,6 +43,7 @@ Normal unattended execution uses GitHub Actions:
 - Unlocks encrypted files with `git-crypt`
 - Runs the bot
 - Commits updated state files back to `main`
+- Limits public Actions console output to errors while detailed runtime logs stay in the local encrypted log file
 
 Only one live runner should be used at a time. Do not keep the old VM cron enabled while GitHub Actions is also running the bot, because two independent schedulers can race each other and make marketplace requests from separate IPs.
 

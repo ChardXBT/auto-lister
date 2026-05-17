@@ -45,6 +45,7 @@ jobs:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          CONSOLE_LOG_LEVEL: ERROR
         run: python bot.py
 
       - name: Commit updated state
