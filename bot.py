@@ -245,9 +245,23 @@ class CSFloatClient:
         for attempt in range(_retries):
             try:
                 r = self.session.get(f"{BASE_URL}{path}", params=params, timeout=15)
+                log.info(
+                    "GET %s attempt=%s status=%s ratelimit_limit=%s ratelimit_remaining=%s ratelimit_reset=%s",
+                    path,
+                    attempt + 1,
+                    r.status_code,
+                    r.headers.get("X-RateLimit-Limit"),
+                    r.headers.get("X-RateLimit-Remaining"),
+                    r.headers.get("X-RateLimit-Reset"),
+                )
                 if r.status_code == 429:
                     wait = 10 * (attempt + 1)
-                    log.warning(f"Rate limited — waiting {wait}s before retry...")
+                    log.warning(
+                        "Rate limited on GET %s params=%s — waiting %ss before retry...",
+                        path,
+                        params,
+                        wait,
+                    )
                     time.sleep(wait)
                     continue
                 r.raise_for_status()
@@ -304,9 +318,11 @@ class CSFloatClient:
     def get_my_active_auctions(self, steam_id: str) -> list | None:
         results = []
         params  = {"user_id": steam_id, "type": "auction", "limit": 50}
+        log.info("Fetching active auctions with params=%s", {"user_id": "***", "type": "auction", "limit": 50})
         while True:
             data = self._get("/listings", params=params)
             if data is None:
+                log.warning("Active auction fetch returned None before pagination completed.")
                 return None
             if not data:
                 break
