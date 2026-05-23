@@ -50,6 +50,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           git add config.json bot_state.json relist_counts.json manual_sales.json prev_inventory_assets.txt new_inventory_assets.txt relisted_formatted.txt CS_GO_PnL_Tracker_Final.xlsx
           git diff --cached --quiet || git commit -m "auto: update lister state"
           git pull --rebase origin main
