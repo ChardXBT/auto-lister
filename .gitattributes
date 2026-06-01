@@ -5,5 +5,6 @@
 *.json filter=git-crypt diff=git-crypt
 *.env filter=git-crypt diff=git-crypt
 *.txt filter=git-crypt diff=git-crypt
+*.csv filter=git-crypt diff=git-crypt
 *.xlsx filter=git-crypt diff=git-crypt
 data/** filter=git-crypt diff=git-crypt
