@@ -49,6 +49,10 @@ jobs:
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           CONSOLE_LOG_LEVEL: ERROR
+          STALL_RELIST_ENABLED: "true"
+          STALL_RELIST_CONFIRM: LOCKED_PRICE_RELIST
+          STALL_RELIST_MAX_PER_RUN: "3"
+          STALL_RELIST_DELAY_SECONDS: "120"
         run: python bot.py
 
       - name: Import CSFloat transaction CSV
