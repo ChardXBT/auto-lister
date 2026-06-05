@@ -1,1 +1,1 @@
-See https://github.com/ChardXBT/CS2-Marketplace-Trading-System
+See https://github.com/ChardXBT/CS2-Marketplace-Trading-System for README
