@@ -1,5 +1,4 @@
 .env
-auction_bot.log
 __pycache__/
 *.pyc
 .idea/vcs.xml
