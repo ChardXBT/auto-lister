@@ -62,7 +62,7 @@ jobs:
       - name: Import CSFloat transaction CSV
         if: ${{ github.event.inputs.transaction_csv != '' }}
         run: |
-          python import_csfloat_transactions.py "${{ github.event.inputs.transaction_csv }}" > /tmp/transaction-import.out 2>/tmp/transaction-import.err || {
+          python import_csfloat_transactions.py "${{ github.event.inputs.transaction_csv }}" --reconcile-existing > /tmp/transaction-import.out 2>/tmp/transaction-import.err || {
             echo "Transaction CSV import failed. Console output suppressed to avoid leaking private listing data."
             exit 1
           }
@@ -73,7 +73,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
-          git add auction_bot.log config.json bot_state.json relist_counts.json manual_sales.json prev_inventory_assets.txt new_inventory_assets.txt relisted_formatted.txt listing_recovery.json listing_recovery.txt listing_ledger.json stall_tracker_state.json transaction_import_state.json unmatched_sales.csv CS_GO_PnL_Tracker_Final.xlsx CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
+          git add data/auction_bot.log data/config.json data/bot_state.json data/relist_counts.json data/manual_sales.json data/prev_inventory_assets.txt data/new_inventory_assets.txt data/relisted_formatted.txt data/listing_recovery.json data/listing_recovery.txt data/listing_ledger.json data/stall_tracker_state.json data/transaction_import_state.json data/unmatched_sales.csv data/monthly_extra_sales.json data/workbooks/CS_GO_PnL_Tracker_Final.xlsx data/workbooks/CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
           git diff --cached --quiet || git commit -m "auto: update lister state"
           git pull --rebase origin main
           git push origin HEAD:main
