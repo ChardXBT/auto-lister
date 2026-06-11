@@ -73,7 +73,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
-          git add data/auction_bot.log data/config.json data/bot_state.json data/relist_counts.json data/manual_sales.json data/prev_inventory_assets.txt data/new_inventory_assets.txt data/relisted_formatted.txt data/listing_recovery.json data/listing_recovery.txt data/listing_ledger.json data/stall_tracker_state.json data/transaction_import_state.json data/unmatched_sales.csv data/monthly_extra_sales.json data/workbooks/CS_GO_PnL_Tracker_Final.xlsx data/workbooks/CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
+          git add data/auction_bot.log data/config.json data/bot_state.json data/relist_counts.json data/manual_sales.json data/prev_inventory_assets.txt data/new_inventory_assets.txt data/relisted_formatted.txt data/cost_basis.json data/listing_recovery.json data/listing_recovery.txt data/listing_ledger.json data/stall_tracker_state.json data/transaction_import_state.json data/unmatched_sales.csv data/monthly_extra_sales.json data/workbooks/CS_GO_PnL_Tracker_Final.xlsx data/workbooks/CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
           git diff --cached --quiet || git commit -m "auto: update lister state"
           git pull --rebase origin main
           git push origin HEAD:main
