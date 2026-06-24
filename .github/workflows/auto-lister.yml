@@ -48,6 +48,7 @@ jobs:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}
           CONSOLE_LOG_LEVEL: ERROR
           STALL_RELIST_ENABLED: "true"
           STALL_RELIST_CONFIRM: LOCKED_PRICE_RELIST
@@ -73,7 +74,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
-          git add data/auction_bot.log data/config.json data/bot_state.json data/relist_counts.json data/manual_sales.json data/manual_price_updates.json data/prev_inventory_assets.txt data/new_inventory_assets.txt data/relisted_formatted.txt data/cost_basis.json data/listing_recovery.json data/listing_recovery.txt data/listing_ledger.json data/stall_tracker_state.json data/transaction_import_state.json data/unmatched_sales.csv data/monthly_extra_sales.json data/workbooks/CS_GO_PnL_Tracker_Final.xlsx data/workbooks/CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
+          git add data/auction_bot.log data/config.json data/bot_state.json data/relist_counts.json data/manual_sales.json data/manual_price_updates.json data/prev_inventory_assets.txt data/new_inventory_assets.txt data/relisted_formatted.txt data/daily_tradable_items.json data/daily_tracker_state.json data/cost_basis.json data/listing_recovery.json data/listing_recovery.txt data/listing_ledger.json data/stall_tracker_state.json data/transaction_import_state.json data/unmatched_sales.csv data/monthly_extra_sales.json data/workbooks/CS_GO_PnL_Tracker_Final.xlsx data/workbooks/CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
           git diff --cached --quiet || git commit -m "auto: update lister state"
           git pull --rebase origin main
           git push origin HEAD:main
