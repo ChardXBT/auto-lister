@@ -24,7 +24,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
+
+      - name: Sync latest main before run
+        run: |
+          set +x
+          git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git fetch origin main
+          git checkout -B main origin/main
 
       - name: Install git-crypt
         run: sudo apt-get update && sudo apt-get install -y git-crypt
@@ -68,13 +76,40 @@ jobs:
             exit 1
           }
 
-      - name: Commit updated state
+      - name: Commit and push updated state
         run: |
+          set -euo pipefail
           set +x
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
-          git add data/auction_bot.log data/config.json data/bot_state.json data/relist_counts.json data/manual_sales.json data/manual_price_updates.json data/prev_inventory_assets.txt data/new_inventory_assets.txt data/relisted_formatted.txt data/daily_tradable_items.json data/daily_tracker_state.json data/cost_basis.json data/listing_recovery.json data/listing_recovery.txt data/listing_ledger.json data/stall_tracker_state.json data/transaction_import_state.json data/unmatched_sales.csv data/monthly_extra_sales.json data/workbooks/CS_GO_PnL_Tracker_Final.xlsx data/workbooks/CS_GO_PnL_Tracker_Final_IMPORT_BACKUP.xlsx
-          git diff --cached --quiet || git commit -m "auto: update lister state"
-          git pull --rebase origin main
-          git push origin HEAD:main
+
+          # Stage all generated lister state under data/.
+          # This avoids missing newly-created state files and leaving the worktree dirty.
+          git add -A data/
+
+          if git diff --cached --quiet; then
+            echo "No lister state changes to commit."
+          else
+            git commit -m "auto: update lister state"
+          fi
+
+          # Main can move while the bot is running.
+          # Rebase safely, then retry push if another run/manual commit moved main.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase --autostash origin/main
+
+            if git push origin HEAD:main; then
+              echo "Auto-lister state pushed successfully."
+              exit 0
+            fi
+
+            echo "Push failed because main moved or was temporarily unavailable. Retrying..."
+            sleep $((attempt * 10))
+          done
+
+          echo "Failed to push auto-lister state after 3 attempts."
+          git status --short
+          exit 1
