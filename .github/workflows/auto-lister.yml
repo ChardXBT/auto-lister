@@ -55,6 +55,7 @@ jobs:
         env:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
+          STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}
           CONSOLE_LOG_LEVEL: ERROR
