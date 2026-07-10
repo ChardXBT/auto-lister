@@ -52,6 +52,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run auto-lister
+        id: auto_lister
+        continue-on-error: true
         env:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
@@ -70,7 +72,7 @@ jobs:
           }
 
       - name: Import CSFloat transaction CSV
-        if: ${{ github.event.inputs.transaction_csv != '' }}
+        if: ${{ steps.auto_lister.outcome == 'success' && github.event.inputs.transaction_csv != '' }}
         run: |
           python import_csfloat_transactions.py "${{ github.event.inputs.transaction_csv }}" --reconcile-existing > /tmp/transaction-import.out 2>/tmp/transaction-import.err || {
             echo "Transaction CSV import failed. Console output suppressed to avoid leaking private listing data."
@@ -78,6 +80,7 @@ jobs:
           }
 
       - name: Commit and push updated state
+        if: ${{ always() && steps.auto_lister.outcome != 'skipped' }}
         run: |
           set -euo pipefail
           set +x
@@ -113,4 +116,10 @@ jobs:
 
           echo "Failed to push auto-lister state after 3 attempts."
           git status --short
+          exit 1
+
+      - name: Report auto-lister failure
+        if: ${{ steps.auto_lister.outcome == 'failure' }}
+        run: |
+          echo "Auto-lister failed. Persisted state and private logs were committed for diagnosis."
           exit 1
