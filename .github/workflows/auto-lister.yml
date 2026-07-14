@@ -58,6 +58,9 @@ jobs:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
           STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
+          # Temporarily disabled: Steam summary counts do not identify the exact
+          # outgoing asset when detailed offer data is empty.
+          STEAM_TRADE_GUARD_ENABLED: "false"
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}
           CONSOLE_LOG_LEVEL: ERROR
