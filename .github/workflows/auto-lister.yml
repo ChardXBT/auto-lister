@@ -56,6 +56,7 @@ jobs:
         continue-on-error: true
         env:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
+          CSFLOAT_RUKIA_API_KEY: ${{ secrets.CSFLOAT_RUKIA_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
           STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
           # Temporarily disabled: Steam summary counts do not identify the exact
