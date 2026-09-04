@@ -7,6 +7,23 @@ on:
         description: "Optional CSFloat transaction CSV path to import into the PnL workbook"
         required: false
         default: ""
+      accounts:
+        description: "Optional run-only account override: main, rukia, or main,rukia"
+        required: false
+        default: ""
+      preflight_only:
+        description: "Read-only account identity/inventory/listing validation (zero marketplace mutations)"
+        required: false
+        type: boolean
+        default: false
+      transaction_account:
+        description: "Account that owns transaction_csv contracts"
+        required: false
+        type: choice
+        options:
+          - main
+          - rukia
+        default: main
 
 permissions:
   contents: write
@@ -14,11 +31,15 @@ permissions:
 concurrency:
   group: auto-lister
   cancel-in-progress: false
+  queue: max
 
 jobs:
   run-auto-lister:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # The 12 pre-change runs averaged 9.93 minutes and peaked at 37.73.
+    # Two sequential peak-length phases need ~75.5 minutes before preflight,
+    # accounting, and Git publication, so 120 minutes provides bounded headroom.
+    timeout-minutes: 120
 
     steps:
       - name: Check out repository
@@ -58,6 +79,14 @@ jobs:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_RUKIA_API_KEY: ${{ secrets.CSFLOAT_RUKIA_API_KEY }}
           CSFLOAT_STEAM_ID: ${{ secrets.CSFLOAT_STEAM_ID }}
+          CSFLOAT_RUKIA_STEAM_ID: ${{ secrets.CSFLOAT_RUKIA_STEAM_ID }}
+          # Empty/unset is interpreted by Python as Main-only. Rukia is never
+          # enabled merely because its API key exists.
+          AUTO_LISTER_ACCOUNTS: ${{ vars.AUTO_LISTER_ACCOUNTS }}
+          AUTO_LISTER_ACCOUNTS_OVERRIDE: ${{ github.event.inputs.accounts }}
+          AUTO_LISTER_PREFLIGHT_ONLY: ${{ github.event.inputs.preflight_only }}
+          AUTO_LISTER_TRANSACTION_CSV: ${{ github.event.inputs.transaction_csv }}
+          AUTO_LISTER_TRANSACTION_ACCOUNT: ${{ github.event.inputs.transaction_account || 'main' }}
           STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
@@ -70,16 +99,19 @@ jobs:
           STALL_RELIST_MAX_PER_RUN: "3"
           STALL_RELIST_DELAY_SECONDS: "120"
         run: |
-          python bot.py > /tmp/auto-lister.out 2>/tmp/auto-lister.err || {
+          args=()
+          if [[ "${AUTO_LISTER_PREFLIGHT_ONLY}" == "true" ]]; then
+            args+=(--preflight-only)
+          fi
+          if [[ -n "${AUTO_LISTER_ACCOUNTS_OVERRIDE}" ]]; then
+            args+=(--accounts "${AUTO_LISTER_ACCOUNTS_OVERRIDE}")
+          fi
+          if [[ -n "${AUTO_LISTER_TRANSACTION_CSV}" && "${AUTO_LISTER_PREFLIGHT_ONLY}" != "true" ]]; then
+            args+=(--transaction-csv "${AUTO_LISTER_TRANSACTION_CSV}")
+            args+=(--transaction-account "${AUTO_LISTER_TRANSACTION_ACCOUNT}")
+          fi
+          python bot.py "${args[@]}" > /tmp/auto-lister.out 2>/tmp/auto-lister.err || {
             echo "Auto-lister failed. Console output suppressed to avoid leaking private listing data."
-            exit 1
-          }
-
-      - name: Import CSFloat transaction CSV
-        if: ${{ steps.auto_lister.outcome == 'success' && github.event.inputs.transaction_csv != '' }}
-        run: |
-          python import_csfloat_transactions.py "${{ github.event.inputs.transaction_csv }}" --reconcile-existing > /tmp/transaction-import.out 2>/tmp/transaction-import.err || {
-            echo "Transaction CSV import failed. Console output suppressed to avoid leaking private listing data."
             exit 1
           }
 
