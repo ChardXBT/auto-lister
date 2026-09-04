@@ -110,10 +110,19 @@ jobs:
             args+=(--transaction-csv "${AUTO_LISTER_TRANSACTION_CSV}")
             args+=(--transaction-account "${AUTO_LISTER_TRANSACTION_ACCOUNT}")
           fi
-          python bot.py "${args[@]}" > /tmp/auto-lister.out 2>/tmp/auto-lister.err || {
-            echo "Auto-lister failed. Console output suppressed to avoid leaking private listing data."
-            exit 1
-          }
+          set +e
+          python bot.py "${args[@]}" > /tmp/auto-lister.out 2>/tmp/auto-lister.err
+          lister_exit=$?
+          set -e
+          if [[ "${AUTO_LISTER_PREFLIGHT_ONLY}" == "true" && -s /tmp/auto-lister.out ]]; then
+            # Python emits an identifier-free account/config summary even for
+            # a fail-closed preflight. Normal live output remains suppressed.
+            cat /tmp/auto-lister.out
+          fi
+          if [[ "${lister_exit}" -ne 0 ]]; then
+            echo "Auto-lister failed. Private console details were suppressed."
+            exit "${lister_exit}"
+          fi
 
       - name: Commit and push updated state
         if: ${{ always() && steps.auto_lister.outcome != 'skipped' }}

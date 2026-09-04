@@ -16,6 +16,8 @@ python bot.py --accounts main,rukia --preflight-only
 
 Full Rukia processing requires both `CSFLOAT_RUKIA_API_KEY` and `CSFLOAT_RUKIA_STEAM_ID`, plus a non-empty, Rukia-tagged `data/accounts/rukia/config.json`. The checked-in empty config is an intentional second safety gate.
 
+Read-only preflight validates that every Rukia config entry has a unique string asset ID and exact name/float identity, passes the existing price/cost rules, is absent from Main config, and resolves to Rukia inventory or an active Rukia stall listing. Successful Actions preflights print only identifier-free counts and validation booleans. A bad or empty Rukia config fails before Rukia account state or marketplace mutations.
+
 ## Mutable-state ownership
 
 | Classification | Main compatibility path | Rukia/full-account path or shared path |
@@ -33,6 +35,8 @@ Full Rukia processing requires both `CSFLOAT_RUKIA_API_KEY` and `CSFLOAT_RUKIA_S
 | obsolete | none | no production state was deleted or mass-migrated |
 
 Legacy unscoped manual records and untagged account state are treated as Main-owned. A Rukia phase fails closed if a copied state file claims Main ownership.
+
+Portfolio preflight retains all enabled inventories in its encrypted shared snapshot for transfer comparison, but only explicitly configured Rukia assets seed Rukia's account-owned asset archive. Unconfigured Rukia inventory is not added to the full-account managed state.
 
 ## Transfer and sale safety
 
