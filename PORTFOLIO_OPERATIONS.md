@@ -14,9 +14,9 @@ python bot.py --accounts rukia --preflight-only
 python bot.py --accounts main,rukia --preflight-only
 ```
 
-Full Rukia processing requires both `CSFLOAT_RUKIA_API_KEY` and `CSFLOAT_RUKIA_STEAM_ID`, plus a non-empty, Rukia-tagged `data/accounts/rukia/config.json`. The checked-in empty config is an intentional second safety gate.
+Full Rukia processing requires both `CSFLOAT_RUKIA_API_KEY` and `CSFLOAT_RUKIA_STEAM_ID`, plus a structurally valid, Rukia-tagged `data/accounts/rukia/config.json`. An empty `items` array is a valid configured-item no-op; it does not disable Rukia's independent stall tracker.
 
-Read-only preflight validates that every Rukia config entry has a unique string asset ID and exact name/float identity, passes the existing price/cost rules, is absent from Main config, and resolves to Rukia inventory or an active Rukia stall listing. Successful Actions preflights print only identifier-free counts and validation booleans. A bad or empty Rukia config fails before Rukia account state or marketplace mutations.
+Read-only preflight validates that every Rukia config entry has a unique string asset ID and exact name/float identity, passes the existing price/cost rules, is absent from Main config, and resolves to Rukia inventory or an active Rukia stall listing. Successful Actions preflights print only identifier-free counts and validation booleans. A malformed or unsafe Rukia config fails before Rukia account state or marketplace mutations; an empty item list succeeds with zero configured items while the existing Main-equivalent stall tracker remains active.
 
 ## Mutable-state ownership
 
