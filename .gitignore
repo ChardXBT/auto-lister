@@ -1,6 +1,8 @@
 .env
 __pycache__/
 *.pyc
+*.lock
+*.tmp
 .idea/vcs.xml
 .idea/auto-lister.iml
 .idea/inspectionProfiles/profiles_settings.xml
