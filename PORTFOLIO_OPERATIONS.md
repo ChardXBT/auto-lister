@@ -44,6 +44,17 @@ Preflight captures both enabled inventories and stalls before marketplace mutati
 
 Logical sales are fsync'd to the shared JSONL journal before terminal sale state is persisted. The workbook has a hidden `_AUTO_LISTER_SALES` sheet containing deterministic sale IDs and account ownership; columns A-J on `CSGO PnL Tracker` retain their existing meaning. Workbook projection uses a same-directory temporary file, reopens and validates it, then atomically replaces the live file.
 
+## Inventory delist guard
+
+At the start of each account phase, every stall listing (buy-now and auction, configured or not) is checked against that account's own inventory. A listing whose asset has left the inventory, because it was sold or traded elsewhere, is deleted so a CSFloat sale cannot fail and incur a penalty. Main is only compared with Main's inventory and Rukia only with Rukia's.
+
+- An asset counts as missing only if it is absent from two inventory reads 15 seconds apart. Items without a float (agents, charms, stickers, cases) count as present.
+- An incomplete stall fetch, a failed or empty inventory read, or more missing assets than `INVENTORY_DELIST_MAX_PER_RUN` (default 10), or than half of a stall with more than 3 missing, deletes nothing. The last case sends a Discord alert.
+- Each listing is re-fetched before deletion and must still be listed, owned by the account, and hold the same asset.
+- An auction with a bid cannot be cancelled. It is reported once in Discord and left alone.
+- A configured auction delisted this way is not treated as an ended auction: no price decrease, no relist that run, and no P&L sale.
+- `INVENTORY_DELIST_ENABLED=false` disables the guard.
+
 ## Failure behavior
 
 - Missing/bad Rukia-only configuration skips Rukia and permits Main to continue.
