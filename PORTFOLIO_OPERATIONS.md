@@ -23,12 +23,13 @@ Read-only preflight validates that every Rukia config entry has a unique string 
 | Classification | Main compatibility path | Rukia/full-account path or shared path |
 | --- | --- | --- |
 | account-specific config, bot state, relist counts | `data/config.json`, `data/bot_state.json`, `data/relist_counts.json` | same names under `data/accounts/rukia/` |
-| account-specific manual sale/update/removal queues | existing files under `data/` | same names under `data/accounts/rukia/`; new Rukia records require `"account_key": "rukia"` |
+| account-specific manual sale/update/removal/reversal queues | existing files under `data/`, plus `manual_reversals.json` | same names under `data/accounts/rukia/`; new Rukia records require `"account_key": "rukia"` |
+| account-specific removed-config archive | `data/removed_config_items.json` | same name under `data/accounts/rukia/` |
 | account-specific ownership/history | asset archive, inventory snapshots, cost basis, pending cost backfill, listing ledger | same names under `data/accounts/rukia/` |
 | account-specific recovery/tracker state | listing recovery JSON/text, stall state, daily tracker state/items, temp listings, disabled Steam guard snapshot | same names under `data/accounts/rukia/` |
 | shared accounting | `data/workbooks/CS_GO_PnL_Tracker_Final.xlsx` and `data/marketplace_fees.json` | one combined workbook and fee configuration |
 | shared operational log/lock | `data/auction_bot.log` | existing combined private log plus ignored `data/shared/.portfolio.lock`; account phase boundaries are tagged in the log |
-| shared idempotency/reconciliation | n/a | `data/shared/sale_events.jsonl`, `transfer_events.jsonl`, and `portfolio_attention.jsonl` |
+| shared idempotency/reconciliation | n/a | `data/shared/sale_events.jsonl`, `transfer_events.jsonl`, `portfolio_attention.jsonl`, and `trade_reversals.json` |
 | shared run control/status | n/a | `data/shared/portfolio_state.json`, `portfolio_preflight.json`, and `portfolio_summary.json` |
 | shared import projection | `data/transaction_import_state.json`, `data/unmatched_sales.csv`, `data/monthly_extra_sales.json`, import-backup workbook | account-tagged/scoped records in the same shared files |
 | legacy Rukia notification sidecar | `data/rukia_daily_tradable_items.json`, `data/rukia_daily_tracker_state.json` | remains a portfolio sidecar and executes at most once per run |
@@ -42,6 +43,8 @@ Portfolio preflight retains all enabled inventories in its encrypted shared snap
 
 Preflight captures both enabled inventories and stalls before marketplace mutations. Cross-account matching uses canonical name plus exact float and, when present, paint seed, paint index, and sticker identity. Asset ID is supporting evidence only. A unique strong match becomes `internal_transfer`; ambiguity or incomplete identity becomes an attention event and cannot append a P&L sale.
 
+A configured item that leaves inventory and stall is confirmed against CSFloat's own record of its latest listing. A sold listing is logged at its final price; a delisted one after repeated inventory checks means the item left another way, so it is removed from config without a P&L sale and an alert is raised. Same-name items in the other account no longer count as transfer candidates when their float clearly differs.
+
 Logical sales are fsync'd to the shared JSONL journal before terminal sale state is persisted. The workbook has a hidden `_AUTO_LISTER_SALES` sheet containing deterministic sale IDs and account ownership; columns A-J on `CSGO PnL Tracker` retain their existing meaning. Workbook projection uses a same-directory temporary file, reopens and validates it, then atomically replaces the live file.
 
 ## Inventory delist guard
@@ -54,6 +57,10 @@ At the start of each account phase, every stall listing (buy-now and auction, co
 - An auction with a bid cannot be cancelled. It is reported once in Discord and left alone.
 - A configured auction delisted this way is not treated as an ended auction: no price decrease, no relist that run, and no P&L sale.
 - `INVENTORY_DELIST_ENABLED=false` disables the guard.
+
+## Trade reversals
+
+A sale whose Steam trade is reversed after it was logged is voided by the reversal phase, which runs after preflight and before every account phase. It deletes that sale's P&L row (rows below move up one) and, for a configured auction item, re-adds the exact removed config entry once the asset is back in inventory and tradable. Reversals come from a manual queue, a 14-day read-only CSFloat trades check, or a transaction CSV import; each matches exactly one logged sale and is applied at most once. The phase makes no marketplace mutations. A reversal-phase failure leaves listing running and fails the run. The operator guide is the encrypted `TRADE_REVERSALS.md`.
 
 ## Failure behavior
 
