@@ -47,6 +47,8 @@ A configured item that leaves inventory and stall is confirmed against CSFloat's
 
 Logical sales are fsync'd to the shared JSONL journal before terminal sale state is persisted. The workbook has a hidden `_AUTO_LISTER_SALES` sheet containing deterministic sale IDs and account ownership; columns A-J on `CSGO PnL Tracker` retain their existing meaning. Workbook projection uses a same-directory temporary file, reopens and validates it, then atomically replaces the live file.
 
+Read-only workbook validation streams the hidden sales sheet once. Its cost grows in proportion to the sales history. Duplicate sale IDs, invalid statuses, and invalid row links still stop processing before marketplace mutations.
+
 ## Inventory delist guard
 
 At the start of each account phase, every stall listing (buy-now and auction, configured or not) is checked against that account's own inventory. A listing whose asset has left the inventory, because it was sold or traded elsewhere, is deleted so a CSFloat sale cannot fail and incur a penalty. Main is only compared with Main's inventory and Rukia only with Rukia's.
@@ -65,7 +67,9 @@ A sale whose Steam trade is reversed after it was logged is voided by the revers
 ## Failure behavior
 
 - Missing/bad Rukia-only configuration skips Rukia and permits Main to continue.
+- Read-only preflight retries interrupted connections, timeouts, truncated/undecodable responses, invalid JSON, temporary HTTP failures, and CSFloat's intermittent HTTP 400. Each request has one three-attempt budget with 15- and 30-second waits. A later stall page is retried with the same cursor; completed pages are retained once.
 - A shared/global preflight rate limit stops all marketplace phases. A global dependency failure detected during one phase defers the remaining account.
+- Exhausted preflight dependency retries stop all marketplace phases before any bot is constructed. Authentication/permission failures and identity mismatches still fail closed. Retry diagnostics contain endpoint labels and exception types, without credentials, response bodies, or account identifiers.
 - Corrupt shared state or journal data stops shared writes.
 - Lock contention exits with code 75 and performs zero marketplace mutations.
 - Marketplace state and accounting evidence are persisted under `data/` before the workflow's one final normal Git commit/rebase/push retry sequence.
