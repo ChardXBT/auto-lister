@@ -91,6 +91,9 @@ jobs:
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
           STEAM_TRADE_GUARD_ENABLED: "false"
+          # Read-only CSFloat refunded-trades scan for trade reversals; hours
+          # between scans, 0 = at the start of every run.
+          REVERSAL_API_CHECK_INTERVAL_HOURS: "0"
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}
           CONSOLE_LOG_LEVEL: ERROR
