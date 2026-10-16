@@ -47,6 +47,12 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          # Full history (commits and trees), but file contents only for the
+          # checked-out commit; older ones are fetched when read. The repo's
+          # encrypted state history is many GB, which made a full checkout
+          # take ~4 minutes per run; this takes ~30 seconds. Only the daily
+          # cost-basis rebuild reads old config versions (~100 small fetches).
+          filter: blob:none
 
       - name: Sync latest main before run
         run: |
@@ -75,6 +81,10 @@ jobs:
       - name: Run auto-lister
         id: auto_lister
         continue-on-error: true
+        # Hard stop below the job's 120 minutes so the state commit below
+        # always runs. The bot stops starting listings at 95 minutes
+        # (AUTO_LISTER_LISTING_BUDGET_MINUTES), so this is only a backstop.
+        timeout-minutes: 112
         env:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_RUKIA_API_KEY: ${{ secrets.CSFLOAT_RUKIA_API_KEY }}
@@ -94,6 +104,12 @@ jobs:
           # Read-only CSFloat refunded-trades scan for trade reversals; hours
           # between scans, 0 = at the start of every run.
           REVERSAL_API_CHECK_INTERVAL_HOURS: "0"
+          # When a run lists nothing new from config, move up to this many
+          # buy-now listings with a known purchase cost to auction (config
+          # items stuck on buy-now first, then cheapest). See AUCTION_FALLBACK.md.
+          AUCTION_FALLBACK_ENABLED: "true"
+          AUCTION_FALLBACK_ACCOUNTS: main
+          AUCTION_FALLBACK_MAX_PER_RUN: "5"
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}
           CONSOLE_LOG_LEVEL: ERROR
