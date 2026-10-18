@@ -79,6 +79,7 @@ When an account phase lists no new config item, the bot moves up to `AUCTION_FAL
 - Corrupt shared state or journal data stops shared writes.
 - Lock contention exits with code 75 and performs zero marketplace mutations.
 - Marketplace state and accounting evidence are persisted under `data/` before the workflow's one final normal Git commit/rebase/push retry sequence.
+- A rebase conflict at publication aborts the rebase, pushes the run's commit to a `rescue/run-*` branch, and fails the job instead of discarding the run's state.
 
 ## Runtime budget
 

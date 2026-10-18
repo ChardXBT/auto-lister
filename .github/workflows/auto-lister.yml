@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: main
           fetch-depth: 0
@@ -71,7 +71,7 @@ jobs:
           rm git-crypt-key
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
@@ -167,7 +167,18 @@ jobs:
           # Rebase safely, then retry push if another run/manual commit moved main.
           for attempt in 1 2 3; do
             git fetch origin main
-            git rebase --autostash origin/main
+            if ! git rebase --autostash origin/main; then
+              # Encrypted state files cannot be merged. Keep this run's commit
+              # reachable instead of losing it with the runner; main is untouched.
+              git rebase --abort || true
+              rescue="rescue/run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+              if git push origin "HEAD:refs/heads/${rescue}"; then
+                echo "Rebase onto main conflicted. This run's state was pushed to ${rescue}; reconcile it into main manually (DEV_LOG: Git push/rebase conflict)."
+              else
+                echo "Rebase onto main conflicted and the rescue branch push failed; this run's state commit was not preserved."
+              fi
+              exit 1
+            fi
 
             if git push origin HEAD:main; then
               echo "Auto-lister state pushed successfully."
