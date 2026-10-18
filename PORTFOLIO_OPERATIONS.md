@@ -70,7 +70,7 @@ When an account phase lists no new config item, the bot moves up to `AUCTION_FAL
 
 ## Failure behavior
 
-- Listing stops starting new auctions after `AUTO_LISTER_LISTING_BUDGET_MINUTES` (default 95) so every run finishes and commits its state inside the 120-minute job; the rest are listed by the next run. The run step has a 112-minute hard stop as a backstop.
+- Listing stops starting new auctions after `AUTO_LISTER_LISTING_BUDGET_MINUTES` (code default 95; the workflow sets 65) so every run finishes and commits its state inside the 90-minute job; the rest are listed by the next run. The run step has an 82-minute hard stop as a backstop.
 - Preflight and config-validation failures are written to the encrypted log; Actions console output stays suppressed.
 - Missing/bad Rukia-only configuration skips Rukia and permits Main to continue.
 - Read-only preflight retries interrupted connections, timeouts, truncated/undecodable responses, invalid JSON, temporary HTTP failures, and CSFloat's intermittent HTTP 400. Each request has one three-attempt budget with 15- and 30-second waits. A later stall page is retried with the same cursor; completed pages are retained once.
@@ -83,4 +83,4 @@ When an account phase lists no new config item, the bot moves up to `AUCTION_FAL
 
 ## Runtime budget
 
-The 12 production runs inspected before this change were all externally dispatched and successful. They averaged 9.93 minutes and ranged from 3.18 to 37.73 minutes. Doubling the observed peak for two sequential account phases is about 75.5 minutes before portfolio preflight, shared accounting, and publication, so the workflow timeout is 120 minutes rather than the previous 90. Account-level API retry and listing-delay bounds remain unchanged.
+The job is capped at 90 minutes by operator decision. The 12 production runs inspected before the multi-account change averaged 9.93 minutes and ranged from 3.18 to 37.73 minutes; peaks since then reached 85 minutes when many one-day auctions ended together. Inside the cap the workflow sets the listing budget to 65 minutes and the run step hard stop to 82 minutes, leaving the same post-listing and publication headroom as before; listings that do not start wait for the next run. Account-level API retry and listing-delay bounds remain unchanged.

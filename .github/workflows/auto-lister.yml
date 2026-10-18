@@ -36,10 +36,10 @@ concurrency:
 jobs:
   run-auto-lister:
     runs-on: ubuntu-latest
-    # The 12 pre-change runs averaged 9.93 minutes and peaked at 37.73.
-    # Two sequential peak-length phases need ~75.5 minutes before preflight,
-    # accounting, and Git publication, so 120 minutes provides bounded headroom.
-    timeout-minutes: 120
+    # Operator cap: 90 minutes per run. The bot stops starting listings at
+    # 65 minutes and the run step hard-stops at 82, so the state commit below
+    # always runs; whatever did not list waits for the next run.
+    timeout-minutes: 90
 
     steps:
       - name: Check out repository
@@ -81,10 +81,10 @@ jobs:
       - name: Run auto-lister
         id: auto_lister
         continue-on-error: true
-        # Hard stop below the job's 120 minutes so the state commit below
-        # always runs. The bot stops starting listings at 95 minutes
+        # Hard stop below the job's 90 minutes so the state commit below
+        # always runs. The bot stops starting listings at 65 minutes
         # (AUTO_LISTER_LISTING_BUDGET_MINUTES), so this is only a backstop.
-        timeout-minutes: 112
+        timeout-minutes: 82
         env:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_RUKIA_API_KEY: ${{ secrets.CSFLOAT_RUKIA_API_KEY }}
@@ -97,6 +97,9 @@ jobs:
           AUTO_LISTER_PREFLIGHT_ONLY: ${{ github.event.inputs.preflight_only }}
           AUTO_LISTER_TRANSACTION_CSV: ${{ github.event.inputs.transaction_csv }}
           AUTO_LISTER_TRANSACTION_ACCOUNT: ${{ github.event.inputs.transaction_account || 'main' }}
+          # No new listing starts after this many minutes of the process;
+          # sized for the 90-minute job (code default is 95).
+          AUTO_LISTER_LISTING_BUDGET_MINUTES: "65"
           STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
