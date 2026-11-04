@@ -68,8 +68,6 @@ A sale whose Steam trade is reversed after it was logged is voided by the revers
 
 When an account phase lists no new config item, the bot moves up to `AUCTION_FALLBACK_MAX_PER_RUN` (default 5) buy-now stall listings to auction, Main only by default (`AUCTION_FALLBACK_ACCOUNTS`). Eligible: the asset's only live listing is buy-now, it has an exact float, and its purchase cost is known (config cost, or a non-ambiguous asset-ID record in the cost file). Config items stuck on buy-now go first, then the cheapest. Each listing is re-verified live, journaled, deleted, confirmed `delisted`, added to config with its buy-now price as reserve (blank description, no price drop) and listed through the normal auction call; the next run finishes any interrupted move. It is skipped when the listing pass did not complete or CSFloat is unhealthy, and finding nothing is not an error. The operator guide is the encrypted `AUCTION_FALLBACK.md`.
 
-A skin that no bulk listing reached and no config entry names is added to auction config after 24 hours unlisted (72 if its cost is unknown), up to 10 per run, with no listing deleted and no run time budget needed; the next run lists it. `UNLISTED_AUCTION_ENABLED=false` turns this off.
-
 ## Failure behavior
 
 - Listing stops starting new auctions after `AUTO_LISTER_LISTING_BUDGET_MINUTES` (code default 95; the workflow sets 65) so every run finishes and commits its state inside the 90-minute job; the rest are listed by the next run. The run step has an 82-minute hard stop as a backstop.
