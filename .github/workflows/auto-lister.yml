@@ -111,7 +111,7 @@ jobs:
           # buy-now listings with a known purchase cost to auction (config
           # items stuck on buy-now first, then cheapest). See AUCTION_FALLBACK.md.
           AUCTION_FALLBACK_ENABLED: "true"
-          AUCTION_FALLBACK_ACCOUNTS: main
+          AUCTION_FALLBACK_ACCOUNTS: main,rukia
           AUCTION_FALLBACK_MAX_PER_RUN: "5"
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}

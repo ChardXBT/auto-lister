@@ -16,7 +16,7 @@ python bot.py --accounts main,rukia --preflight-only
 
 Full Rukia processing requires both `CSFLOAT_RUKIA_API_KEY` and `CSFLOAT_RUKIA_STEAM_ID`, plus a structurally valid, Rukia-tagged `data/accounts/rukia/config.json`. An empty `items` array is a valid configured-item no-op; it does not disable Rukia's independent stall tracker.
 
-Read-only preflight validates that every Rukia config entry has a unique string asset ID and exact name/float identity, passes the existing price/cost rules, is absent from Main config, and resolves to Rukia inventory or an active Rukia stall listing. Successful Actions preflights print only identifier-free counts and validation booleans. A malformed or unsafe Rukia config fails before Rukia account state or marketplace mutations; an empty item list succeeds with zero configured items while the existing Main-equivalent stall tracker remains active.
+Read-only preflight validates that every Rukia config entry has a unique string asset ID and exact name/float identity, passes the existing price/cost rules, is absent from Main config, and, when present in Rukia inventory or an active Rukia stall listing, matches it. An absent asset is left for the tick to settle, as on Main, because that is what a sold item looks like. Successful Actions preflights print only identifier-free counts and validation booleans. A malformed or unsafe Rukia config fails before Rukia account state or marketplace mutations; an empty item list succeeds with zero configured items while the existing Main-equivalent stall tracker remains active.
 
 ## Mutable-state ownership
 
@@ -67,6 +67,8 @@ A sale whose Steam trade is reversed after it was logged is voided by the revers
 ## Auction fallback
 
 When an account phase lists no new config item, the bot moves up to `AUCTION_FALLBACK_MAX_PER_RUN` (default 5) buy-now stall listings to auction, Main only by default (`AUCTION_FALLBACK_ACCOUNTS`). Eligible: the asset's only live listing is buy-now, it has an exact float, and its purchase cost is known (config cost, or a non-ambiguous asset-ID record in the cost file). Config items stuck on buy-now go first, then the cheapest. Each listing is re-verified live, journaled, deleted, confirmed `delisted`, added to config with its buy-now price as reserve (blank description, no price drop) and listed through the normal auction call; the next run finishes any interrupted move. It is skipped when the listing pass did not complete or CSFloat is unhealthy, and finding nothing is not an error. The operator guide is the encrypted `AUCTION_FALLBACK.md`.
+
+An account may have a read-only listing policy (`listing_policy.json` in its data directory) that freezes which items may go to auction and which may never be listed. It is required for Rukia: a missing or damaged policy, or a blocked item in config, stops Rukia's phase before any mutation while Main continues. Every listing POST is checked against it. Main has no policy and is unaffected.
 
 ## Smart Auto-Sell
 
