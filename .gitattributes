@@ -13,3 +13,4 @@ DEV_LOG.md filter=git-crypt diff=git-crypt
 TRADE_REVERSALS.md filter=git-crypt diff=git-crypt
 AUCTION_FALLBACK.md filter=git-crypt diff=git-crypt
 SMART_SELL.md filter=git-crypt diff=git-crypt
+SUPPLY_CHAIN_PROVENANCE.md filter=git-crypt diff=git-crypt
