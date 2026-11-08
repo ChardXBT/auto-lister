@@ -9,6 +9,7 @@
 *.csv filter=git-crypt diff=git-crypt
 *.xlsx filter=git-crypt diff=git-crypt
 data/** filter=git-crypt diff=git-crypt
+docs/** filter=git-crypt diff=git-crypt
 DEV_LOG.md filter=git-crypt diff=git-crypt
 TRADE_REVERSALS.md filter=git-crypt diff=git-crypt
 AUCTION_FALLBACK.md filter=git-crypt diff=git-crypt
