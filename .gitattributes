@@ -1,17 +1,11 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-*.py filter=git-crypt diff=git-crypt
-*.json filter=git-crypt diff=git-crypt
-*.env filter=git-crypt diff=git-crypt
-*.txt filter=git-crypt diff=git-crypt
-*.log filter=git-crypt diff=git-crypt
-*.csv filter=git-crypt diff=git-crypt
-*.xlsx filter=git-crypt diff=git-crypt
-data/** filter=git-crypt diff=git-crypt
-DEV_LOG.md filter=git-crypt diff=git-crypt
-TRADE_REVERSALS.md filter=git-crypt diff=git-crypt
-AUCTION_FALLBACK.md filter=git-crypt diff=git-crypt
-SMART_SELL.md filter=git-crypt diff=git-crypt
-SUPPLY_CHAIN_PROVENANCE.md filter=git-crypt diff=git-crypt
-AUTOBUYER_FLOOR_EDGE_CASE_PROMPT.md filter=git-crypt diff=git-crypt
+* filter=git-crypt diff=git-crypt
+
+# GitHub must read the workflow before checkout can unlock the repository.
+# .gitattributes itself must stay plaintext for the filter rules to load.
+.gitattributes !filter !diff
+.github/workflows/*.yml !filter !diff
+.github/workflows/*.yaml !filter !diff
+/README.md !filter !diff
