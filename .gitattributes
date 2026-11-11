@@ -9,3 +9,12 @@
 .github/workflows/*.yml !filter !diff
 .github/workflows/*.yaml !filter !diff
 /README.md !filter !diff
+.github/scripts/prepare_git_crypt.sh !filter !diff
+.github/dependabot.yml !filter !diff
+
+# Vendored build inputs: the git-crypt binary must run before unlock, and the
+# wheels hold only public PyPI packages. -text keeps them byte-exact.
+.github/vendor/** !filter !diff -text
+
+# Pinned public dependencies, deliberately plaintext so Dependabot can read them.
+requirements.txt !filter !diff

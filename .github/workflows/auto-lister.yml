@@ -31,19 +31,32 @@ permissions:
 concurrency:
   group: auto-lister
   cancel-in-progress: false
-  queue: max
+  queue: single
 
 jobs:
   run-auto-lister:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Operator cap: 90 minutes per run. The bot stops starting listings at
     # 65 minutes and the run step hard-stops at 82, so the state commit below
     # always runs; whatever did not list waits for the next run.
     timeout-minutes: 90
 
     steps:
+      - name: Harden runner
+        timeout-minutes: 3
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          # disable-telemetry is only accepted together with egress-policy: block.
+          egress-policy: audit
+
+      - name: Announce pending egress allowlist
+        timeout-minutes: 1
+        run: |
+          echo "::notice title=Harden-Runner audit mode::Block mode is a separate follow-up; intended allowlist: github.com, *.githubusercontent.com, pypi.org, files.pythonhosted.org, archive.ubuntu.com, security.ubuntu.com, csfloat.com, discord.com"
+
       - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        timeout-minutes: 10
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
           fetch-depth: 0
@@ -53,48 +66,36 @@ jobs:
           # take ~4 minutes per run; this takes ~30 seconds. Only the daily
           # cost-basis rebuild reads old config versions (~100 small fetches).
           filter: blob:none
+          persist-credentials: false
 
       - name: Sync latest main before run
+        timeout-minutes: 5
         run: |
-          set +x
-          git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           git fetch origin main
           git checkout -B main origin/main
 
-      - name: Install git-crypt
-        run: |
-          set +e
-          run_apt() { sudo apt-get update && sudo apt-get install -y git-crypt; }
-          out=$(run_apt 2>&1); rc=$?
-          if [ $rc -ne 0 ] && printf '%s' "$out" | grep -qE "Temporary failure resolving|Could not resolve|Name or service not known"; then
-            echo "::notice::apt DNS failure detected; resolving apt hosts via DoH and pinning /etc/hosts (upstream DNS outage workaround)"
-            apt_hosts=$(grep -rhoE 'https?://[^/[:space:]"]+' /etc/apt/sources.list /etc/apt/sources.list.d/ /etc/apt/apt-mirrors.txt 2>/dev/null | sed -E 's|https?://||' | sort -u)
-            for h in $apt_hosts azure.archive.ubuntu.com archive.ubuntu.com security.ubuntu.com; do
-              getent hosts "$h" >/dev/null 2>&1 && continue
-              ip=$(curl -sf --max-time 10 "https://dns.google/resolve?name=$h&type=A" | python3 -c 'import json,sys; print(next((a["data"] for a in json.load(sys.stdin).get("Answer",[]) if a.get("type")==1), ""))' 2>/dev/null)
-              if [ -z "$ip" ]; then
-                ip=$(curl -sf --max-time 10 -H 'accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=$h&type=A" | python3 -c 'import json,sys; print(next((a["data"] for a in json.load(sys.stdin).get("Answer",[]) if a.get("type")==1), ""))' 2>/dev/null)
-              fi
-              [ -n "$ip" ] && { echo "$ip $h" | sudo tee -a /etc/hosts; echo "::notice::pinned $h -> $ip"; }
-            done
-            out=$(run_apt 2>&1); rc=$?
-          fi
-          printf '%s\n' "$out"
-          exit "$rc"
+      - name: Prepare git-crypt
+        timeout-minutes: 8
+        run: bash .github/scripts/prepare_git_crypt.sh
 
       - name: Unlock encrypted files
+        timeout-minutes: 3
         run: |
           echo "${{ secrets.GIT_CRYPT_KEY }}" | base64 -d > git-crypt-key
           git-crypt unlock git-crypt-key
           rm git-crypt-key
 
       - name: Set up Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        timeout-minutes: 5
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        timeout-minutes: 7
+        env:
+          PIP_RETRIES: "5"
+        run: pip install --disable-pip-version-check --no-index --find-links .github/vendor/wheels -r requirements.txt
 
       - name: Run auto-lister
         id: auto_lister
@@ -167,56 +168,23 @@ jobs:
 
       - name: Commit and push updated state
         if: ${{ always() && steps.auto_lister.outcome != 'skipped' }}
-        run: |
-          set -euo pipefail
-          set +x
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
-
-          # Stage all generated lister state under data/.
-          # This avoids missing newly-created state files and leaving the worktree dirty.
-          git add -A data/
-
-          if git diff --cached --quiet; then
-            echo "No lister state changes to commit."
-          else
-            git commit -m "auto: update lister state"
-          fi
-
-          # Main can move while the bot is running.
-          # Rebase safely, then retry push if another run/manual commit moved main.
-          for attempt in 1 2 3; do
-            git fetch origin main
-            if ! git rebase --autostash origin/main; then
-              # Encrypted state files cannot be merged. Keep this run's commit
-              # reachable instead of losing it with the runner; main is untouched.
-              git rebase --abort || true
-              rescue="rescue/run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-              if git push origin "HEAD:refs/heads/${rescue}"; then
-                echo "Rebase onto main conflicted. This run's state was pushed to ${rescue}; reconcile it into main manually (DEV_LOG: Git push/rebase conflict)."
-              else
-                echo "Rebase onto main conflicted and the rescue branch push failed; this run's state commit was not preserved."
-              fi
-              exit 1
-            fi
-
-            if git push origin HEAD:main; then
-              echo "Auto-lister state pushed successfully."
-              exit 0
-            fi
-
-            echo "Push failed because main moved or was temporarily unavailable. Retrying..."
-            sleep $((attempt * 10))
-          done
-
-          echo "Failed to push auto-lister state after 3 attempts."
-          git status --short
-          exit 1
+        timeout-minutes: 10
+        env:
+          RUNTIME_CHECKPOINT_BRANCH: main
+          # Stage all generated lister state under data/, including new files.
+          RUNTIME_CHECKPOINT_FILES: "data/"
+          RUNTIME_CHECKPOINT_MESSAGE: "auto: update lister state"
+          # Encrypted state cannot be merged and is not rebuilt by the next
+          # run: a conflicting replay keeps this run's commit on
+          # rescue/run-<id>-<attempt> for manual reconciliation (DEV_LOG: Git
+          # push/rebase conflict), and the run stays green.
+          RUNTIME_CHECKPOINT_RESCUE_ON_CONFLICT: "true"
+          GH_PUSH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/checkpoint_runtime.sh
 
       - name: Report auto-lister failure
         if: ${{ steps.auto_lister.outcome == 'failure' }}
+        timeout-minutes: 1
         run: |
           echo "Auto-lister failed. Persisted state and private logs were committed for diagnosis."
           exit 1
