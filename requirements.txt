@@ -1,7 +1,7 @@
 requests==2.34.2
 python-dotenv==1.2.4
 openpyxl==3.1.5
-tzdata==2026.5
+tzdata==2026.6
 # transitive, pinned for reproducible live runs
 urllib3==2.8.0
 charset_normalizer==3.5.2
