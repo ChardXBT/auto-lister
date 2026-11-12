@@ -37,8 +37,9 @@ jobs:
   run-auto-lister:
     runs-on: ubuntu-24.04
     # Operator cap: 90 minutes per run. The bot stops starting listings at
-    # 65 minutes and the run step hard-stops at 82, so the state commit below
-    # always runs; whatever did not list waits for the next run.
+    # 65 minutes and the run step hard-stops at 75: setup (~3) + 75 + the state
+    # commit (10) stays under 90, so the commit always runs to completion;
+    # whatever did not list waits for the next run.
     timeout-minutes: 90
 
     steps:
@@ -103,7 +104,7 @@ jobs:
         # Hard stop below the job's 90 minutes so the state commit below
         # always runs. The bot stops starting listings at 65 minutes
         # (AUTO_LISTER_LISTING_BUDGET_MINUTES), so this is only a backstop.
-        timeout-minutes: 82
+        timeout-minutes: 75
         env:
           CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
           CSFLOAT_RUKIA_API_KEY: ${{ secrets.CSFLOAT_RUKIA_API_KEY }}
@@ -179,9 +180,10 @@ jobs:
           RUNTIME_CHECKPOINT_FILES: "data/"
           RUNTIME_CHECKPOINT_MESSAGE: "auto: update lister state"
           # Encrypted state cannot be merged and is not rebuilt by the next
-          # run: a conflicting replay keeps this run's commit on
+          # run: if this run's state cannot be published (a conflicting
+          # replay, a lost push race, a rejected push) its commit is kept on
           # rescue/run-<id>-<attempt> for manual reconciliation (DEV_LOG: Git
-          # push/rebase conflict), and the run stays green.
+          # push/rebase conflict) and the job fails, so it is never silent.
           RUNTIME_CHECKPOINT_RESCUE_ON_CONFLICT: "true"
           GH_PUSH_TOKEN: ${{ github.token }}
         run: bash .github/scripts/checkpoint_runtime.sh

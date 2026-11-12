@@ -15,6 +15,9 @@ env:
   WATCHED_WORKFLOW: auto-lister.yml
   # Sized to this repository's dispatch cadence plus normal scheduling delay.
   WATCHDOG_MAX_AGE_MINUTES: "150"
+  # This many failed runs in a row (and none since) also raises an alert:
+  # a workflow that starts on time but fails every run is just as stuck.
+  WATCHDOG_MAX_FAILED_RUNS: "3"
   # "true" re-dispatches the watched workflow once when it is stale. Enabling it
   # also requires raising the job's actions permission to write.
   WATCHDOG_REDISPATCH: "false"
@@ -45,11 +48,18 @@ jobs:
             summary="newest $WATCHED_WORKFLOW run is ${age_minutes} min old (limit ${WATCHDOG_MAX_AGE_MINUTES})"
           fi
           if [ "$age_minutes" -ge 0 ] && [ "$age_minutes" -le "$WATCHDOG_MAX_AGE_MINUTES" ]; then
-            echo "Dispatcher healthy: $summary."
-            exit 0
+            # On time; now check the newest finished runs did not all fail.
+            failed_streak="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WATCHED_WORKFLOW/runs?status=completed&per_page=$WATCHDOG_MAX_FAILED_RUNS" \
+              --jq '[.workflow_runs[] | select(.conclusion == "failure" or .conclusion == "timed_out")] | length')"
+            if [ "$failed_streak" -lt "$WATCHDOG_MAX_FAILED_RUNS" ]; then
+              echo "Dispatcher healthy: $summary."
+              exit 0
+            fi
+            summary="the last $WATCHDOG_MAX_FAILED_RUNS finished $WATCHED_WORKFLOW runs all failed"
+            failing=true
           fi
 
-          if [ "$WATCHDOG_REDISPATCH" = "true" ]; then
+          if [ "$WATCHDOG_REDISPATCH" = "true" ] && [ "${failing:-false}" != "true" ]; then
             default_branch="$(gh api "repos/$GITHUB_REPOSITORY" --jq '.default_branch')"
             gh workflow run "$WATCHED_WORKFLOW" --repo "$GITHUB_REPOSITORY" --ref "$default_branch"
             summary="$summary; re-dispatched once"
