@@ -119,6 +119,10 @@ jobs:
           # No new listing starts after this many minutes of the process;
           # sized for the 90-minute job (code default is 95).
           AUTO_LISTER_LISTING_BUDGET_MINUTES: "65"
+          # data/auction_bot.log is committed every run as the durable
+          # diagnostics record; a 1 MB cap (trimmed to its newest half)
+          # bounds what each run adds to history.
+          AUCTION_LOG_MAX_BYTES: "1000000"
           STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
