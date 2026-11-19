@@ -25,7 +25,7 @@ on:
           - rukia
         default: main
       transfer_receipt_reconcile:
-        description: "Instead of a bot run: list departure attention rows a Steam trade receipt explains (dry_run), or queue them for the next run (apply)"
+        description: "Instead of a bot run: list departure attention rows the committed trade receipts explain (dry_run), or queue them for the next run (apply)"
         required: false
         type: choice
         options:
@@ -135,8 +135,12 @@ jobs:
           AUCTION_LOG_MAX_BYTES: "1000000"
           STEAM_WEB_API_KEY: ${{ secrets.STEAM_WEB_API_KEY }}
           # off (unset), shadow or on: book a departure as an own-account
-          # internal transfer when Steam's trade receipt proves the move.
+          # internal transfer when the committed trade receipts prove the move
+          # (data/shared/own_transfer_receipts.jsonl, see PORTFOLIO_OPERATIONS.md).
           TRANSFER_RECEIPT_EVIDENCE: ${{ vars.TRANSFER_RECEIPT_EVIDENCE }}
+          # off (unset) or on: also ask Steam's trade history (Web API key)
+          # about a departure the receipts file has no record of.
+          TRANSFER_RECEIPT_STEAM_HISTORY: ${{ vars.TRANSFER_RECEIPT_STEAM_HISTORY }}
           AUTO_LISTER_TRANSFER_RECONCILE: ${{ github.event.inputs.transfer_receipt_reconcile }}
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
@@ -161,8 +165,8 @@ jobs:
           STALL_RELIST_DELAY_SECONDS: "120"
         run: |
           if [[ "${AUTO_LISTER_TRANSFER_RECONCILE}" == "dry_run" || "${AUTO_LISTER_TRANSFER_RECONCILE}" == "apply" ]]; then
-            # No bot run: read-only Steam trade history plus the encrypted
-            # journals. The console shows identifier-free counts only; the
+            # No bot run: reads the encrypted receipts file and journals
+            # only. The console shows identifier-free counts only; the
             # per-row report and any queued rows are committed below.
             reconcile_args=()
             if [[ "${AUTO_LISTER_TRANSFER_RECONCILE}" == "apply" ]]; then
