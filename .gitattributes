@@ -12,6 +12,11 @@
 .github/scripts/prepare_git_crypt.sh !filter !diff
 .github/dependabot.yml !filter !diff
 
+# Read before or without unlock: git's ignore rules, and Gemini Code Assist's
+# config and style guide (its reviewer cannot decrypt).
+/.gitignore !filter !diff
+/.gemini/** !filter !diff
+
 # Vendored build inputs: the git-crypt binary must run before unlock, and the
 # wheels hold only public PyPI packages. -text keeps them byte-exact.
 .github/vendor/** !filter !diff -text
