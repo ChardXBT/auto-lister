@@ -141,6 +141,9 @@ jobs:
           # off (unset) or on: also ask Steam's trade history (Web API key)
           # about a departure the receipts file has no record of.
           TRANSFER_RECEIPT_STEAM_HISTORY: ${{ vars.TRANSFER_RECEIPT_STEAM_HISTORY }}
+          # on (unset) or off: with the switch above shadow or on, book at the
+          # start of each run every configured asset a receipt proves gone.
+          TRANSFER_RECEIPT_SWEEP: ${{ vars.TRANSFER_RECEIPT_SWEEP }}
           AUTO_LISTER_TRANSFER_RECONCILE: ${{ github.event.inputs.transfer_receipt_reconcile }}
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
