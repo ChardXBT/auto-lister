@@ -144,6 +144,7 @@ jobs:
           # Read-only CSFloat refunded-trades scan for trade reversals; hours
           # between scans, 0 = at the start of every run.
           REVERSAL_API_CHECK_INTERVAL_HOURS: "0"
+          TRADE_PARTIES_CAPTURE: ${{ vars.TRADE_PARTIES_CAPTURE }}
           # When a run lists nothing new from config, move up to this many
           # buy-now listings with a known purchase cost to auction (config
           # items stuck on buy-now first, then cheapest). See AUCTION_FALLBACK.md.
