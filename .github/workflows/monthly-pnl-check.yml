@@ -1,0 +1,141 @@
+name: Monthly PnL Check
+
+on:
+  schedule:
+    # 13:00 UTC on the 1st (primary monthly audit + one-time reminder),
+    # 3rd (conditional nudge if unsigned), and 10th (post-hold settlement tail).
+    - cron: "0 13 1,3,10 * *"
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Closed UTC month to audit (YYYY-MM; blank = previous month)"
+        required: false
+        default: ""
+      reminder_kind:
+        description: "Discord notification mode"
+        required: false
+        type: choice
+        options:
+          - auto
+          - day1
+          - day3_nudge
+          - day10_tail
+          - none
+        default: auto
+      csv_main:
+        description: "Optional committed CSFloat transaction CSV path (primary account)"
+        required: false
+        default: ""
+      csv_secondary:
+        description: "Optional committed CSFloat transaction CSV path (secondary account)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+# Share the main concurrency group so encrypted state commits never collide
+# with the recurring Auto Lister job.
+concurrency:
+  group: auto-lister
+  cancel-in-progress: false
+
+jobs:
+  monthly-pnl-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+
+    steps:
+      - name: Harden runner
+        timeout-minutes: 3
+        uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+        with:
+          egress-policy: audit
+
+      - name: Check out repository
+        timeout-minutes: 10
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+
+      - name: Sync latest main before run
+        timeout-minutes: 5
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+
+      - name: Prepare git-crypt
+        timeout-minutes: 8
+        run: bash .github/scripts/prepare_git_crypt.sh
+
+      - name: Unlock encrypted files
+        timeout-minutes: 3
+        run: |
+          echo "${{ secrets.GIT_CRYPT_KEY }}" | base64 -d > git-crypt-key
+          git-crypt unlock git-crypt-key
+          rm git-crypt-key
+
+      - name: Set up Python
+        timeout-minutes: 5
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        timeout-minutes: 7
+        env:
+          PIP_RETRIES: "5"
+        run: pip install --disable-pip-version-check --no-index --find-links .github/vendor/wheels -r requirements.txt
+
+      - name: Run monthly PnL audit
+        id: pnl_audit
+        continue-on-error: true
+        timeout-minutes: 12
+        env:
+          CSFLOAT_API_KEY: ${{ secrets.CSFLOAT_API_KEY }}
+          CSFLOAT_RUKIA_API_KEY: ${{ secrets.CSFLOAT_RUKIA_API_KEY }}
+          AUTO_LISTER_ACCOUNTS: ${{ vars.AUTO_LISTER_ACCOUNTS }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_LOG_WEBHOOK_URL: ${{ secrets.DISCORD_LOG_WEBHOOK_URL }}
+          MONTHLY_PNL_DISCORD_WEBHOOK: ${{ secrets.MONTHLY_PNL_DISCORD_WEBHOOK }}
+          MONTHLY_PNL_DISCORD_USER_ID: ${{ secrets.MONTHLY_PNL_DISCORD_USER_ID }}
+          AUDIT_MONTH: ${{ github.event.inputs.month }}
+          REMINDER_KIND: ${{ github.event.inputs.reminder_kind || 'auto' }}
+          CSV_MAIN: ${{ github.event.inputs.csv_main }}
+          CSV_SECONDARY: ${{ github.event.inputs.csv_secondary }}
+        run: |
+          args=(--mode audit --public-summary-only --reminder-kind "${REMINDER_KIND}")
+          if [[ -n "${AUDIT_MONTH}" ]]; then
+            args+=(--month "${AUDIT_MONTH}")
+          fi
+          if [[ -n "${CSV_MAIN}" ]]; then
+            args+=(--csv-main "${CSV_MAIN}")
+          fi
+          if [[ -n "${CSV_SECONDARY}" ]]; then
+            args+=(--csv-rukia "${CSV_SECONDARY}")
+          fi
+          set +e
+          python tools/monthly_pnl_check.py "${args[@]}" > /tmp/monthly-pnl.out 2> /tmp/monthly-pnl.err
+          audit_exit=$?
+          set -e
+          if [[ -s /tmp/monthly-pnl.out ]]; then
+            cat /tmp/monthly-pnl.out
+          fi
+          if [[ "${audit_exit}" -ne 0 ]]; then
+            echo "Monthly PnL audit exited ${audit_exit}. Private diagnostics were suppressed."
+          fi
+          exit "${audit_exit}"
+
+      - name: Commit and push encrypted audit artifacts
+        if: ${{ always() && steps.pnl_audit.outcome != 'skipped' }}
+        timeout-minutes: 8
+        env:
+          RUNTIME_CHECKPOINT_BRANCH: main
+          RUNTIME_CHECKPOINT_FILES: "data/shared/pnl_audits/ data/shared/monthly_pnl_state.json"
+          RUNTIME_CHECKPOINT_MESSAGE: "auto: monthly pnl audit snapshot"
+          RUNTIME_CHECKPOINT_RESCUE_ON_CONFLICT: "true"
+          GH_PUSH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/checkpoint_runtime.sh
