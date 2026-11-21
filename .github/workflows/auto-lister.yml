@@ -144,6 +144,9 @@ jobs:
           # on (unset) or off: with the switch above shadow or on, book at the
           # start of each run every configured asset a receipt proves gone.
           TRANSFER_RECEIPT_SWEEP: ${{ vars.TRANSFER_RECEIPT_SWEEP }}
+          # off (unset) or on: a receipt naming another own account is skipped
+          # and counted instead of making the whole receipts file unusable.
+          TRANSFER_RECEIPT_OTHER_OWN_ACCOUNTS: ${{ vars.TRANSFER_RECEIPT_OTHER_OWN_ACCOUNTS }}
           AUTO_LISTER_TRANSFER_RECONCILE: ${{ github.event.inputs.transfer_receipt_reconcile }}
           # Temporarily disabled: Steam summary counts do not identify the exact
           # outgoing asset when detailed offer data is empty.
