@@ -162,6 +162,10 @@ jobs:
           AUCTION_FALLBACK_ACCOUNTS: main,rukia
           AUCTION_FALLBACK_MAX_PER_RUN: "5"
           UNLISTED_INVENTORY_ALERT_ACCOUNTS: main,rukia
+          # on (unset) or off: each run, give blank buy-now listings their
+          # caption in place (auto descriptions, DEV_LOG.md); auctions get
+          # theirs from config when they relist.
+          AUTO_DESCRIPTION_LIVE: ${{ vars.AUTO_DESCRIPTION_LIVE }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DAILY_TRACKER_DISCORD_WEBHOOK: ${{ secrets.DAILY_TRACKER_DISCORD_WEBHOOK }}
           MONTHLY_PNL_DISCORD_USER_ID: ${{ secrets.MONTHLY_PNL_DISCORD_USER_ID }}
