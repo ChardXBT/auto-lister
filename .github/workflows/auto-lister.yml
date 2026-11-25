@@ -138,6 +138,7 @@ jobs:
           # internal transfer when the committed trade receipts prove the move
           # (data/shared/own_transfer_receipts.jsonl, see PORTFOLIO_OPERATIONS.md).
           TRANSFER_RECEIPT_EVIDENCE: ${{ vars.TRANSFER_RECEIPT_EVIDENCE }}
+          TRANSFER_RELIST: ${{ vars.TRANSFER_RELIST }}
           # off (unset) or on: also ask Steam's trade history (Web API key)
           # about a departure the receipts file has no record of.
           TRANSFER_RECEIPT_STEAM_HISTORY: ${{ vars.TRANSFER_RECEIPT_STEAM_HISTORY }}
