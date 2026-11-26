@@ -1,3 +1,4 @@
+import importlib.util
 import json
 import subprocess
 import sys
@@ -58,6 +59,34 @@ class MonthlyPnlFixtureProofTests(unittest.TestCase):
         self.assertTrue(any("reversal recheck" in item for item in checklist))
         self.assertEqual(data["queue_drain"]["pending_after_drain"], 0)
         self.assertEqual(data["queue_drain"]["duplicates_suppressed"], 1)
+
+    def test_same_account_identical_unicode_names_remain_distinct_assets(self):
+        spec = importlib.util.spec_from_file_location("monthly_pnl_fixture_proof", SCRIPT)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        rows = [
+            module.Row("main", "tx-ü-1", "asset-1", "同名 Item ★", "2026-10-10T00:00:00Z", 0, 0),
+            module.Row("main", "tx-ü-2", "asset-2", "同名 Item ★", "2026-10-10T00:00:00Z", 2**40, 1),
+        ]
+        distinct, duplicates, conflicts = module.dedupe(rows)
+        self.assertEqual(len(distinct), 2)
+        self.assertEqual(duplicates, 0)
+        self.assertEqual(conflicts, 0)
+        self.assertEqual(rows[1].net_cents, 2**40 - 1)
+
+    def test_exact_duplicate_export_batch_is_ignored_but_order_conflict_surfaces(self):
+        spec = importlib.util.spec_from_file_location("monthly_pnl_fixture_proof", SCRIPT)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        first = module.Row("main", "tx-same", "asset-same", "Item", "2026-10-10T00:00:00Z", -100, 0, export_batch="first")
+        same = module.Row("main", "tx-same", "asset-same", "Item", "2026-10-10T00:00:00Z", -100, 0, export_batch="second")
+        conflict = module.Row("main", "tx-same", "asset-same", "Item", "2026-10-10T00:00:00Z", -101, 0, export_batch="third")
+        distinct, duplicates, conflicts = module.dedupe([first, same, conflict])
+        self.assertEqual(len(distinct), 1)
+        self.assertEqual(duplicates, 1)
+        self.assertEqual(conflicts, 1)
 
 
 if __name__ == "__main__":
