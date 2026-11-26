@@ -23,3 +23,9 @@
 
 # Pinned public dependencies, deliberately plaintext so Dependabot can read them.
 requirements.txt !filter !diff
+
+# Synthetic monthly PnL proof only: no private data, intended to be reviewable
+# and runnable before git-crypt unlock.
+/tools/monthly_pnl_fixture_proof.py !filter !diff
+/tests/test_monthly_pnl_fixture_proof.py !filter !diff
+/docs/MONTHLY_PNL_FIXTURE_PROOF.md !filter !diff
