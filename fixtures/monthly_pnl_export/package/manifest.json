@@ -1,0 +1,54 @@
+{
+  "corrections_source": {
+    "name": "manual_corrections.json",
+    "schema": "synthetic-pnl-review-corrections/v1"
+  },
+  "files": [
+    {
+      "bytes": 665,
+      "path": "README.txt",
+      "sha256": "9630c00e5053fc9322a82cf4ba0b8e16e6e4e480e835e3370d626fe9d7493267"
+    },
+    {
+      "bytes": 818,
+      "path": "evidence/synthetic-month.md",
+      "sha256": "f5ffe48e5618b36d41d92750ae053f088ea974b9f8dd9a7db8408c1f491f5c80"
+    },
+    {
+      "bytes": 1047,
+      "path": "original_vs_amended.csv",
+      "sha256": "4113e2ff32f06b17fdaf8f5ab7cc4276a870062e75f982f2ae2f6018880a2925"
+    },
+    {
+      "bytes": 1290,
+      "path": "reversible_replacements.json",
+      "sha256": "86df4b9eeb81f899cc01da5195b2e8d4bdec85edca0fd7008d195afbdf78b9b7"
+    },
+    {
+      "bytes": 344,
+      "path": "reviewer_corrections.csv",
+      "sha256": "c968dea980624b51bf7b811a6362a28f5b5907f89fa840f0e2d51bd2bcefd462"
+    },
+    {
+      "bytes": 931,
+      "path": "rows.csv",
+      "sha256": "9afd62060a262ec5ea49e3c1fa4c7d80410292447dd609fcd40c508a5d411fcd"
+    },
+    {
+      "bytes": 545,
+      "path": "totals.json",
+      "sha256": "88a1a74aaca11dc6aad29ee6f7199bce11a086558351245cd2cb4c818acdc861"
+    }
+  ],
+  "fixture": {
+    "name": "synthetic_month.json",
+    "schema": "synthetic-pnl-export-fixture/v1"
+  },
+  "generated_at": "2026-03-01T00:00:00Z",
+  "month": "2026-02",
+  "network": "none",
+  "portable": true,
+  "production_accounting_changed": false,
+  "real_exports_or_accounts_used": false,
+  "schema": "synthetic-pnl-export-package/v1"
+}

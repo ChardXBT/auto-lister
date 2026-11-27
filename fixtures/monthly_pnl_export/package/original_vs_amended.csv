@@ -1,0 +1,7 @@
+row_id,account_alias,item_name,original_gross_cents,amended_gross_cents,original_fee_cents,amended_fee_cents,original_carry_cost_cents,amended_carry_cost_cents,original_net_cents,amended_net_cents,delta_cents,correction_ids,evidence_refs
+sale-001,amber-otter,Training Fixture Alpha,125000,125000,12500,12500,500,500,112000,112000,0,,evidence/synthetic-month.md#sale-001
+sale-002,blue-fox,训练 Fixture Item ★,0,0,0,0,0,0,0,0,0,,evidence/synthetic-month.md#sale-002
+reversal-001,amber-otter,Training Fixture Reversal,-25000,-25000,0,0,0,0,-25000,-25000,0,,evidence/synthetic-month.md#reversal-001
+sale-003,blue-fox,Training Fixture Carry Cost,88000,88000,8800,8800,4200,4500,75000,74700,-300,corr-carry-001,evidence/synthetic-month.md#sale-003
+sale-004,amber-otter,Training Fixture Huge Integer,1099511627776,1099511627776,1073741824,1073741824,0,0,1098437885952,1098437885952,0,,evidence/synthetic-month.md#sale-004
+adjustment-001,amber-otter,Training Fixture Signed Adjustment,-1,-1,0,0,0,0,-1,-1,0,,evidence/synthetic-month.md#adjustment-001

@@ -1,0 +1,17 @@
+{
+  "amended_carry_cost_cents": 5000,
+  "amended_fee_cents": 1073763124,
+  "amended_gross_cents": 1099511815775,
+  "amended_total_cents": 1098438047651,
+  "correction_count": 1,
+  "correction_delta_cents": -300,
+  "currency_minor_unit": "cents",
+  "deterministic_generated_at": "2026-03-01T00:00:00Z",
+  "month": "2026-02",
+  "original_carry_cost_cents": 4700,
+  "original_fee_cents": 1073763124,
+  "original_gross_cents": 1099511815775,
+  "original_total_cents": 1098438047951,
+  "row_count": 6,
+  "schema": "synthetic-pnl-export-package/v1"
+}

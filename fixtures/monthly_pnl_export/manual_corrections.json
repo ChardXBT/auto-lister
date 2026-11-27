@@ -1,0 +1,15 @@
+{
+  "schema": "synthetic-pnl-review-corrections/v1",
+  "corrections": [
+    {
+      "correction_id": "corr-carry-001",
+      "row_id": "sale-003",
+      "field": "carry_cost_cents",
+      "original_value": 4200,
+      "amended_value": 4500,
+      "reason": "manual carry-cost revision after reviewer recount of generated fixture evidence",
+      "reviewer": "reviewer-a",
+      "evidence_refs": ["evidence/synthetic-month.md#carry-cost-revision"]
+    }
+  ]
+}
