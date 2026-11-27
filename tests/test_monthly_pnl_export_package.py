@@ -2,12 +2,14 @@ import concurrent.futures
 import copy
 import csv
 import hashlib
+import importlib.util
 import json
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "tools" / "monthly_pnl_export_package.py"
@@ -319,6 +321,105 @@ class MonthlyPnlExportPackageTests(unittest.TestCase):
             self.assertEqual(refused.returncode, 2)
             self.assertIn("not empty", refused.stderr)
             self.assertEqual((unrelated / "keep.txt").read_text(encoding="utf-8"), "do not overwrite")
+
+
+    def test_rows_sort_by_timestamp_value_not_timestamp_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+
+            def fractional_second(data):
+                data["rows"][2]["occurred_at"] = "2026-02-03T12:00:00.500Z"
+
+            run = run_with_inputs(tmp_path, tmp_path / "package", fixture_mutator=fractional_second)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            rows = read_csv(tmp_path / "package" / "rows.csv")
+            row_ids = [row["row_id"] for row in rows]
+            self.assertLess(row_ids.index("sale-001"), row_ids.index("sale-002"))
+
+    def test_non_ascii_account_alias_is_rejected_as_non_portable(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+
+            def unicode_alias(data):
+                detail = data["account_aliases"]["amber-otter"]
+                data["account_aliases"]["amber-öttër"] = detail
+                data["rows"][0]["account_alias"] = "amber-öttër"
+
+            run = run_with_inputs(tmp_path, tmp_path / "package", fixture_mutator=unicode_alias)
+            self.assertEqual(run.returncode, 2)
+            self.assertIn("lowercase ASCII letters", run.stderr)
+            self.assertFalse((tmp_path / "package").exists())
+
+    def test_evidence_document_paths_must_be_canonical_files_below_evidence(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+
+            def directory_evidence(data):
+                content = data["evidence_documents"].pop("evidence/synthetic-month.md")
+                data["evidence_documents"]["evidence/"] = content
+                for row in data["rows"]:
+                    row["evidence_refs"] = ["evidence/#row"]
+
+            def correction_refs(data):
+                data["corrections"][0]["evidence_refs"] = ["evidence/#correction"]
+
+            run = run_with_inputs(
+                tmp_path,
+                tmp_path / "package",
+                fixture_mutator=directory_evidence,
+                corrections_mutator=correction_refs,
+            )
+            self.assertEqual(run.returncode, 2)
+            self.assertIn("canonical file path", run.stderr)
+            self.assertFalse((tmp_path / "package").exists())
+
+    def test_prior_package_with_extra_file_is_refused_without_overwriting_it(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "package"
+            first = run_export(out, "--json")
+            self.assertEqual(first.returncode, 0, first.stderr)
+            extra = out / "reviewer-notes.txt"
+            extra.write_text("not generated", encoding="utf-8")
+            second = run_export(out, "--json")
+            self.assertEqual(second.returncode, 2)
+            self.assertIn("not generated", second.stderr)
+            self.assertEqual(extra.read_text(encoding="utf-8"), "not generated")
+
+    def test_interrupted_write_leaves_prior_package_unchanged(self):
+        spec = importlib.util.spec_from_file_location("monthly_pnl_export_package", SCRIPT)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "package"
+            out.mkdir()
+            manifest = json.dumps({"schema": "synthetic-pnl-export-package/v1"}).encode("utf-8")
+            (out / "manifest.json").write_bytes(manifest)
+            real_write_bytes = Path.write_bytes
+
+            def crashing_write_bytes(path, data):
+                if path.name == "README.txt":
+                    raise OSError("simulated crash during write")
+                return real_write_bytes(path, data)
+
+            files = {
+                "README.txt": b"new readme\n",
+                "manifest.json": json.dumps({"schema": "synthetic-pnl-export-package/v1", "new": True}).encode("utf-8"),
+            }
+            with mock.patch.object(Path, "write_bytes", crashing_write_bytes):
+                with self.assertRaises(OSError):
+                    module.write_package(out, files)
+            self.assertTrue((out / "manifest.json").is_file())
+            self.assertEqual((out / "manifest.json").read_bytes(), manifest)
+            self.assertFalse((out / "README.txt").exists())
+
+    def test_concurrent_runs_to_same_output_are_serialized_and_complete(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "package"
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+                runs = list(executor.map(lambda _: run_export(out, "--json"), range(4)))
+            self.assertTrue(all(run.returncode == 0 for run in runs), [run.stderr for run in runs])
+            golden = ROOT / "fixtures" / "monthly_pnl_export" / "package"
+            self.assertEqual(file_hashes(out), file_hashes(golden))
 
     def test_empty_correction_list_is_valid_but_schema_must_be_exact(self):
         with tempfile.TemporaryDirectory() as tmp:
