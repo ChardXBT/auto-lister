@@ -45,7 +45,7 @@ The net correction delta is `-300` cents. Reversing those signed deltas restores
 
 The input fixture carries a fixed `generated_at`; the tool does not use the wall clock. Rows sort by parsed UTC timestamp rather than timestamp text, corrections are sorted, JSON keys are sorted, CSV line endings are fixed, floating point is never used, and output content has no absolute paths. Rerunning the normal entry point into two empty directories therefore produces identical file hashes and identical totals.
 
-Writes are serialized with a sibling lock file and built in a sibling staging directory. The prior package is swapped aside only after the replacement is complete, so an interrupted run never leaves a mixed package; if the interruption happens during the swap, a later run restores or removes the backup before rebuilding. A non-empty output directory is accepted only when it contains exactly the generated files of a prior synthetic package, so unrelated reviewer files are never overwritten.
+Writes are serialized with a sibling lock file and built in a sibling staging directory. The prior package is swapped aside only after the replacement is complete, so an interrupted run never leaves a mixed package; if the interruption happens during the swap, a later run restores or removes the backup before rebuilding. A non-empty output directory is accepted only when it contains exactly the generated files of a prior synthetic package and their recorded SHA-256 checksums still match, so unrelated, edited or corrupt reviewer files are never overwritten.
 
 ## Boundary and relation to prior work
 

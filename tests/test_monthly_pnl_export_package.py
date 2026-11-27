@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -447,6 +448,31 @@ class MonthlyPnlExportPackageTests(unittest.TestCase):
             self.assertEqual(extra.read_text(encoding="utf-8"), "not generated")
 
 
+
+    def test_nested_extra_or_modified_prior_package_file_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            extra_out = base / "extra-package"
+            first = run_export(extra_out, "--json")
+            self.assertEqual(first.returncode, 0, first.stderr)
+            nested_extra = extra_out / "evidence" / "reviewer-note.txt"
+            nested_extra.write_text("not generated", encoding="utf-8")
+            extra_run = run_export(extra_out, "--json")
+            self.assertEqual(extra_run.returncode, 2)
+            self.assertIn("not generated", extra_run.stderr)
+            self.assertEqual(nested_extra.read_text(encoding="utf-8"), "not generated")
+
+            modified_out = base / "modified-package"
+            first = run_export(modified_out, "--json")
+            self.assertEqual(first.returncode, 0, first.stderr)
+            rows_path = modified_out / "rows.csv"
+            original_rows = rows_path.read_bytes()
+            rows_path.write_bytes(original_rows + b"corrupt\n")
+            modified_run = run_export(modified_out, "--json")
+            self.assertEqual(modified_run.returncode, 2)
+            self.assertIn("checksum", modified_run.stderr)
+            self.assertEqual(rows_path.read_bytes(), original_rows + b"corrupt\n")
+
     def test_symlink_output_path_is_refused(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -469,9 +495,10 @@ class MonthlyPnlExportPackageTests(unittest.TestCase):
         spec.loader.exec_module(module)
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "package"
-            out.mkdir()
-            manifest = json.dumps({"schema": "synthetic-pnl-export-package/v1"}).encode("utf-8")
-            (out / "manifest.json").write_bytes(manifest)
+            golden = ROOT / "fixtures" / "monthly_pnl_export" / "package"
+            shutil.copytree(golden, out)
+            manifest = (out / "manifest.json").read_bytes()
+            readme = (out / "README.txt").read_bytes()
             real_write_bytes = Path.write_bytes
 
             def crashing_write_bytes(path, data):
@@ -488,7 +515,7 @@ class MonthlyPnlExportPackageTests(unittest.TestCase):
                     module.write_package(out, files)
             self.assertTrue((out / "manifest.json").is_file())
             self.assertEqual((out / "manifest.json").read_bytes(), manifest)
-            self.assertFalse((out / "README.txt").exists())
+            self.assertEqual((out / "README.txt").read_bytes(), readme)
 
     def test_concurrent_runs_to_same_output_are_serialized_and_complete(self):
         with tempfile.TemporaryDirectory() as tmp:
