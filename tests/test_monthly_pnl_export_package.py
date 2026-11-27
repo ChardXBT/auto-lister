@@ -4,6 +4,7 @@ import csv
 import hashlib
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -293,6 +294,66 @@ class MonthlyPnlExportPackageTests(unittest.TestCase):
             self.assertEqual(run.returncode, 2)
             self.assertIn("duplicate evidence", run.stderr)
 
+
+
+    def test_json_integer_beyond_parser_limit_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            fixture_path = tmp_path / "fixture.json"
+            corrections_path = tmp_path / "corrections.json"
+            fixture_text = FIXTURE.read_text(encoding="utf-8").replace("125000", "9" * 5000, 1)
+            fixture_path.write_text(fixture_text, encoding="utf-8")
+            corrections_path.write_text(CORRECTIONS.read_text(encoding="utf-8"), encoding="utf-8")
+            run = run_export(
+                tmp_path / "package",
+                "--fixture",
+                str(fixture_path),
+                "--corrections",
+                str(corrections_path),
+                "--json",
+            )
+            self.assertEqual(run.returncode, 2)
+            self.assertIn("cannot read fixture.json", run.stderr)
+            self.assertNotIn("Traceback", run.stderr)
+            self.assertFalse((tmp_path / "package").exists())
+
+    def test_missing_evidence_anchor_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+
+            def missing_anchor(data):
+                data["rows"][0]["evidence_refs"] = ["evidence/synthetic-month.md#does-not-exist"]
+
+            run = run_with_inputs(tmp_path, tmp_path / "package", fixture_mutator=missing_anchor)
+            self.assertEqual(run.returncode, 2)
+            self.assertIn("missing evidence anchor", run.stderr)
+            self.assertFalse((tmp_path / "package").exists())
+
+    def test_duplicate_json_keys_are_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            fixture_path = tmp_path / "fixture.json"
+            corrections_path = tmp_path / "corrections.json"
+            fixture_text = FIXTURE.read_text(encoding="utf-8")
+            duplicate_schema = fixture_text.replace(
+                '"schema": "synthetic-pnl-export-fixture/v1",',
+                '"schema": "synthetic-pnl-export-fixture/v1", "schema": "synthetic-pnl-export-fixture/v1",',
+                1,
+            )
+            fixture_path.write_text(duplicate_schema, encoding="utf-8")
+            corrections_path.write_text(CORRECTIONS.read_text(encoding="utf-8"), encoding="utf-8")
+            run = run_export(
+                tmp_path / "package",
+                "--fixture",
+                str(fixture_path),
+                "--corrections",
+                str(corrections_path),
+                "--json",
+            )
+            self.assertEqual(run.returncode, 2)
+            self.assertIn("duplicate JSON key", run.stderr)
+            self.assertFalse((tmp_path / "package").exists())
+
     def test_concurrent_independent_runs_are_deterministic(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
@@ -384,6 +445,23 @@ class MonthlyPnlExportPackageTests(unittest.TestCase):
             self.assertEqual(second.returncode, 2)
             self.assertIn("not generated", second.stderr)
             self.assertEqual(extra.read_text(encoding="utf-8"), "not generated")
+
+
+    def test_symlink_output_path_is_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            target = tmp_path / "target"
+            target.mkdir()
+            out = tmp_path / "package"
+            try:
+                os.symlink(target, out, target_is_directory=True)
+            except (OSError, NotImplementedError) as exc:
+                self.skipTest(f"directory symlinks unavailable: {exc}")
+            run = run_export(out, "--json")
+            self.assertEqual(run.returncode, 2)
+            self.assertIn("symbolic link", run.stderr)
+            self.assertTrue(out.is_symlink())
+            self.assertEqual(list(target.iterdir()), [])
 
     def test_interrupted_write_leaves_prior_package_unchanged(self):
         spec = importlib.util.spec_from_file_location("monthly_pnl_export_package", SCRIPT)

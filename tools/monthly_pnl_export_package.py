@@ -10,8 +10,12 @@ import argparse
 import csv
 import hashlib
 import json
+import os
+import re
 import shutil
+import string
 import sys
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from io import StringIO
 from pathlib import Path, PurePosixPath
@@ -55,6 +59,7 @@ GENERATED_TOP_LEVEL = {
     "totals.json",
     "checksums.json",
 }
+ALLOWED_OUTPUT_TOP_LEVEL = GENERATED_TOP_LEVEL | {"evidence"}
 
 
 class ValidationError(ValueError):
@@ -65,11 +70,24 @@ def fail(message: str) -> ValidationError:
     return ValidationError(message)
 
 
+def json_object_without_duplicates(pairs: list[tuple[str, object]]) -> dict:
+    value = {}
+    for key, item in pairs:
+        if key in value:
+            raise fail(f"duplicate JSON key {key!r}")
+        value[key] = item
+    return value
+
+
 def read_json(path: Path) -> dict:
     try:
         with path.open(encoding="utf-8") as handle:
-            value = json.load(handle)
+            value = json.load(handle, object_pairs_hook=json_object_without_duplicates)
+    except ValidationError:
+        raise
     except (OSError, json.JSONDecodeError) as exc:
+        raise fail(f"cannot read {path.name}: {exc}") from exc
+    except ValueError as exc:
         raise fail(f"cannot read {path.name}: {exc}") from exc
     if not isinstance(value, dict):
         raise fail(f"{path.name} must contain a JSON object")
@@ -100,28 +118,53 @@ def parse_utc(value: object, name: str) -> datetime:
         parsed = datetime.fromisoformat(text[:-1] + "+00:00")
     except ValueError as exc:
         raise fail(f"{name} is not a valid ISO timestamp") from exc
-    if parsed.tzinfo is None or parsed.utcoffset().total_seconds() != 0:
+    offset = parsed.utcoffset()
+    if parsed.tzinfo is None or offset is None or offset.total_seconds() != 0:
         raise fail(f"{name} must be UTC")
     return parsed
 
 
-def validate_evidence_ref(ref: object, evidence_paths: set[str], name: str) -> str:
+def validate_evidence_path(path_text: str, name: str) -> None:
+    path = PurePosixPath(path_text)
+    if not path_text.startswith("evidence/") or ".." in path.parts:
+        raise fail(f"{name} must stay below evidence/")
+    if path.as_posix() != path_text or not path.name:
+        raise fail(f"{name} must be a canonical file path below evidence/")
+
+
+def markdown_anchor(text: str) -> str:
+    normalized = re.sub(r"[^\w\- ]", "", text.strip().lower(), flags=re.UNICODE)
+    return normalized.replace(" ", "-")
+
+
+def markdown_anchors(content: str) -> set[str]:
+    anchors = set()
+    for line in content.splitlines():
+        match = re.match(r"^#{1,6}\s+(.+?)\s*#*\s*$", line)
+        if match:
+            anchors.add(markdown_anchor(match.group(1)))
+    return anchors
+
+
+def validate_evidence_ref(ref: object, evidence_anchors: dict[str, set[str]], name: str) -> str:
     text = require_text(ref, name)
     if "\\" in text or text.startswith("/") or "://" in text:
         raise fail(f"{name} must be a portable relative POSIX path")
     path_text = text.split("#", 1)[0]
-    path = PurePosixPath(path_text)
-    if not path_text.startswith("evidence/") or ".." in path.parts:
-        raise fail(f"{name} must stay below evidence/")
-    if path_text not in evidence_paths:
+    validate_evidence_path(path_text, name)
+    if path_text not in evidence_anchors:
         raise fail(f"{name} references missing evidence document {path_text}")
+    if "#" in text:
+        anchor = text.split("#", 1)[1]
+        if not anchor or anchor not in evidence_anchors[path_text]:
+            raise fail(f"{name} references missing evidence anchor {anchor!r}")
     return text
 
 
-def validate_evidence_refs(value: object, evidence_paths: set[str], name: str) -> list[str]:
+def validate_evidence_refs(value: object, evidence_anchors: dict[str, set[str]], name: str) -> list[str]:
     if not isinstance(value, list) or not value:
         raise fail(f"{name} must be a non-empty list")
-    refs = [validate_evidence_ref(ref, evidence_paths, f"{name}[{index}]") for index, ref in enumerate(value)]
+    refs = [validate_evidence_ref(ref, evidence_anchors, f"{name}[{index}]") for index, ref in enumerate(value)]
     if len(set(refs)) != len(refs):
         raise fail(f"{name} contains duplicate evidence references")
     return refs
@@ -158,25 +201,26 @@ def validate_fixture(data: dict) -> dict:
         raise fail("account_aliases must be a non-empty object")
     for alias, detail in aliases.items():
         require_text(alias, "account alias")
-        if any(char.isupper() for char in alias) or not all(char.isalnum() or char == "-" for char in alias):
-            raise fail(f"account alias {alias!r} must use lowercase letters, digits and hyphens")
+        portable_alias_chars = string.ascii_lowercase + string.digits + "-"
+        if not all(char in portable_alias_chars for char in alias):
+            raise fail(f"account alias {alias!r} must use lowercase ASCII letters, digits and hyphens")
         if not isinstance(detail, dict) or "fictional" not in str(detail.get("description", "")):
             raise fail(f"account alias {alias!r} must be explicitly described as fictional")
     evidence = data.get("evidence_documents")
     if not isinstance(evidence, dict) or not evidence:
         raise fail("evidence_documents must be a non-empty object")
     evidence_paths: set[str] = set()
+    evidence_anchors: dict[str, set[str]] = {}
     for path_text, content in evidence.items():
         if "\\" in path_text or path_text.startswith("/") or "://" in path_text:
             raise fail("evidence document paths must be portable relative POSIX paths")
-        path = PurePosixPath(path_text)
-        if not path_text.startswith("evidence/") or ".." in path.parts:
-            raise fail("evidence document paths must stay below evidence/")
+        validate_evidence_path(path_text, "evidence document path")
         if path_text in evidence_paths:
             raise fail(f"duplicate evidence document {path_text}")
         if not isinstance(content, str) or "Synthetic" not in content or "real" not in content:
             raise fail(f"evidence document {path_text} must identify generated non-real evidence")
         evidence_paths.add(path_text)
+        evidence_anchors[path_text] = markdown_anchors(content)
 
     raw_rows = data.get("rows")
     if not isinstance(raw_rows, list) or not raw_rows:
@@ -202,7 +246,7 @@ def validate_fixture(data: dict) -> dict:
             "account_alias": require_text(raw["account_alias"], f"{name}.account_alias"),
             "item_name": require_text(raw["item_name"], f"{name}.item_name"),
             "kind": require_text(raw["kind"], f"{name}.kind"),
-            "evidence_refs": validate_evidence_refs(raw["evidence_refs"], evidence_paths, f"{name}.evidence_refs"),
+            "evidence_refs": validate_evidence_refs(raw["evidence_refs"], evidence_anchors, f"{name}.evidence_refs"),
         }
         if row["row_id"] in seen_ids:
             raise fail(f"duplicate row_id {row['row_id']}")
@@ -215,8 +259,9 @@ def validate_fixture(data: dict) -> dict:
         for field in CENT_FIELDS:
             row[field] = require_int(raw[field], f"{name}.{field}")
         row["net_cents"] = row["gross_cents"] - row["fee_cents"] - row["carry_cost_cents"]
-        rows.append(row)
-    rows.sort(key=lambda row: (row["occurred_at"], row["row_id"]))
+        rows.append((occurred, row))
+    rows.sort(key=lambda item: (item[0], item[1]["row_id"]))
+    rows = [row for _, row in rows]
     return {
         "schema": data["schema"],
         "month": month,
@@ -225,6 +270,7 @@ def validate_fixture(data: dict) -> dict:
         "account_aliases": aliases,
         "evidence_documents": evidence,
         "evidence_paths": evidence_paths,
+        "evidence_anchors": evidence_anchors,
         "rows": rows,
     }
 
@@ -256,7 +302,7 @@ def validate_corrections(data: dict, fixture: dict) -> list[dict]:
             "reason": require_text(raw["reason"], f"{name}.reason"),
             "reviewer": require_text(raw["reviewer"], f"{name}.reviewer"),
             "evidence_refs": validate_evidence_refs(
-                raw["evidence_refs"], fixture["evidence_paths"], f"{name}.evidence_refs"
+                raw["evidence_refs"], fixture["evidence_anchors"], f"{name}.evidence_refs"
             ),
         }
         if correction["correction_id"] in seen_ids:
@@ -575,6 +621,8 @@ def build_package(fixture: dict, corrections: list[dict], fixture_path: Path, co
 
 
 def validate_output_dir(path: Path) -> None:
+    if path.is_symlink():
+        raise fail("output path must not be a symbolic link")
     if not path.exists():
         return
     if not path.is_dir():
@@ -591,22 +639,101 @@ def validate_output_dir(path: Path) -> None:
         raise fail("existing output manifest cannot be read") from exc
     if data.get("schema") != PACKAGE_SCHEMA:
         raise fail("output directory contains an unrelated manifest")
+    extra = sorted(entry.name for entry in entries if entry.name not in ALLOWED_OUTPUT_TOP_LEVEL)
+    if extra:
+        raise fail("output directory contains files not generated by the synthetic export: " + ", ".join(extra))
+    for entry in entries:
+        if entry.is_symlink():
+            raise fail("output directory must not contain symbolic links")
+        if entry.name == "evidence":
+            if not entry.is_dir():
+                raise fail("output evidence path is not a directory")
+        elif not entry.is_file():
+            raise fail(f"output package entry {entry.name} is not a file")
+
+
+def remove_file_or_tree(path: Path) -> None:
+    if path.is_dir() and not path.is_symlink():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
+
+
+def lock_file_handle(handle) -> None:
+    if os.name == "nt":
+        import msvcrt
+
+        handle.seek(0, os.SEEK_END)
+        if handle.tell() == 0:
+            handle.write(b"\0")
+            handle.flush()
+        handle.seek(0)
+        msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+    else:
+        import fcntl
+
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+
+
+def unlock_file_handle(handle) -> None:
+    if os.name == "nt":
+        import msvcrt
+
+        handle.seek(0)
+        msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+    else:
+        import fcntl
+
+        fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
+@contextmanager
+def output_write_lock(path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = path.parent / f".{path.name}.lock"
+    with lock_path.open("a+b") as handle:
+        lock_file_handle(handle)
+        try:
+            yield
+        finally:
+            unlock_file_handle(handle)
+
+
+def write_staging_package(staging: Path, files: dict[str, bytes]) -> None:
+    staging.mkdir()
+    try:
+        for rel_path, content in sorted(files.items()):
+            target = staging / rel_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
+    except BaseException:
+        remove_file_or_tree(staging)
+        raise
 
 
 def write_package(path: Path, files: dict[str, bytes]) -> None:
-    validate_output_dir(path)
-    path.mkdir(parents=True, exist_ok=True)
-    evidence_dir = path / "evidence"
-    if evidence_dir.exists():
-        shutil.rmtree(evidence_dir)
-    for name in GENERATED_TOP_LEVEL:
-        target = path / name
-        if target.exists():
-            target.unlink()
-    for rel_path, content in sorted(files.items()):
-        target = path / rel_path
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(content)
+    parent = path.parent
+    staging = parent / f".{path.name}.staging"
+    backup = parent / f".{path.name}.backup"
+    with output_write_lock(path):
+        if backup.exists() and not path.exists():
+            os.replace(backup, path)
+        if backup.exists() and path.exists():
+            remove_file_or_tree(backup)
+        validate_output_dir(path)
+        if staging.exists():
+            remove_file_or_tree(staging)
+        write_staging_package(staging, files)
+        if not path.exists():
+            os.replace(staging, path)
+            return
+        os.replace(path, backup)
+        try:
+            os.replace(staging, path)
+        except BaseException:
+            os.replace(backup, path)
+            raise
+        remove_file_or_tree(backup)
 
 
 def load_inputs(fixture_path: Path, corrections_path: Path) -> tuple[dict, list[dict]]:
