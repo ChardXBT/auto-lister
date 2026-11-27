@@ -1,0 +1,7 @@
+row_id,occurred_at,account_alias,item_name,kind,gross_cents,fee_cents,carry_cost_cents,amount_cents,evidence_refs
+sale-001,2026-02-03T12:00:00Z,amber-otter,Training Fixture Alpha,sale,125000,12500,500,112000,evidence/synthetic-month.md#sale-001
+sale-002,2026-02-04T12:00:00Z,blue-fox,训练 Fixture Item ★,sale,0,0,0,0,evidence/synthetic-month.md#sale-002
+reversal-001,2026-02-07T09:30:00Z,amber-otter,Training Fixture Reversal,reversal,-25000,0,0,-25000,evidence/synthetic-month.md#reversal-001
+sale-003,2026-02-12T15:45:00Z,blue-fox,Training Fixture Carry Cost,sale,88000,8800,4200,75000,evidence/synthetic-month.md#sale-003
+sale-004,2026-02-20T10:00:00Z,amber-otter,Training Fixture Huge Integer,sale,1099511627776,1073741824,0,1098437885952,evidence/synthetic-month.md#sale-004
+adjustment-001,2026-02-28T23:59:59Z,amber-otter,Training Fixture Signed Adjustment,adjustment,-1,0,0,-1,evidence/synthetic-month.md#adjustment-001

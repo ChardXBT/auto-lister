@@ -1,0 +1,14 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "README.txt": "9630c00e5053fc9322a82cf4ba0b8e16e6e4e480e835e3370d626fe9d7493267",
+    "evidence/synthetic-month.md": "f5ffe48e5618b36d41d92750ae053f088ea974b9f8dd9a7db8408c1f491f5c80",
+    "manifest.json": "4ef977c2fa3e43684aaf2ed631ab19e8678cb7fc58391c7b254cc4641bb59f8c",
+    "original_vs_amended.csv": "4113e2ff32f06b17fdaf8f5ab7cc4276a870062e75f982f2ae2f6018880a2925",
+    "reversible_replacements.json": "86df4b9eeb81f899cc01da5195b2e8d4bdec85edca0fd7008d195afbdf78b9b7",
+    "reviewer_corrections.csv": "c968dea980624b51bf7b811a6362a28f5b5907f89fa840f0e2d51bd2bcefd462",
+    "rows.csv": "9afd62060a262ec5ea49e3c1fa4c7d80410292447dd609fcd40c508a5d411fcd",
+    "totals.json": "88a1a74aaca11dc6aad29ee6f7199bce11a086558351245cd2cb4c818acdc861"
+  },
+  "schema": "synthetic-pnl-export-package/v1"
+}

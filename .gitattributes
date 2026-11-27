@@ -23,3 +23,11 @@
 
 # Pinned public dependencies, deliberately plaintext so Dependabot can read them.
 requirements.txt !filter !diff
+
+# Synthetic monthly PnL reviewer export fixtures and proof only: generated data,
+# no private account or marketplace data, intended to be reviewable and runnable
+# before git-crypt unlock.
+/tools/monthly_pnl_export_package.py !filter !diff
+/tests/test_monthly_pnl_export_package.py !filter !diff
+/docs/MONTHLY_PNL_EXPORT_PACKAGE.md !filter !diff
+/fixtures/monthly_pnl_export/** !filter !diff

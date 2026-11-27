@@ -1,0 +1,36 @@
+{
+  "corrections": [
+    {
+      "amended_value": 4500,
+      "correction_id": "corr-carry-001",
+      "evidence_refs": [
+        "evidence/synthetic-month.md#carry-cost-revision"
+      ],
+      "explanation": "manual carry-cost revision after reviewer recount of generated fixture evidence",
+      "field": "carry_cost_cents",
+      "net_delta_cents": -300,
+      "original_value": 4200,
+      "replacement_rows": [
+        {
+          "action": "reverse_original_field_contribution",
+          "adjustment_id": "corr-carry-001-reverse-original",
+          "inverse_signed_delta_cents": -4200,
+          "reversible": true,
+          "signed_delta_cents": 4200
+        },
+        {
+          "action": "apply_amended_field_contribution",
+          "adjustment_id": "corr-carry-001-apply-amended",
+          "inverse_signed_delta_cents": 4500,
+          "reversible": true,
+          "signed_delta_cents": -4500
+        }
+      ],
+      "row_id": "sale-003"
+    }
+  ],
+  "description": "Original fixture rows remain immutable. Each correction is represented by a reversing adjustment and an amended replacement adjustment; each adjustment carries its inverse signed delta.",
+  "method": "reverse-and-replace",
+  "mutable_source_rows": false,
+  "schema": "synthetic-pnl-export-package/v1"
+}

@@ -1,0 +1,2 @@
+correction_id,row_id,field,original_value,amended_value,delta_cents,reason,reviewer,evidence_refs,reversible,reverse_method
+corr-carry-001,sale-003,carry_cost_cents,4200,4500,-300,manual carry-cost revision after reviewer recount of generated fixture evidence,reviewer-a,evidence/synthetic-month.md#carry-cost-revision,true,reverse-and-replace

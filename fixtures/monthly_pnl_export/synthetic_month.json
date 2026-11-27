@@ -1,0 +1,84 @@
+{
+  "schema": "synthetic-pnl-export-fixture/v1",
+  "month": "2026-02",
+  "generated_at": "2026-03-01T00:00:00Z",
+  "account_aliases": {
+    "amber-otter": {
+      "description": "fictional seller alias; not a real account"
+    },
+    "blue-fox": {
+      "description": "fictional buyer alias; not a real account"
+    }
+  },
+  "evidence_documents": {
+    "evidence/synthetic-month.md": "# Synthetic month evidence\n\nAll rows on this page are generated for reviewer workflow testing. No account, marketplace, export or transaction is real.\n\n## sale-001\nGenerated sale evidence reference.\n\n## sale-002\nGenerated zero-value unicode evidence reference.\n\n## reversal-001\nGenerated negative reversal evidence reference.\n\n## sale-003\nGenerated carry-cost evidence reference. The original carry-cost entry was intentionally wrong for the review exercise.\n\n## carry-cost-revision\nManual reviewer recount: the fictional carry cost changes from 4200 cents to 4500 cents. The original row is preserved and the correction is represented as a reversible reverse-and-replace adjustment.\n\n## sale-004\nGenerated huge-integer arithmetic evidence reference.\n\n## adjustment-001\nGenerated signed adjustment evidence reference.\n"
+  },
+  "rows": [
+    {
+      "row_id": "sale-004",
+      "occurred_at": "2026-02-20T10:00:00Z",
+      "account_alias": "amber-otter",
+      "item_name": "Training Fixture Huge Integer",
+      "kind": "sale",
+      "gross_cents": 1099511627776,
+      "fee_cents": 1073741824,
+      "carry_cost_cents": 0,
+      "evidence_refs": ["evidence/synthetic-month.md#sale-004"]
+    },
+    {
+      "row_id": "sale-001",
+      "occurred_at": "2026-02-03T12:00:00Z",
+      "account_alias": "amber-otter",
+      "item_name": "Training Fixture Alpha",
+      "kind": "sale",
+      "gross_cents": 125000,
+      "fee_cents": 12500,
+      "carry_cost_cents": 500,
+      "evidence_refs": ["evidence/synthetic-month.md#sale-001"]
+    },
+    {
+      "row_id": "sale-002",
+      "occurred_at": "2026-02-04T12:00:00Z",
+      "account_alias": "blue-fox",
+      "item_name": "训练 Fixture Item ★",
+      "kind": "sale",
+      "gross_cents": 0,
+      "fee_cents": 0,
+      "carry_cost_cents": 0,
+      "evidence_refs": ["evidence/synthetic-month.md#sale-002"]
+    },
+    {
+      "row_id": "reversal-001",
+      "occurred_at": "2026-02-07T09:30:00Z",
+      "account_alias": "amber-otter",
+      "item_name": "Training Fixture Reversal",
+      "kind": "reversal",
+      "gross_cents": -25000,
+      "fee_cents": 0,
+      "carry_cost_cents": 0,
+      "evidence_refs": ["evidence/synthetic-month.md#reversal-001"]
+    },
+    {
+      "row_id": "sale-003",
+      "occurred_at": "2026-02-12T15:45:00Z",
+      "account_alias": "blue-fox",
+      "item_name": "Training Fixture Carry Cost",
+      "kind": "sale",
+      "gross_cents": 88000,
+      "fee_cents": 8800,
+      "carry_cost_cents": 4200,
+      "evidence_refs": ["evidence/synthetic-month.md#sale-003"]
+    },
+    {
+      "row_id": "adjustment-001",
+      "occurred_at": "2026-02-28T23:59:59Z",
+      "account_alias": "amber-otter",
+      "item_name": "Training Fixture Signed Adjustment",
+      "kind": "adjustment",
+      "gross_cents": -1,
+      "fee_cents": 0,
+      "carry_cost_cents": 0,
+      "evidence_refs": ["evidence/synthetic-month.md#adjustment-001"]
+    }
+  ]
+}
